@@ -1,0 +1,28 @@
+<RCC>
+    <qresource prefix="/">
+        <file>assets/appIcon.png</file>
+        <file>assets/icons8-close-48.png</file>
+        <file>assets/icons8-delete-48.png</file>
+        <file>assets/icons8-document-48.png</file>
+        <file>assets/icons8-done-48.png</file>
+        <file>assets/icons8-edit-48.png</file>
+        <file>assets/icons8-folder-48.png</file>
+        <file>assets/icons8-plus-48.png</file>
+        <file>assets/icons8-puppy-48.png</file>
+        <file>assets/icons8-search-48.png</file>
+        <file>assets/icons8-settings-48.png</file>
+        <file>assets/icons8-save-48.png</file>
+        <file>assets/icons8-save-as-48.png</file>
+        <file>assets/icons8-add-file-48.png</file>
+        <file>assets/icons8-view-more-48.png</file>
+        <file>assets/icons8-invisible-48.png</file>
+        <file>assets/icons8-doge-48.png</file>
+        <file>assets/icons8-pug-under-96.png</file>
+        <file>assets/icons8-pug-behind-48.png</file>
+        <file>assets/icons8-eye-48.png</file>
+        <file>assets/icons8-dog-64.png</file>
+        <file>assets/icons8-dog-house-64.png</file>
+        <file>assets/icons8-dog-collar-64.png</file>
+        <file>assets/icons8-french-bulldog-64.png</file>
+    </qresource>
+</RCC>

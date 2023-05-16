@@ -1,0 +1,185 @@
+classDiagram
+    Dog <|-- Breeding
+    Dog <|-- Boarding
+    Boarding *-- Owner
+    Dog *-- Date 
+    Owner *-- Date 
+    Boarding *-- Size
+    DogVisitor ..|> Breeding
+    DogVisitor ..|> Boarding
+    Size <|-- Small
+    Size <|-- Medium
+    Size <|-- Large
+    Breeding *-- Breed
+    Breed <|-- Bulldog
+    Breed <|-- AmStaff
+    
+
+    
+
+
+    class Dog{
+        -date: Date
+        -name: std::string
+        +Dog(d: unsigned int, m: unsigned int,y: unsigned int,n: std::string )
+        +~Dog()
+        +totPrice()*: double
+        +getName(): std::string
+        +getDate(): Date
+        +setName(): void
+        +setName(): void
+        +accept(visitor: DogVisitor)*: void
+    }
+
+    class DogVisitor{
+        +visitBreeding(breeding: Breeding&)*
+        +visitBoarding(boarding: Boarding&)*
+    }
+
+    class Breeding{
+        -mother: Breeding*
+        -father: Breeding*
+        -breed: Breed*
+        -vax: bool
+        -purchasable: bool
+        -booked: bool
+        +Breeding(d: unsigned int, m: unsigned int, y: unsigned int, n: std::string, b: Breed*, mom: Breeding*, dad: Breeding*)
+        +~Breeding()
+        +totPrice(): double
+        +isVax(): bool
+        +isBooked(): bool
+        +isPurchasable(): bool
+        +getBreed(): Breed*
+        +getMother(): Breeding*
+        +getFather(): Breeding*
+        +setBooked(b: bool): void
+        +setVax(b: bool): void
+        +setPurchasable(b: bool): void
+        +setMom(b: Breeding*): void
+        +setDad(b: Breeding*): void
+        +setBreed(b: Breed*): void
+        +accept(visitor: DogVisitor): void
+    }
+    
+
+    class Boarding{
+        -size: Size*
+        -owner: Owner*
+        -breed: std::string
+        -bath: bool
+        -training: bool
+        -diet: bool
+        -walking: bool
+        +Boarding(d: unsigned int, m: unsigned int, y: unsigned int, n: std::string, s: Size*, o: Owner*, b: std::string, bath: bool, train: bool, diet: bool, walks: bool)
+        +~Boarding()
+        +totPrice(): double
+        +getSize(): Size*
+        +getOwner(): Owner*
+        +getBreed(): std::string
+        +didBath(): bool
+        +didDiet(): bool
+        +didTraining(): bool
+        +didWalks(): bool
+        +accept(visitor: DogVisitor): void
+    }
+    
+    
+    class Owner{
+        -name: std::string
+        -surname: std::string
+        -phone: std::string
+        -address: std::string
+        -house_number: std::string
+        -birth: Date 
+        +Owner(n: std::string, s: std::string, p: std::string, a: std::string,h: std::string, d: unsigne int, m: unisgned int, y:unsigned int)
+        +~Owner()
+        +getName(): std::string
+        +getSurname(): std::string
+        +getPhone(): std::string
+        +getAddress(): std::string
+        +getHouseNumber(): std::string
+        +getBirthD(): Date
+
+
+    }
+
+
+    
+
+    
+
+
+    class Size{
+        +priceStay: unsigned int
+        +pirceBath: unsigned int
+        +priceTraining: unsigned int
+        +priceDiet: unsigned int
+        +priceWalks: unsigned int
+        +~Size()
+        +stayTax(d: date)*: double
+        +bath()*: double
+        +training()*: double
+        +diet()*: double
+        +walks()*: double
+    }
+
+
+    class Small{
+        +stayTax(d: date): double
+        +bath(): double
+        +training(): double
+        +diet(): double
+        +walks(): double
+    }
+
+    class Medium{
+        +stayTax(d: date): double
+        +bath(): double
+        +training(): double
+        +diet(): double
+        +walks(): double
+    }
+
+    class Large{
+        +stayTax(d: date): double
+        +bath(): double
+        +training(): double
+        +diet(): double
+        +walks(): double
+    }
+
+    class Breed{
+        +price()*: double
+    }
+
+    class Bulldog{
+        +price(): double
+    }
+
+    class AmStaff{
+        +price(): double
+    }
+
+
+    class Date{
+        -day: unsigned int
+        -month: unsigned int
+        -year: unsigned int 
+        +Date()
+        +Date(d: unsigned int, m: unsigned int,y: unsigned int)
+        +~Date()
+        +getDay(): unsigned int  
+        +getMonth(): unsigned int
+        +getYear(): unsigned int 
+        +setDay(): void
+        +setMonth(): void
+        +setYear(): void
+        +operator==(d: Date): bool
+        +operator<(d: Date): bool
+        +operator-(d: Date): unsigned int 
+        +countLeapYear(d: Date): unsigned int 
+        +convert(d: Date): unsigned int 
+        +checkLeapYear(x: int): bool
+        +addDays(x: int): Date
+
+    }
