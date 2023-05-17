@@ -128,6 +128,26 @@ void DogVisitorCard::visitBoarding(Boarding &boarding) {
     srvc->addWidget(walksString);
 
     hbox->addStretch();
+    hbox->addStretch();
+
+    //Buttons
+    QHBoxLayout* buttons= new QHBoxLayout();
+    hbox->addLayout(buttons);
+    buttons->setAlignment(Qt::AlignBottom|Qt::AlignCenter);
+
+    view_button= new QPushButton(QIcon(QPixmap(":/assets/info-icon.png")), "");
+    view_button->setIconSize(QSize(18,18));
+    buttons->addWidget(view_button);
+
+    edit_button= new QPushButton(QIcon(QPixmap(":/assets/edit-icon.png")), "");
+    edit_button->setIconSize(QSize(18,18));
+    buttons->addWidget(edit_button);
+
+    delete_button= new QPushButton(QIcon(QPixmap(":/assets/delete-icon.png")), "");
+    delete_button->setIconSize(QSize(18,18));
+    buttons->addWidget(delete_button);
+
+    hbox->addSpacing(25);
 
 
     //End line
@@ -247,8 +267,29 @@ void DogVisitorCard::visitBreeding(Breeding &breeding) {
     opt->addWidget(booked);
     opt->addWidget(bookedString);
 
-
     hbox->addStretch();
+    hbox->addStretch();
+
+    //Buttons
+    QHBoxLayout* buttons= new QHBoxLayout();
+    hbox->addLayout(buttons);
+    buttons->setAlignment(Qt::AlignBottom|Qt::AlignCenter);
+
+    view_button= new QPushButton(QIcon(QPixmap(":/assets/info-icon.png")), "");
+    view_button->setIconSize(QSize(18,18));
+    buttons->addWidget(view_button);
+
+    edit_button= new QPushButton(QIcon(QPixmap(":/assets/edit-icon.png")), "");
+    edit_button->setIconSize(QSize(18,18));
+    buttons->addWidget(edit_button);
+
+    delete_button= new QPushButton(QIcon(QPixmap(":/assets/delete-icon.png")), "");
+    delete_button->setIconSize(QSize(18,18));
+    buttons->addWidget(delete_button);
+
+    hbox->addSpacing(25);
+
+
 
     //End line
     QFrame* line= new QFrame;

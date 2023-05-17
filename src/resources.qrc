@@ -24,5 +24,8 @@
         <file>assets/icons8-dog-house-64.png</file>
         <file>assets/icons8-dog-collar-64.png</file>
         <file>assets/icons8-french-bulldog-64.png</file>
+        <file>assets/info-icon.png</file>
+        <file>assets/edit-icon.png</file>
+        <file>assets/delete-icon.png</file>
     </qresource>
 </RCC>
