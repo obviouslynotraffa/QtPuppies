@@ -4,21 +4,26 @@
 
 #include "doglist.h"
 #include "dogcard.h"
+#include "DogVisitorCard.h"
 
 DogList::DogList(Container c,QWidget *parent)
     :   QWidget(parent), c(c)
 {
 
     QVBoxLayout* box= new QVBoxLayout;
+    DogVisitorCard visitor;
 
+    //Show all dog that rispect the filter
 
-    if(c.getSize()>0){ //Show all dog that rispect the filter
-        Container::Node* n=c.getHead();
+    if(c.getSize()>0){
+
+        Container::Node* node=c.getHead();
 
         for(unsigned int i=0;i<c.getSize();i++){
-            DogCard* g= new DogCard(c.getDog(n));
-            box->addWidget(g);
-            n=c.getNextNode(n);
+
+            c.getDog(node)->accept(visitor);
+            box->addLayout(visitor.getCard());
+            node=c.getNextNode(node);
         }
 
     } else{ //Display something if not found any
