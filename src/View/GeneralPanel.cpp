@@ -10,7 +10,7 @@
 
 
 GeneralPanel::GeneralPanel(Container c,QWidget* parent)
-    : c(c), QWidget{parent}
+    :  QWidget{parent}, c(c)
 {
 
     QVBoxLayout* vbox= new QVBoxLayout();
