@@ -40,9 +40,6 @@ DogCard::DogCard(Dog* dog, QWidget *parent)
     }
     image->setAlignment(Qt::AlignLeft|Qt::AlignVCenter);
 
-    /*QSizePolicy spLeft(QSizePolicy::Preferred, QSizePolicy::Preferred);
-    spLeft.setHorizontalStretch(1);
-    image->setSizePolicy(spLeft);*/
 
     QVBoxLayout* info= new QVBoxLayout();
     hbox->addSpacing(-270);

@@ -34,3 +34,8 @@ double Medium::bath() const {
     return priceBath*multiplier;
 }
 
+
+std::string Medium::toString() const{
+    std::string m="Medium";
+    return m;
+}

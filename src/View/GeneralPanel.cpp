@@ -56,4 +56,5 @@ GeneralPanel::GeneralPanel(Container c,QWidget* parent)
     all->addLayout(hbox);
 
     setLayout(all);
+
 }

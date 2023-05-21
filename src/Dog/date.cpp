@@ -136,7 +136,9 @@ Date Date::addDays(unsigned int x){
 
     return Date(day,month,year);
 }
-/*
-std::string Date::toString(Date& d){
 
-}*/
+
+std::string Date::toString() const{
+    std::string date= ""+ std::to_string(day) + "/" + std::to_string(month) + "/"+ std::to_string(year);
+    return date;
+}

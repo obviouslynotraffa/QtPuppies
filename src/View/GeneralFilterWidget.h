@@ -14,10 +14,10 @@ public:
     explicit GeneralFilterWidget(QWidget *parent = nullptr);
 
 signals:
-    void searchEvent();
+
 
 public slots:
-    //void search();
+
 
 };
 

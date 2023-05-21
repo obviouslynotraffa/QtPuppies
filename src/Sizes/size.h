@@ -10,6 +10,7 @@ class Size{
     virtual double training() const=0;
     virtual double diet () const=0;
     virtual double walkDog() const=0;
+    virtual std::string toString()const =0;
     virtual ~Size();
 
     static unsigned int priceStay;

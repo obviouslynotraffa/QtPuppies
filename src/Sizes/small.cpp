@@ -34,3 +34,8 @@ double Small::bath() const {
     return priceBath*multiplier;
 }
 
+
+std::string Small::toString()const{
+    std::string s="Small";
+    return s;
+}

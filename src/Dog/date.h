@@ -30,7 +30,7 @@ class Date{
     static unsigned int convert(const Date& d);
     Date addDays(unsigned int x);
     static bool checkLeapYear(int x);
-    //std::string toString(Date& d);
+    std::string toString() const;
 
 
 };

@@ -1,11 +1,16 @@
 #include <QFrame>
 #include <QHBoxLayout>
+#include <QVBoxLayout>
 #include <QLabel>
 #include <QSizePolicy>
+#include <QDialog>
+#include <QDialogButtonBox>
 
 
 #include "DogVisitorCard.h"
+#include "DogVisitorInfoPanel.h"
 #include "Dog/owner.h"
+#include "ButtonsWidget.h"
 
 #include "Breeds/breed.h"
 #include "Breeds/amstaff.h"
@@ -20,6 +25,8 @@ QVBoxLayout* DogVisitorCard::getCard() const{
 void DogVisitorCard::visitBoarding(Boarding &boarding) {
 
     QHBoxLayout* hbox=new QHBoxLayout();
+
+    dog=&boarding;
 
     hbox->addSpacing(30);
 
@@ -47,12 +54,7 @@ void DogVisitorCard::visitBoarding(Boarding &boarding) {
     info->addWidget(name);
 
     //date
-    std::string d=std::to_string(boarding.getDate().getDay());
-    std::string m=std::to_string(boarding.getDate().getMonth());
-    std::string y=std::to_string(boarding.getDate().getYear());
-    std::string date_string = d + "/" + m + "/" + y ;
-
-    QLabel* date= new QLabel("Arrival date: "+ QString::fromStdString(date_string));
+    QLabel* date= new QLabel("Arrival date: "+ QString::fromStdString(boarding.getDate().toString()));
     info->addWidget(date);
 
     //Owner
@@ -131,21 +133,9 @@ void DogVisitorCard::visitBoarding(Boarding &boarding) {
     hbox->addStretch();
 
     //Buttons
-    QHBoxLayout* buttons= new QHBoxLayout();
-    hbox->addLayout(buttons);
-    buttons->setAlignment(Qt::AlignBottom|Qt::AlignCenter);
+    ButtonsWidget* buttons= new ButtonsWidget(&boarding);
+    hbox->addWidget(buttons);
 
-    view_button= new QPushButton(QIcon(QPixmap(":/assets/info-icon.png")), "");
-    view_button->setIconSize(QSize(18,18));
-    buttons->addWidget(view_button);
-
-    edit_button= new QPushButton(QIcon(QPixmap(":/assets/edit-icon.png")), "");
-    edit_button->setIconSize(QSize(18,18));
-    buttons->addWidget(edit_button);
-
-    delete_button= new QPushButton(QIcon(QPixmap(":/assets/delete-icon.png")), "");
-    delete_button->setIconSize(QSize(18,18));
-    buttons->addWidget(delete_button);
 
     hbox->addSpacing(25);
 
@@ -161,8 +151,10 @@ void DogVisitorCard::visitBoarding(Boarding &boarding) {
     cardLayout->addLayout(hbox);
     cardLayout->addWidget(line);
 
-}
 
+
+
+}
 
 
 
@@ -171,6 +163,8 @@ void DogVisitorCard::visitBreeding(Breeding &breeding) {
     QHBoxLayout* hbox=new QHBoxLayout();
 
     hbox->addSpacing(30);
+
+    dog=&breeding;
 
     //left image
     QHBoxLayout* img= new QHBoxLayout();
@@ -204,13 +198,9 @@ void DogVisitorCard::visitBreeding(Breeding &breeding) {
     info->addWidget(name);
 
     //date
-    std::string d=std::to_string(breeding.getDate().getDay());
-    std::string m=std::to_string(breeding.getDate().getMonth());
-    std::string y=std::to_string(breeding.getDate().getYear());
-    std::string date_string = d + "/" + m + "/" + y ;
-
-    QLabel* date= new QLabel("Day of birth: "+ QString::fromStdString(date_string));
+    QLabel* date= new QLabel("Day of birth: "+ QString::fromStdString(breeding.getDate().toString()));
     info->addWidget(date);
+
 
     //Breed
     QLabel* breed= new QLabel("Breed: "+QString::fromStdString(breeding.getBreed()->toString()));
@@ -271,24 +261,11 @@ void DogVisitorCard::visitBreeding(Breeding &breeding) {
     hbox->addStretch();
 
     //Buttons
-    QHBoxLayout* buttons= new QHBoxLayout();
-    hbox->addLayout(buttons);
-    buttons->setAlignment(Qt::AlignBottom|Qt::AlignCenter);
+    ButtonsWidget* buttons= new ButtonsWidget(&breeding);
+    hbox->addWidget(buttons);
 
-    view_button= new QPushButton(QIcon(QPixmap(":/assets/info-icon.png")), "");
-    view_button->setIconSize(QSize(18,18));
-    buttons->addWidget(view_button);
-
-    edit_button= new QPushButton(QIcon(QPixmap(":/assets/edit-icon.png")), "");
-    edit_button->setIconSize(QSize(18,18));
-    buttons->addWidget(edit_button);
-
-    delete_button= new QPushButton(QIcon(QPixmap(":/assets/delete-icon.png")), "");
-    delete_button->setIconSize(QSize(18,18));
-    buttons->addWidget(delete_button);
 
     hbox->addSpacing(25);
-
 
 
     //End line
@@ -302,5 +279,10 @@ void DogVisitorCard::visitBreeding(Breeding &breeding) {
     cardLayout->addLayout(hbox);
     cardLayout->addWidget(line);
 
-
 }
+
+
+
+
+
+

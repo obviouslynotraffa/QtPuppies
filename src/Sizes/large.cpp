@@ -34,3 +34,8 @@ double Large::bath() const {
     return priceBath*multiplier;
 }
 
+
+std::string Large::toString() const{
+    std:: string l= "Large";
+    return l;
+}

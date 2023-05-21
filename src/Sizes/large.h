@@ -14,6 +14,7 @@ class Large: public Size {
          double training() const;
          double diet () const;
          double walkDog() const;
+         std::string toString()const;
 };
 
 

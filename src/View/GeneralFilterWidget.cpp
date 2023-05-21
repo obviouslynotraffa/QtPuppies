@@ -4,6 +4,7 @@
 #include <QLineEdit>
 #include <QPushButton>
 #include <QPixmap>
+#include <QDialog>
 
 #include "GeneralFilterWidget.h"
 
@@ -39,4 +40,8 @@ GeneralFilterWidget::GeneralFilterWidget(QWidget *parent)
     vbox->addLayout(hbox);
 
 
+
 }
+
+
+

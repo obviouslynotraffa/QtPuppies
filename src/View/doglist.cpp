@@ -1,13 +1,14 @@
 #include <QVBoxLayout>
 #include <QPixmap>
 #include <QLabel>
+#include <QDialog>
 
 #include "doglist.h"
 #include "dogcard.h"
 #include "DogVisitorCard.h"
 
 DogList::DogList(Container c,QWidget *parent)
-    :   QWidget(parent), c(c)
+    :   QWidget(parent), NoFilter(c)
 {
 
     QVBoxLayout* box= new QVBoxLayout;
@@ -24,6 +25,7 @@ DogList::DogList(Container c,QWidget *parent)
             c.getDog(node)->accept(visitor);
             box->addLayout(visitor.getCard());
             node=c.getNextNode(node);
+
         }
 
     } else{ //Display something if not found any
@@ -49,4 +51,5 @@ DogList::DogList(Container c,QWidget *parent)
     setLayout(box);
 
 }
+
 

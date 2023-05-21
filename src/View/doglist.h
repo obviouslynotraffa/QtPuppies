@@ -10,14 +10,15 @@ class DogList : public QWidget
 {
     Q_OBJECT
 private:
-    Container c;
+    Container NoFilter;
 
 public:
 
     explicit DogList(Container c,QWidget *parent = nullptr);
 
 
-signals:
+public slots:
+
 
 };
 
