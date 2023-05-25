@@ -14,6 +14,7 @@ SOURCES += \
     Dog/date.cpp \
     Dog/dog.cpp \
     Dog/owner.cpp \
+    JsonConverter/JsonVisitor.cpp \
     breeds/amstaff.cpp \
     breeds/bulldog.cpp \
     main.cpp \
@@ -27,6 +28,7 @@ SOURCES += \
     view/BreedingPanel.cpp \
     view/ButtonsWidget.cpp \
     view/DogVisitorCard.cpp \
+    view/DogVisitorEditPanel.cpp \
     view/DogVisitorInfoPanel.cpp \
     view/GeneralFilterWidget.cpp \
     view/GeneralPanel.cpp \
@@ -43,6 +45,7 @@ HEADERS += \
     Dog/dog.h \
     Dog/dogvisitor.h \
     Dog/owner.h \
+    JsonConverter/JsonVisitor.h \
     breeds/amstaff.h \
     breeds/breed.h \
     breeds/bulldog.h \
@@ -56,6 +59,7 @@ HEADERS += \
     view/BreedingPanel.h \
     view/ButtonsWidget.h \
     view/DogVisitorCard.h \
+    view/DogVisitorEditPanel.h \
     view/DogVisitorInfoPanel.h \
     view/GeneralFilterWidget.h \
     view/GeneralPanel.h \
@@ -73,6 +77,9 @@ RESOURCES += \
     resources.qrc
 
 FORMS +=
+
+DISTFILES += \
+    JsonConverter/Nuovo documento di testo.txt
 
 
 

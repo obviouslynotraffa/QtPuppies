@@ -1,4 +1,6 @@
 #include <QLabel>
+#include <QGroupBox>
+
 
 #include "DogVisitorInfoPanel.h"
 
@@ -13,156 +15,102 @@ void DogVisitorInfoPanel::visitBoarding(Boarding &boarding){
     InfoPanel = new QVBoxLayout();
 
 
-    //Title section
-    QHBoxLayout* title= new QHBoxLayout();
-    InfoPanel->addLayout(title);
+    QHBoxLayout* hbox= new QHBoxLayout();
+    InfoPanel->addLayout(hbox);
 
 
-    QLabel* titleLeft= new QLabel("Dog's details");
-    titleLeft->setAlignment(Qt::AlignCenter);
-    titleLeft->setFrameStyle(QFrame::Box|QFrame::Sunken);
-    title->addWidget(titleLeft);
+    //--------Dog--------//
 
-    QLabel* titleRight= new QLabel("Owner's details");
-    titleRight->setAlignment(Qt::AlignCenter);
-    titleRight->setFrameStyle(QFrame::Box|QFrame::Sunken);
-    title->addWidget(titleRight);
+    QGroupBox* dogGroup= new QGroupBox(tr("Dog's info"));
+    hbox->addWidget(dogGroup);
 
-
-
-    //Dog's info
-    QHBoxLayout* infoBox= new QHBoxLayout;
-    InfoPanel->addLayout(infoBox);
+    QLabel* dogname= new QLabel("Name: " + QString::fromStdString(boarding.getName()));
+    QLabel* dogdate= new QLabel("Arrival date: " +QString::fromStdString(boarding.getDate().toString()));
+    QLabel* dogbreed= new QLabel("Breed: "+ QString::fromStdString(boarding.getBreed()));
+    QLabel* dogsize= new QLabel("Size: ");
 
 
-    //Left side with dog's info
-    QVBoxLayout* leftInfo= new QVBoxLayout();
-    infoBox->addLayout(leftInfo);
-    leftInfo->setAlignment(Qt::AlignTop|Qt::AlignLeft);
-
-
-    QLabel* nameDog= new QLabel("Name: " + QString::fromStdString(boarding.getName()));
-    leftInfo->addWidget(nameDog);
-
-
-    QLabel* date= new QLabel("Arrival date: " + QString::fromStdString(boarding.getDate().toString()));
-    leftInfo->addWidget(date);
-
-    QLabel* breed;
-    if(boarding.getBreed()!="")
-        breed= new QLabel("Breed: "+ QString::fromStdString(boarding.getBreed()));
-    else
-        breed= new QLabel("Breed: not defined");
-
-    leftInfo->addWidget(breed);
-
-    QLabel* size= new QLabel("Size: ");
-    leftInfo->addWidget(size);
-
-    leftInfo->addSpacing(15);
-
-
-    //Optional services
-    QLabel* services= new QLabel("Services: ");
-    leftInfo->addWidget(services);
-
-
-    //Bath
-    QHBoxLayout* bathBox= new QHBoxLayout();
-    leftInfo->addLayout(bathBox);
-
-    QLabel* bath= new QLabel();
-    QLabel* bathString= new QLabel("Bath");
-    bath->setAlignment(Qt::AlignRight);
-
-    if (boarding.didBath())
-        bath->setPixmap(QPixmap(":/assets/icons8-done-48.png").scaled(10,10,Qt::KeepAspectRatio));
-    else
-        bath->setPixmap(QPixmap(":/assets/icons8-close-48.png").scaled(10,10,Qt::KeepAspectRatio));
-
-    bathBox->addWidget(bath);
-    bathBox->addWidget(bathString);
-
-
-    //Diet
-    QHBoxLayout* dietBox= new QHBoxLayout();
-    leftInfo->addLayout(dietBox);
+    //Optionals
+    QLabel* dogoption= new QLabel("Optional serivices: ");
 
     QLabel* diet= new QLabel();
     QLabel* dietString= new QLabel("Diet");
-    diet->setAlignment(Qt::AlignRight);
+    diet->setAlignment(Qt::AlignRight|Qt::AlignVCenter);
+    if(boarding.didDiet()) diet->setPixmap(QPixmap(":/assets/icons8-done-48.png").scaled(10,10,Qt::KeepAspectRatio));
+    else diet->setPixmap(QPixmap(":/assets/icons8-close-48.png").scaled(10,10,Qt::KeepAspectRatio));
 
-    if (boarding.didDiet())
-        diet->setPixmap(QPixmap(":/assets/icons8-done-48.png").scaled(10,10,Qt::KeepAspectRatio));
-    else
-        diet->setPixmap(QPixmap(":/assets/icons8-close-48.png").scaled(10,10,Qt::KeepAspectRatio));
-
-    dietBox->addWidget(diet);
-    dietBox->addWidget(dietString);
-
-
-    //Trainings
-    QHBoxLayout* trainBox= new QHBoxLayout();
-    leftInfo->addLayout(trainBox);
-
-    QLabel* trainings= new QLabel();
-    QLabel* trainString= new QLabel("Trainings");
-    trainings->setAlignment(Qt::AlignRight);
-
-    if (boarding.didTraining())
-        trainings->setPixmap(QPixmap(":/assets/icons8-done-48.png").scaled(10,10,Qt::KeepAspectRatio));
-    else
-        trainings->setPixmap(QPixmap(":/assets/icons8-close-48.png").scaled(10,10,Qt::KeepAspectRatio));
-
-    trainBox->addWidget(trainings);
-    trainBox->addWidget(trainString);
-
-
-    //Walks
-    QHBoxLayout* walksBox= new QHBoxLayout();
-    leftInfo->addLayout(walksBox);
+    QLabel* bath= new QLabel();
+    bath->setAlignment(Qt::AlignRight|Qt::AlignVCenter);
+    QLabel* bathString= new QLabel("Bath");
+    if(boarding.didBath()) bath->setPixmap(QPixmap(":/assets/icons8-done-48.png").scaled(10,10,Qt::KeepAspectRatio));
+    else bath->setPixmap(QPixmap(":/assets/icons8-close-48.png").scaled(10,10,Qt::KeepAspectRatio));
 
     QLabel* walks= new QLabel();
+    walks->setAlignment(Qt::AlignRight|Qt::AlignVCenter);
     QLabel* walksString= new QLabel("Walks");
-    walks->setAlignment(Qt::AlignRight);
+    if(boarding.didWalking()) walks->setPixmap(QPixmap(":/assets/icons8-done-48.png").scaled(10,10,Qt::KeepAspectRatio));
+    else walks->setPixmap(QPixmap(":/assets/icons8-close-48.png").scaled(10,10,Qt::KeepAspectRatio));
 
-    if (boarding.didWalking())
-        walks->setPixmap(QPixmap(":/assets/icons8-done-48.png").scaled(10,10,Qt::KeepAspectRatio));
-    else
-        walks->setPixmap(QPixmap(":/assets/icons8-close-48.png").scaled(10,10,Qt::KeepAspectRatio));
-
-    walksBox->addWidget(walks);
-    walksBox->addWidget(walksString);
-
-    //Middle line
-    QFrame* line= new QFrame;
-    line->setFrameShape(QFrame::VLine);
-    line->setFrameShadow(QFrame::Sunken);
-    infoBox->addWidget(line);
+    QLabel* training= new QLabel();
+    training->setAlignment(Qt::AlignRight|Qt::AlignVCenter);
+    QLabel* trainString= new QLabel("Training");
+    if(boarding.didTraining()) training->setPixmap(QPixmap(":/assets/icons8-done-48.png").scaled(10,10,Qt::KeepAspectRatio));
+    else training->setPixmap(QPixmap(":/assets/icons8-close-48.png").scaled(10,10,Qt::KeepAspectRatio));
 
 
-    //Right side with owner's info
-    QVBoxLayout* rightInfo= new QVBoxLayout();
-    infoBox->addLayout(rightInfo);
-    rightInfo->setAlignment(Qt::AlignTop|Qt::AlignLeft);
-
-    QLabel* ownerName= new QLabel("Name: "+ QString::fromStdString(boarding.getOwner()->getName())
-                                  + " " +QString::fromStdString(boarding.getOwner()->getSurname()));
-
-    rightInfo->addWidget(ownerName);
-
-    QLabel* birth= new QLabel("Day of birth: "+QString::fromStdString(boarding.getOwner()->getBirthD().toString()));
-    rightInfo->addWidget(birth);
-
-    QLabel* phone= new QLabel("Phone number: "+ QString::fromStdString(boarding.getOwner()->getPhone()));
-    rightInfo->addWidget(phone);
 
 
-    QLabel* address= new QLabel("Address: " + QString::fromStdString(boarding.getOwner()->getAddress()+ ", "
-                                                                     +boarding.getOwner()->getHouseNumber()));
-    rightInfo->addWidget(address);
+    //set up grid layout for dog
+    QGridLayout* dogLayout= new QGridLayout;
+    dogLayout->addWidget(dogname, 0,0);
+    dogLayout->addWidget(dogdate, 1,0);
+    dogLayout->addWidget(dogbreed, 2,0);
+    dogLayout->addWidget(dogsize, 3,0);
 
-    InfoPanel->addStretch();
+
+    dogLayout->addWidget(dogoption, 4,0);
+
+    dogLayout->addWidget(diet, 5,0);
+    dogLayout->addWidget(dietString, 5,1);
+
+    dogLayout->addWidget(bath, 6,0);
+    dogLayout->addWidget(bathString, 6,1);
+
+    dogLayout->addWidget(walks, 7,0);
+    dogLayout->addWidget(walksString, 7,1);
+
+    dogLayout->addWidget(training, 8,0);
+    dogLayout->addWidget(trainString, 8,1);
+
+
+
+    dogGroup->setLayout(dogLayout);
+
+
+
+    //---------Owner-----------//
+    QGroupBox* ownerBox= new QGroupBox(tr("Owner's info"));
+    hbox->addWidget(ownerBox);
+
+    Owner* ow=boarding.getOwner();
+
+    //Name
+    QLabel* owname= new QLabel("Name: "+QString::fromStdString(ow->getName())+ " " +QString::fromStdString(ow->getSurname()));
+    QLabel* owdate= new QLabel("Day of birth: "+QString::fromStdString(ow->getBirthD().toString()));
+    QLabel* number= new QLabel("Phone: " + QString::fromStdString(ow->getPhone()));
+    QLabel* address= new QLabel("Address: " + QString::fromStdString(ow->getAddress())+ ", "+ QString::fromStdString(ow->getHouseNumber()));
+
+
+
+    //set up owner layout
+    QGridLayout* ownerLayout= new QGridLayout;
+    ownerLayout->addWidget(owname, 0 ,0);
+    ownerLayout->addWidget(owdate, 1 ,0);
+    ownerLayout->addWidget(number, 2 ,0);
+    ownerLayout->addWidget(address, 3 ,0);
+
+
+    ownerBox->setLayout(ownerLayout);
 }
 
 
@@ -172,174 +120,104 @@ void DogVisitorInfoPanel::visitBreeding(Breeding &breeding){
 
     InfoPanel = new QVBoxLayout();
 
-    InfoPanel->addStretch();
 
-
-    //Title section
-    QHBoxLayout* title= new QHBoxLayout();
-    InfoPanel->addLayout(title);
-
-
-    QLabel* titleLeft= new QLabel("Dog's details");
-    titleLeft->setAlignment(Qt::AlignCenter);
-    titleLeft->setFrameStyle(QFrame::Box|QFrame::Sunken);
-    title->addWidget(titleLeft);
-
-    QLabel* titleRight= new QLabel("Parent's details");
-    titleRight->setAlignment(Qt::AlignCenter);
-    titleRight->setFrameStyle(QFrame::Box|QFrame::Sunken);
-    title->addWidget(titleRight);
+    QHBoxLayout* hbox= new QHBoxLayout();
+    InfoPanel->addLayout(hbox);
 
 
 
-    //Dog's info
-    QHBoxLayout* infoBox= new QHBoxLayout;
-    InfoPanel->addLayout(infoBox);
+    //---------Dog---------//
+
+    QGroupBox* dogGroup= new QGroupBox(tr("Dog's info"));
+    hbox->addWidget(dogGroup);
 
 
-    //Left side with dog's info
-    QVBoxLayout* leftInfo= new QVBoxLayout();
-    infoBox->addLayout(leftInfo);
-    leftInfo->setAlignment(Qt::AlignTop|Qt::AlignLeft);
+    QLabel* dogname= new QLabel("Name: "+QString::fromStdString(breeding.getName()));
+    QLabel* dogdate= new QLabel("Birthday: "+QString::fromStdString(breeding.getDate().toString()));
+    QLabel* breedDog= new QLabel("Breed: ");
 
 
-    QLabel* nameDog= new QLabel("Name: " + QString::fromStdString(breeding.getName()));
-    leftInfo->addWidget(nameDog);
 
-
-    QLabel* date= new QLabel("Day of birth : " + QString::fromStdString(breeding.getDate().toString()));
-    leftInfo->addWidget(date);
-
-    QLabel* breed= new QLabel("Breed: ");
-    leftInfo->addWidget(breed);
-
-
-    leftInfo->addSpacing(15);
-
-
-    //Options
-    QLabel* opt= new QLabel("Options: ");
-    leftInfo->addWidget(opt);
-
-
-    //Vax
-    QHBoxLayout* vaxBox= new QHBoxLayout();
-    leftInfo->addLayout(vaxBox);
+    //Optionals
+    QLabel* dogoption= new QLabel("Details:");
 
     QLabel* vax= new QLabel();
-    QLabel* vaxString= new QLabel("Vaxxed");
-    vax->setAlignment(Qt::AlignRight);
-
-    if (breeding.isVax())
-        vax->setPixmap(QPixmap(":/assets/icons8-done-48.png").scaled(10,10,Qt::KeepAspectRatio));
-    else
-        vax->setPixmap(QPixmap(":/assets/icons8-close-48.png").scaled(10,10,Qt::KeepAspectRatio));
-
-    vaxBox->addWidget(vax);
-    vaxBox->addWidget(vaxString);
+    QLabel* vaxString= new QLabel("Vax");
+    vax->setAlignment(Qt::AlignRight|Qt::AlignVCenter);
+    if(breeding.isVax()) vax->setPixmap(QPixmap(":/assets/icons8-done-48.png").scaled(10,10,Qt::KeepAspectRatio));
+    else vax->setPixmap(QPixmap(":/assets/icons8-close-48.png").scaled(10,10,Qt::KeepAspectRatio));
 
 
-    //Booked
-    QHBoxLayout* bookedBox= new QHBoxLayout();
-    leftInfo->addLayout(bookedBox);
+    QLabel* purch= new QLabel();
+    QLabel* purchString= new QLabel("Purchasable");
+    purch->setAlignment(Qt::AlignRight|Qt::AlignVCenter);
+    if(breeding.isPurchasable()) purch->setPixmap(QPixmap(":/assets/icons8-done-48.png").scaled(10,10,Qt::KeepAspectRatio));
+    else purch->setPixmap(QPixmap(":/assets/icons8-close-48.png").scaled(10,10,Qt::KeepAspectRatio));
 
     QLabel* booked= new QLabel();
     QLabel* bookedString= new QLabel("Booked");
-    booked->setAlignment(Qt::AlignRight);
-
-    if (breeding.isBooked())
-        booked->setPixmap(QPixmap(":/assets/icons8-done-48.png").scaled(10,10,Qt::KeepAspectRatio));
-    else
-        booked->setPixmap(QPixmap(":/assets/icons8-close-48.png").scaled(10,10,Qt::KeepAspectRatio));
-
-    bookedBox->addWidget(booked);
-    bookedBox->addWidget(bookedString);
-
-
-    //Purchasable
-    QHBoxLayout* purchBox= new QHBoxLayout();
-    leftInfo->addLayout(purchBox);
-
-    QLabel* purchase= new QLabel();
-    QLabel* purchaseString= new QLabel("Purchasable");
-    purchase->setAlignment(Qt::AlignRight);
-
-    if (breeding.isPurchasable())
-        purchase->setPixmap(QPixmap(":/assets/icons8-done-48.png").scaled(10,10,Qt::KeepAspectRatio));
-    else
-        purchase->setPixmap(QPixmap(":/assets/icons8-close-48.png").scaled(10,10,Qt::KeepAspectRatio));
-
-    purchBox->addWidget(purchase);
-    purchBox->addWidget(purchaseString);
+    booked->setAlignment(Qt::AlignRight|Qt::AlignVCenter);
+    if(breeding.isBooked()) booked->setPixmap(QPixmap(":/assets/icons8-done-48.png").scaled(10,10,Qt::KeepAspectRatio));
+    else booked->setPixmap(QPixmap(":/assets/icons8-close-48.png").scaled(10,10,Qt::KeepAspectRatio));
 
 
 
-    //Middle line
-    QFrame* line= new QFrame;
-    line->setFrameShape(QFrame::VLine);
-    line->setFrameShadow(QFrame::Sunken);
-    infoBox->addWidget(line);
+    //Set up layout
+    QGridLayout* dogLayout= new QGridLayout;
+    dogLayout->addWidget(dogname, 0,0);
+    dogLayout->addWidget(dogdate, 1,0);
+    dogLayout->addWidget(breedDog, 2,0);
 
+    dogLayout->addWidget(dogoption, 4,0);
 
-    //Right side with owner's info
-    QVBoxLayout* rightInfo= new QVBoxLayout();
-    infoBox->addLayout(rightInfo);
+    dogLayout->addWidget(vax, 5,0);
+    dogLayout->addWidget(vaxString, 5,1);
 
+    dogLayout->addWidget(purch, 6,0);
+    dogLayout->addWidget(purchString, 6,1);
 
+    dogLayout->addWidget(booked, 7,0);
+    dogLayout->addWidget(bookedString, 7,1);
 
-    if(breeding.getFather() && breeding.getMother()){
-
-
-        //Mother
-        QLabel* titleMother= new QLabel("Mom");
-        titleMother->setAlignment(Qt::AlignHCenter);
-        rightInfo->addWidget(titleMother);
-
-
-        QLabel* motherName= new QLabel("Name: "+ QString::fromStdString(breeding.getMother()->getName()));
-        rightInfo->addWidget(motherName);
-
-        QLabel* motherBreed= new QLabel("Breed: ");
-        rightInfo->addWidget(motherBreed);
-
-        QLabel* motherDate= new QLabel("Day of birth: "+ QString::fromStdString(breeding.getMother()->getDate().toString()));
-        rightInfo->addWidget(motherDate);
+    dogGroup->setLayout(dogLayout);
 
 
 
-        rightInfo->addStretch();
-
-        //Line
-        QFrame* line= new QFrame;
-        line->setFrameShape(QFrame::HLine);
-        line->setFrameShadow(QFrame::Sunken);
-        rightInfo->addWidget(line);
-
-        rightInfo->addStretch();
+    //------Parents--------//
+    QGroupBox* parentGroup= new QGroupBox(tr("Parent's info"));
+    hbox->addWidget(parentGroup);
 
 
-        //Dad
-        QLabel* titleFather= new QLabel("Dad");
-        titleFather->setAlignment(Qt::AlignHCenter);
-        rightInfo->addWidget(titleFather);
+    //Mother
+    QGroupBox* mom = new QGroupBox(tr("Mom"));
+    QLabel* momName= new QLabel("Name: " + QString::fromStdString(breeding.getMother()->getName()));
+    QLabel* momDate= new QLabel("Birthday: " + QString::fromStdString(breeding.getMother()->getDate().toString()));
+    QLabel* momBreed = new QLabel("Breed: ");
 
-        QLabel* fatherName= new QLabel("Name: "+ QString::fromStdString(breeding.getFather()->getName()));
-        rightInfo->addWidget(fatherName);
-
-        QLabel* fatherBreed= new QLabel("Breed: ");
-        rightInfo->addWidget(fatherBreed);
-
-        QLabel* fatherDate= new QLabel("Day of birth: "+ QString::fromStdString(breeding.getFather()->getDate().toString()));
-        rightInfo->addWidget(fatherDate);
+    QGridLayout* momLayout= new QGridLayout;
+    momLayout->addWidget(momName,0,0,1,50);
+    momLayout->addWidget(momDate,1,0,1,50);
+    momLayout->addWidget(momBreed,2,0,1,50);
+    mom->setLayout(momLayout);
 
 
+    //Father
+    QGroupBox* dad = new QGroupBox(tr("Dad"));
+    QLabel* dadName= new QLabel("Name: " + QString::fromStdString(breeding.getFather()->getName()));
+    QLabel* dadDate= new QLabel("Birthday: " + QString::fromStdString(breeding.getFather()->getDate().toString()));
+    QLabel* dadBreed = new QLabel("Breed: ");
 
-    } else{
-        QLabel* noParents= new QLabel("No data avaiable");
-        rightInfo->addWidget(noParents);
-        noParents->setAlignment(Qt::AlignCenter);
-    }
+    QGridLayout* dadLayout= new QGridLayout;
+    dadLayout->addWidget(dadName,0,0);
+    dadLayout->addWidget(dadDate,1,0);
+    dadLayout->addWidget(dadBreed,2,0);
+    dad->setLayout(dadLayout);
 
-    InfoPanel->addStretch();
+    //set up parent layout
+    QGridLayout* parentLayout= new QGridLayout;
+    parentLayout->addWidget(mom,0,0);
+    parentLayout->addWidget(dad,1,0);
+
+    parentGroup->setLayout(parentLayout);
 
 }

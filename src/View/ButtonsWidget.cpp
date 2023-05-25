@@ -5,6 +5,7 @@
 
 #include "ButtonsWidget.h"
 #include "DogVisitorInfoPanel.h"
+#include "DogVisitorEditPanel.h"
 
 ButtonsWidget::ButtonsWidget(Dog* dog, QWidget *parent)
     : QWidget{parent}, dog(dog)
@@ -28,6 +29,7 @@ ButtonsWidget::ButtonsWidget(Dog* dog, QWidget *parent)
 
     //Connect
     connect(view_button, &QPushButton::released, this, &ButtonsWidget::createInfoPanel);
+    connect(edit_button, &QPushButton::released, this, &ButtonsWidget::createEditPanel);
 
     setLayout(buttons);
 
@@ -43,10 +45,26 @@ void ButtonsWidget::createInfoPanel(){
    dialog->setLayout(visitor.getInfoPanel());
    dialog->setModal(true);
    dialog->setMinimumHeight(250);
-   dialog->setMaximumHeight(250);
    dialog->setMinimumWidth(650);
-   dialog->setMaximumWidth(650);
    dialog->setWindowTitle(QString::fromStdString(dog->getName()));
    dialog->setWindowIcon(QIcon(":/assets/icons8-info-48.png"));
    dialog->show();
+}
+
+
+
+void ButtonsWidget::createEditPanel(){
+
+    DogVisitorEditPanel visitor;
+    dog->accept(visitor);
+
+    QDialog* dialog =  new QDialog;
+    dialog->setLayout(visitor.getEditPanel());
+    dialog->setModal(true);
+    dialog->setMinimumHeight(250);
+    dialog->setMinimumWidth(650);
+    dialog->setWindowTitle("Editing "+QString::fromStdString(dog->getName()));
+    dialog->setWindowIcon(QIcon(":/assets/icons8-edit-48.png"));
+    dialog->show();
+
 }
