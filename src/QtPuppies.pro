@@ -77,7 +77,7 @@ RESOURCES += \
 FORMS +=
 
 DISTFILES += \
-    JsonConverter/Nuovo documento di testo.txt
+
 
 
 

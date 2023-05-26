@@ -8,9 +8,9 @@
 #include <QPushButton>
 
 #include "DogVisitorEditPanel.h"
-#include "Sizes/large.h"
-#include "Sizes/medium.h"
-#include "Sizes/small.h"
+#include "sizes/large.h"
+#include "sizes/medium.h"
+#include "sizes/small.h"
 
 
 

@@ -4,12 +4,12 @@
 
 #include "mainwindow.h"
 
-#include "Breeds/amstaff.h"
-#include "Breeds/bulldog.h"
+#include "breeds/amstaff.h"
+#include "breeds/bulldog.h"
 
-#include "Sizes/large.h"
-#include "Sizes/medium.h"
-#include "Sizes/small.h"
+#include "sizes/large.h"
+#include "sizes/medium.h"
+#include "sizes/small.h"
 
 #include "Dog/owner.h"
 

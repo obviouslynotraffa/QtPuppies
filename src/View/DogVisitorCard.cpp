@@ -12,9 +12,9 @@
 #include "Dog/owner.h"
 #include "ButtonsWidget.h"
 
-#include "Breeds/breed.h"
-#include "Breeds/amstaff.h"
-#include "Breeds/bulldog.h"
+#include "breeds/breed.h"
+#include "breeds/amstaff.h"
+#include "breeds/bulldog.h"
 
 
 
