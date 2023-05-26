@@ -5,9 +5,8 @@
 
 
 
-
-
 class Owner{
+
     private:
         std::string name;
         std::string surname;
@@ -15,6 +14,7 @@ class Owner{
         std::string address;
         std::string house_number;
         Date birth;
+
     public:
         Owner(std::string n, std::string s, std::string p, unsigned int d, unsigned int m, unsigned int y ,
         std::string a="", std::string h="");
@@ -27,9 +27,16 @@ class Owner{
         std::string getAddress() const;
         std::string getHouseNumber() const;
         Date getBirthD() const;
-};
 
-std::ostream& operator<<(std::ostream& o, const Owner& p);
+        Owner* setName(const std::string& s);
+        Owner* setSurname(const std::string& s);
+        Owner* setPhone(const std::string& s);
+        Owner* setAddress(const std::string& s);
+        Owner* setHouseNumber(const std::string& s);
+        Owner* setBirthday(const Date& d);
+
+
+};
 
 
 

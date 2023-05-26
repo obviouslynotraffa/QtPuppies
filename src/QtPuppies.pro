@@ -14,7 +14,6 @@ SOURCES += \
     Dog/date.cpp \
     Dog/dog.cpp \
     Dog/owner.cpp \
-    JsonConverter/JsonVisitor.cpp \
     breeds/amstaff.cpp \
     breeds/bulldog.cpp \
     main.cpp \
@@ -45,7 +44,6 @@ HEADERS += \
     Dog/dog.h \
     Dog/dogvisitor.h \
     Dog/owner.h \
-    JsonConverter/JsonVisitor.h \
     breeds/amstaff.h \
     breeds/breed.h \
     breeds/bulldog.h \

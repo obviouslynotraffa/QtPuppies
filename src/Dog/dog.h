@@ -9,6 +9,7 @@ class Dog{
     private:
         Date date;
         std::string name;
+
     public:
         Dog(unsigned int d, unsigned int m, unsigned int y, std::string n);
         virtual ~Dog();
@@ -18,12 +19,11 @@ class Dog{
         Date getDate() const;
         std::string getName() const;
 
-        void setDate(const Date& d);
-        void setName(std::string n);
+        Dog* setDate(const Date& d);
+        Dog* setName(const std::string& n);
 
         virtual void accept(DogVisitor& visitor)=0;
 };
 
-std::ostream& operator<<(std::ostream& o, const Dog& d);
 
 #endif

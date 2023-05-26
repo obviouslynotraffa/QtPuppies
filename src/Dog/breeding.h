@@ -19,20 +19,20 @@ class Breeding: public Dog{
 
         Breeding* getFather() const;
         Breeding* getMother() const;
-
+        Breed* getBreed() const;
 
         bool isVax() const;
         bool isPurchasable() const;
-        Breed* getBreed() const;
-        double totPrice() const;
         bool isBooked() const;
 
-        void setBooked(bool b);
-        void setVax(bool b);
-        void setPurch(bool b);
-        void setDad(Breeding* b);
-        void setMom(Breeding* b);
-        void setBreed(Breed* p);
+        Breeding* setBooked(const bool& b);
+        Breeding* setVax(const bool& b);
+        Breeding* setPurch(const bool& b);
+        Breeding* setDad(Breeding* b);
+        Breeding* setMom(Breeding* b);
+        Breeding* setBreed(Breed* p);
+
+        double totPrice() const;
 
         void accept(DogVisitor& visitor);
 };

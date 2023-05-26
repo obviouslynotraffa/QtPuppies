@@ -19,6 +19,7 @@ std::string Boarding::getBreed() const{
     return breed;
 }
 
+
 bool Boarding::didBath() const{
     return bath;
 }
@@ -34,6 +35,51 @@ bool Boarding::didTraining() const{
 bool Boarding::didWalking() const{
     return walking;
 }
+
+
+Boarding* Boarding::setBath(const bool &b){
+    bath=b;
+    return this;
+}
+
+Boarding* Boarding::setDiet(const bool &b){
+    diet=b;
+    return this;
+}
+
+
+Boarding* Boarding::setTraining(const bool &b){
+    training=b;
+    return this;
+}
+
+
+
+Boarding* Boarding::setWalking(const bool &b){
+    walking=b;
+    return this;
+}
+
+
+Boarding* Boarding::setBreed(const std::string& s){
+    breed=s;
+    return this;
+}
+
+
+Boarding* Boarding::setOwner(Owner* o){
+    owner=o;
+    return this;
+}
+
+
+
+Boarding* Boarding::setSize(Size* s){
+    size=s;
+    return this;
+}
+
+
 
 
 double Boarding::totPrice() const{

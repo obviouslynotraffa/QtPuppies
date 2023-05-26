@@ -37,17 +37,42 @@ Date Owner::getBirthD() const{
     return birth;
 }
 
-std::ostream& operator<<(std::ostream& os, const Owner& o){
-    os<<o.getSurname()<<" "<<o.getName()<<", nato il "<<o.getBirthD();
 
-    if(o.getAddress()!=""){
-        os<<", residente a "<<o.getAddress();
-        if(o.getHouseNumber() !="")
-        os<<", "<<o.getHouseNumber();
-    }
 
-    os<<", con recapito telefonico: "<<o.getPhone()<<std::endl;
 
-    return os;
+Owner* Owner::setName(const std::string &s){
+    name=s;
+    return this;
 }
+
+
+Owner* Owner::setSurname(const std::string &s){
+    surname=s;
+    return this;
+}
+
+
+Owner* Owner::setPhone(const std::string &s){
+    phone=s;
+    return this;
+}
+
+
+Owner* Owner::setAddress(const std::string &s){
+    address=s;
+    return this;
+}
+
+
+Owner* Owner::setHouseNumber(const std::string &s){
+    house_number=s;
+    return this;
+}
+
+
+Owner* Owner::setBirthday(const Date &d){
+    birth=d;
+    return this;
+}
+
 

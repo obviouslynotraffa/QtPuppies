@@ -33,16 +33,19 @@ unsigned int Date::countLeapYear(const Date& d){
 }
 
 
-void Date::setDay(int x){
+Date* Date::setDay(const int& x){
     day=x;
+    return this;
 }
 
-void Date::setMonth(int x){
+Date* Date::setMonth(const int& x){
     month=x;
+    return this;
 }
 
-void Date::setYear(int x){
+Date* Date::setYear(const int& x){
     year=x;
+    return this;
 }
 
 unsigned int Date::operator-(const Date& d){

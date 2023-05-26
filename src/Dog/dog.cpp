@@ -12,14 +12,14 @@ std::string Dog::getName() const{
     return name;
 }
 
-void Dog::setDate(const Date& d){
+Dog* Dog::setDate(const Date& d){
     date=d;
+    return this;
 }
 
-void Dog::setName(std::string s){
+Dog* Dog::setName(const std::string& s){
     name=s;
+    return this;
 }
 
-std::ostream& operator<<(std::ostream& o, const Dog& d){
-    return o<<d.getName();
-}
+

@@ -19,24 +19,23 @@ class Date{
     unsigned int getMonth() const;
     unsigned int getYear() const;
 
-    void setDay(int x);
-    void setMonth(int x);
-    void setYear(int x);
+    Date* setDay(const int& x);
+    Date* setMonth(const int& x);
+    Date* setYear(const int& x);
 
     bool operator==(const Date& d);
     bool operator<(const Date& d);
     unsigned int operator-(const Date& d);
+
     static unsigned int countLeapYear(const Date& d);
     static unsigned int convert(const Date& d);
     Date addDays(unsigned int x);
     static bool checkLeapYear(int x);
+
     std::string toString() const;
 
 
 };
-
-
-std::ostream& operator<<(std::ostream& o, const Date& d);
 
 
 #endif
