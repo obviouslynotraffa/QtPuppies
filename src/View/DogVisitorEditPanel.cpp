@@ -12,9 +12,16 @@
 #include "Sizes/medium.h"
 #include "Sizes/small.h"
 
+
+
+
 QVBoxLayout* DogVisitorEditPanel::getEditPanel()const{
     return editPanel;
 }
+
+
+
+
 
 
 void DogVisitorEditPanel::visitBoarding(Boarding &boarding){
@@ -59,7 +66,7 @@ void DogVisitorEditPanel::visitBoarding(Boarding &boarding){
     sizeEdit->addItem(tr("Medium"));
     sizeEdit->addItem(tr("Small"));
 
-    /*
+    /* causa crash
     if(dynamic_cast<Large*>(boarding.getSize()))
         sizeEdit->setCurrentIndex(0);
 
@@ -186,6 +193,9 @@ void DogVisitorEditPanel::visitBoarding(Boarding &boarding){
     btnLayout->addWidget(saveButton);
 
 }
+
+
+
 
 
 

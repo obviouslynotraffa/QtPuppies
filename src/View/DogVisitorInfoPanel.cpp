@@ -30,6 +30,10 @@ void DogVisitorInfoPanel::visitBoarding(Boarding &boarding){
     QLabel* dogsize= new QLabel("Size: ");
 
 
+    //causa crash
+    //QLabel* dogsize= new QLabel("Size: "+ QString::fromStdString(boarding.getSize()->toString()));
+
+
     //Optionals
     QLabel* dogoption= new QLabel("Optional serivices: ");
 
@@ -135,6 +139,9 @@ void DogVisitorInfoPanel::visitBreeding(Breeding &breeding){
     QLabel* dogname= new QLabel("Name: "+QString::fromStdString(breeding.getName()));
     QLabel* dogdate= new QLabel("Birthday: "+QString::fromStdString(breeding.getDate().toString()));
     QLabel* breedDog= new QLabel("Breed: ");
+
+    //causa crash
+    //QLabel* breedDog= new QLabel("Breed: "+ QString::fromStdString(breeding.getBreed()->toString()));
 
 
 
