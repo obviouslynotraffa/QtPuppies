@@ -1,6 +1,7 @@
 #include <QDialog>
 #include <QHBoxLayout>
 #include <QStyle>
+#include <QMessageBox>
 
 
 #include "ButtonsWidget.h"
@@ -30,6 +31,7 @@ ButtonsWidget::ButtonsWidget(Dog* dog, QWidget *parent)
     //Connect
     connect(view_button, &QPushButton::released, this, &ButtonsWidget::createInfoPanel);
     connect(edit_button, &QPushButton::released, this, &ButtonsWidget::createEditPanel);
+    connect(delete_button, &QPushButton::released, this, &ButtonsWidget::createDeleteMessage);
 
     setLayout(buttons);
 
@@ -66,5 +68,32 @@ void ButtonsWidget::createEditPanel(){
     dialog->setWindowTitle("Editing "+QString::fromStdString(dog->getName()));
     dialog->setWindowIcon(QIcon(":/assets/icons8-edit-48.png"));
     dialog->show();
+
+}
+
+
+
+void ButtonsWidget::createDeleteMessage(){
+
+
+    QMessageBox msgBox;
+
+    msgBox.setIcon(QMessageBox::Warning);
+    msgBox.setWindowTitle("Warning");
+
+    msgBox.setText("Are you sure to delete "+ QString::fromStdString(dog->getName())+ " ?\t\t");
+    msgBox.setInformativeText("This action can not be undone later.");
+
+    msgBox.setStandardButtons(QMessageBox::Yes|QMessageBox::Cancel);
+    msgBox.setDefaultButton(QMessageBox::Cancel);
+
+
+
+    int ret = msgBox.exec();
+
+    if(ret == QMessageBox::Yes){
+
+    }
+
 
 }

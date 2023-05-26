@@ -21,6 +21,7 @@ public:
 public slots:
     void createInfoPanel();
     void createEditPanel();
+    void createDeleteMessage();
 
 };
 
