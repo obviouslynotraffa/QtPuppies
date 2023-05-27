@@ -8,9 +8,13 @@
 #include <QPushButton>
 
 #include "DogVisitorEditPanel.h"
+
 #include "sizes/large.h"
 #include "sizes/medium.h"
 #include "sizes/small.h"
+
+#include "breeds/amstaff.h"
+#include "breeds/bulldog.h"
 
 
 
@@ -66,7 +70,7 @@ void DogVisitorEditPanel::visitBoarding(Boarding &boarding){
     sizeEdit->addItem(tr("Medium"));
     sizeEdit->addItem(tr("Small"));
 
-    /* causa crash
+
     if(dynamic_cast<Large*>(boarding.getSize()))
         sizeEdit->setCurrentIndex(0);
 
@@ -75,7 +79,7 @@ void DogVisitorEditPanel::visitBoarding(Boarding &boarding){
 
     if(dynamic_cast<Small*>(boarding.getSize()))
         sizeEdit->setCurrentIndex(2);
-    */
+
 
 
     //Optionals
@@ -233,6 +237,11 @@ void DogVisitorEditPanel::visitBreeding(Breeding &breeding){
     breedEdit->setFixedWidth(150);
     breedEdit->addItem(tr("AmStaff"));
     breedEdit->addItem(tr("Bulldog"));
+
+    if(dynamic_cast<AmStaff*>(breeding.getBreed()))
+        breedEdit->setCurrentIndex(0);
+    if(dynamic_cast<Bulldog*>(breeding.getBreed()))
+        breedEdit->setCurrentIndex(1);
 
 
     //Optionals

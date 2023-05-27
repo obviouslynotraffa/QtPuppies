@@ -44,12 +44,12 @@ MainWindow::MainWindow(QWidget *parent): QMainWindow{parent}{
 
 
     //set up container
-    Large large;
-    Medium medium;
-    Small small;
+    Large* large= new Large();
+    Medium* medium= new Medium();
+    Small* small= new Small();
 
-    AmStaff amsatff;
-    Bulldog bulldog;
+    AmStaff* amsatff= new AmStaff();
+    Bulldog* bulldog= new Bulldog();
 
     Owner* ow1= new Owner("Pino", "Daniele", "+39 65165132", 18, 5, 1999, "Piazza Garibaldi", "18");
     Owner* ow2= new Owner("Gennaro", "Bullo", "+39 3698547215", 11, 2, 1984, "Via Falcone Borsellino", "2");
@@ -57,28 +57,28 @@ MainWindow::MainWindow(QWidget *parent): QMainWindow{parent}{
     Owner* ow4= new Owner("Pino", "Daniele", "+39 65165132", 1, 7, 1996, "Via Brombeis", "1");
 
 
-    Boarding* guest1= new Boarding(20,4,2023,"Jack",&medium,ow1,"Boxer",true, false, true, false);
-    Boarding* guest2= new Boarding(20,4,2023,"Pablo",&small,ow2,"Pinchir",false, true, false, true);
-    Boarding* guest3= new Boarding(20,4,2023,"Zoe",&large,ow3,"Cane-lupo cecoslovacco",false, false, false, false);
-    Boarding* guest4= new Boarding(20,4,2023,"Maya",&small,ow4,"Bassotto",true, true, false, true);
+    Boarding* guest1= new Boarding(20,4,2023,"Jack",medium,ow1,"Boxer",true, false, true, false);
+    Boarding* guest2= new Boarding(20,4,2023,"Pablo",small,ow2,"Pinchir",false, true, false, true);
+    Boarding* guest3= new Boarding(20,4,2023,"Zoe",large,ow3,"Cane-lupo cecoslovacco",false, false, false, false);
+    Boarding* guest4= new Boarding(20,4,2023,"Maya",small,ow4,"Bassotto",true, true, false, true);
 
 
-    Breeding* BulFather= new Breeding(19,11,2015, "Pepe", &bulldog);
-    Breeding* BulMother= new Breeding(5,8,2016, "Vik", &bulldog);
+    Breeding* BulFather= new Breeding(19,11,2015, "Pepe", bulldog);
+    Breeding* BulMother= new Breeding(5,8,2016, "Vik", bulldog);
 
-    Breeding* Bulpuppie1= new Breeding(20,12,2022, "Bink", &bulldog, BulMother, BulFather);
-    Breeding* Bulpuppie2= new Breeding(20,12,2022, "Sip", &bulldog, BulMother, BulFather);
-    Breeding* Bulpuppie3= new Breeding(20,12,2022, "Zip", &bulldog, BulMother, BulFather);
-    Breeding* Bulpuppie4= new Breeding(20,12,2022, "Ettore", &bulldog, BulMother, BulFather);
+    Breeding* Bulpuppie1= new Breeding(20,12,2022, "Bink", bulldog, BulMother, BulFather);
+    Breeding* Bulpuppie2= new Breeding(20,12,2022, "Sip", bulldog, BulMother, BulFather);
+    Breeding* Bulpuppie3= new Breeding(20,12,2022, "Zip", bulldog, BulMother, BulFather);
+    Breeding* Bulpuppie4= new Breeding(20,12,2022, "Ettore", bulldog, BulMother, BulFather);
 
 
-    Breeding* AmSFather= new Breeding(19,11,2015, "Pepe", &amsatff);
-    Breeding* AmSMother= new Breeding(5,8,2016, "Vik", &amsatff);
+    Breeding* AmSFather= new Breeding(19,11,2015, "Orio", amsatff);
+    Breeding* AmSMother= new Breeding(5,8,2016, "Nida", amsatff);
 
-    Breeding* AmSpuppie1= new Breeding(13,2,2023, "Zil", &amsatff,AmSMother, AmSFather);
-    Breeding* AmSpuppie2= new Breeding(13,2,2023, "Paky", &amsatff,AmSMother, AmSFather);
-    Breeding* AmSpuppie3= new Breeding(13,2,2023, "Chuck", &amsatff,AmSMother, AmSFather);
-    Breeding* AmSpuppie4= new Breeding(13,2,2023, "Bone", &amsatff,AmSMother, AmSFather);
+    Breeding* AmSpuppie1= new Breeding(13,2,2023, "Zil", amsatff,AmSMother, AmSFather);
+    Breeding* AmSpuppie2= new Breeding(13,2,2023, "Paky", amsatff,AmSMother, AmSFather);
+    Breeding* AmSpuppie3= new Breeding(13,2,2023, "Chuck", amsatff,AmSMother, AmSFather);
+    Breeding* AmSpuppie4= new Breeding(13,2,2023, "Bone", amsatff,AmSMother, AmSFather);
 
 
 

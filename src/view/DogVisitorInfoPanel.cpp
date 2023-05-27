@@ -27,11 +27,7 @@ void DogVisitorInfoPanel::visitBoarding(Boarding &boarding){
     QLabel* dogname= new QLabel("Name: " + QString::fromStdString(boarding.getName()));
     QLabel* dogdate= new QLabel("Arrival date: " +QString::fromStdString(boarding.getDate().toString()));
     QLabel* dogbreed= new QLabel("Breed: "+ QString::fromStdString(boarding.getBreed()));
-    QLabel* dogsize= new QLabel("Size: ");
-
-
-    //causa crash
-    //QLabel* dogsize= new QLabel("Size: "+ QString::fromStdString(boarding.getSize()->toString()));
+    QLabel* dogsize= new QLabel("Size: "+ QString::fromStdString(boarding.getSize()->toString()));
 
 
     //Optionals
@@ -138,10 +134,7 @@ void DogVisitorInfoPanel::visitBreeding(Breeding &breeding){
 
     QLabel* dogname= new QLabel("Name: "+QString::fromStdString(breeding.getName()));
     QLabel* dogdate= new QLabel("Birthday: "+QString::fromStdString(breeding.getDate().toString()));
-    QLabel* breedDog= new QLabel("Breed: ");
-
-    //causa crash
-    //QLabel* breedDog= new QLabel("Breed: "+ QString::fromStdString(breeding.getBreed()->toString()));
+    QLabel* breedDog= new QLabel("Breed: "+ QString::fromStdString(breeding.getBreed()->toString()));
 
 
 
@@ -194,37 +187,47 @@ void DogVisitorInfoPanel::visitBreeding(Breeding &breeding){
     QGroupBox* parentGroup= new QGroupBox(tr("Parent's info"));
     hbox->addWidget(parentGroup);
 
+    if(breeding.getFather() && breeding.getMother()){
 
-    //Mother
-    QGroupBox* mom = new QGroupBox(tr("Mom"));
-    QLabel* momName= new QLabel("Name: " + QString::fromStdString(breeding.getMother()->getName()));
-    QLabel* momDate= new QLabel("Birthday: " + QString::fromStdString(breeding.getMother()->getDate().toString()));
-    QLabel* momBreed = new QLabel("Breed: ");
+        //Mother
+        QGroupBox* mom = new QGroupBox(tr("Mom"));
+        QLabel* momName= new QLabel("Name: " + QString::fromStdString(breeding.getMother()->getName()));
+        QLabel* momDate= new QLabel("Birthday: " + QString::fromStdString(breeding.getMother()->getDate().toString()));
+        QLabel* momBreed = new QLabel("Breed: "+ QString::fromStdString(breeding.getMother()->getBreed()->toString()));
 
-    QGridLayout* momLayout= new QGridLayout;
-    momLayout->addWidget(momName,0,0,1,50);
-    momLayout->addWidget(momDate,1,0,1,50);
-    momLayout->addWidget(momBreed,2,0,1,50);
-    mom->setLayout(momLayout);
+        QGridLayout* momLayout= new QGridLayout;
+        momLayout->addWidget(momName,0,0,1,50);
+        momLayout->addWidget(momDate,1,0,1,50);
+        momLayout->addWidget(momBreed,2,0,1,50);
+        mom->setLayout(momLayout);
 
 
-    //Father
-    QGroupBox* dad = new QGroupBox(tr("Dad"));
-    QLabel* dadName= new QLabel("Name: " + QString::fromStdString(breeding.getFather()->getName()));
-    QLabel* dadDate= new QLabel("Birthday: " + QString::fromStdString(breeding.getFather()->getDate().toString()));
-    QLabel* dadBreed = new QLabel("Breed: ");
+        //Father
+        QGroupBox* dad = new QGroupBox(tr("Dad"));
+        QLabel* dadName= new QLabel("Name: " + QString::fromStdString(breeding.getFather()->getName()));
+        QLabel* dadDate= new QLabel("Birthday: " + QString::fromStdString(breeding.getFather()->getDate().toString()));
+        QLabel* dadBreed = new QLabel("Breed: "+ QString::fromStdString(breeding.getFather()->getBreed()->toString()));
 
-    QGridLayout* dadLayout= new QGridLayout;
-    dadLayout->addWidget(dadName,0,0);
-    dadLayout->addWidget(dadDate,1,0);
-    dadLayout->addWidget(dadBreed,2,0);
-    dad->setLayout(dadLayout);
+        QGridLayout* dadLayout= new QGridLayout;
+        dadLayout->addWidget(dadName,0,0);
+        dadLayout->addWidget(dadDate,1,0);
+        dadLayout->addWidget(dadBreed,2,0);
+        dad->setLayout(dadLayout);
 
-    //set up parent layout
-    QGridLayout* parentLayout= new QGridLayout;
-    parentLayout->addWidget(mom,0,0);
-    parentLayout->addWidget(dad,1,0);
+        //set up parent layout
+        QGridLayout* parentLayout= new QGridLayout;
+        parentLayout->addWidget(mom,0,0);
+        parentLayout->addWidget(dad,1,0);
 
-    parentGroup->setLayout(parentLayout);
+        parentGroup->setLayout(parentLayout);
+
+    }else{  //show no data
+
+        QLabel* noParents= new QLabel("No parental data available");
+        QVBoxLayout* vbox= new QVBoxLayout;
+        vbox->addWidget(noParents);
+        vbox->setAlignment(Qt::AlignCenter);
+        parentGroup->setLayout(vbox);
+    }
 
 }

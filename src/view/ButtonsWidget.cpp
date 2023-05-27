@@ -84,9 +84,8 @@ void ButtonsWidget::createDeleteMessage(){
     msgBox.setText("Are you sure to delete "+ QString::fromStdString(dog->getName())+ " ?\t\t");
     msgBox.setInformativeText("This action can not be undone later.");
 
-    msgBox.setStandardButtons(QMessageBox::Yes|QMessageBox::Cancel);
-    msgBox.setDefaultButton(QMessageBox::Cancel);
-
+    msgBox.setStandardButtons(QMessageBox::Yes|QMessageBox::No);
+    msgBox.setDefaultButton(QMessageBox::No);
 
 
     int ret = msgBox.exec();
