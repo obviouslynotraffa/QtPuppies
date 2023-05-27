@@ -8,6 +8,7 @@
 #include <QPushButton>
 
 #include "DogVisitorEditPanel.h"
+#include "FinalButtonWidget.h"
 
 #include "sizes/large.h"
 #include "sizes/medium.h"
@@ -46,21 +47,21 @@ void DogVisitorEditPanel::visitBoarding(Boarding &boarding){
     QLineEdit* nameEdit= new QLineEdit;
     nameEdit->setText(QString::fromStdString(boarding.getName()));
     nameEdit->setFixedWidth(150);
-    nameEdit->setFocusPolicy(Qt::NoFocus);
+
 
     //Date
     QLabel* dogdate= new QLabel("Arrival date: ");
     QLineEdit* dateEdit= new QLineEdit;
     dateEdit->setText(QString::fromStdString(boarding.getDate().toString()));
     dateEdit->setFixedWidth(150);
-    dateEdit->setFocusPolicy(Qt::NoFocus);
+
 
     //Breed
     QLabel* dogbreed= new QLabel("Breed: ");
     QLineEdit* breedEdit= new QLineEdit;
     breedEdit->setText(QString::fromStdString(boarding.getBreed()));
     breedEdit->setFixedWidth(150);
-    breedEdit->setFocusPolicy(Qt::NoFocus);
+
 
     //Size
     QLabel* dogsize= new QLabel("Size: ");
@@ -188,15 +189,13 @@ void DogVisitorEditPanel::visitBoarding(Boarding &boarding){
 
 
     //save button
-    QHBoxLayout* btnLayout= new QHBoxLayout;
-    editPanel->addLayout(btnLayout);
-    QPushButton* saveButton= new QPushButton("Save changes");
-    saveButton->setFocusPolicy(Qt::NoFocus);
-    saveButton->setMinimumSize(80,40);
-    btnLayout->addStretch();
-    btnLayout->addWidget(saveButton);
+
+    FinalButtonWidget* btn= new FinalButtonWidget(&boarding, nameEdit, dateEdit, breedEdit, sizeEdit,bath, walks, diet, training,
+                                                  ownameEdit, surnameEdit, owdateEdit, numberEdit, addressEdit, hnEdit);
+    editPanel->addWidget(btn);
 
 }
+
 
 
 
@@ -222,14 +221,14 @@ void DogVisitorEditPanel::visitBreeding(Breeding &breeding){
     QLineEdit* nameEdit= new QLineEdit;
     nameEdit->setText(QString::fromStdString(breeding.getName()));
     nameEdit->setFixedWidth(150);
-    nameEdit->setFocusPolicy(Qt::NoFocus);
+
 
     //Date
     QLabel* dogdate= new QLabel("Birthday: ");
     QLineEdit* dateEdit= new QLineEdit;
     dateEdit->setText(QString::fromStdString(breeding.getDate().toString()));
     dateEdit->setFixedWidth(150);
-    dateEdit->setFocusPolicy(Qt::NoFocus);
+
 
     //Breed
     QLabel* breedDog= new QLabel("Breed: ");
@@ -285,7 +284,7 @@ void DogVisitorEditPanel::visitBreeding(Breeding &breeding){
 
     QLabel* mother= new QLabel("Select mother: ");
     QComboBox* listmom= new QComboBox;
-    listmom->addItem("None");
+    listmom->addItem(QString::fromStdString(breeding.getMother()->getName()));
 
     QGridLayout* momLayout= new QGridLayout;
 
@@ -298,7 +297,7 @@ void DogVisitorEditPanel::visitBreeding(Breeding &breeding){
     QGroupBox* dad = new QGroupBox(tr("Dad"));
     QLabel* father= new QLabel("Select father: ");
     QComboBox* listdad= new QComboBox;
-    listdad->addItem("None");
+    listdad->addItem(QString::fromStdString(breeding.getFather()->getName()));
 
 
     QGridLayout* dadLayout= new QGridLayout;
@@ -317,13 +316,7 @@ void DogVisitorEditPanel::visitBreeding(Breeding &breeding){
 
 
     //save button
-    QHBoxLayout* btnLayout= new QHBoxLayout;
-    editPanel->addLayout(btnLayout);
-    QPushButton* saveButton= new QPushButton("Save changes");
-    saveButton->setFocusPolicy(Qt::NoFocus);
-    saveButton->setMinimumSize(80,40);
-    btnLayout->addStretch();
-    btnLayout->addWidget(saveButton);
-
+    FinalButtonWidget* btn= new FinalButtonWidget(&breeding, nameEdit, dateEdit, breedEdit, vax, purch, booked);
+    editPanel->addWidget(btn);
 
 }

@@ -26,6 +26,7 @@ class Breeding: public Dog{
         bool isPurchasable() const;
         bool isBooked() const;
 
+
         Breeding* setBooked(const bool b);
         Breeding* setVax(const bool b);
         Breeding* setPurch(const bool b);

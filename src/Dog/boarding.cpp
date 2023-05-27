@@ -37,6 +37,7 @@ bool Boarding::didWalking() const{
 }
 
 
+
 Boarding* Boarding::setBath(const bool &b){
     bath=b;
     return this;

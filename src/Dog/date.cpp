@@ -1,5 +1,6 @@
 #include "date.h"
 
+#include <QDate>
 
 Date::Date(unsigned int d, unsigned int m, unsigned int y) : day(d), month(m), year(y) {}
 
@@ -121,7 +122,6 @@ Date Date::addDays(unsigned int x){
     x=x-daysMonth[month-1]+day;
     day=1;
     month++;
-    //std::cout<<day<<" "<<month<<" "<<x<<std::endl;
 
     while(x>=daysMonth[month-1]){
         if(month!=12){
@@ -144,4 +144,22 @@ Date Date::addDays(unsigned int x){
 std::string Date::toString() const{
     std::string date= ""+ std::to_string(day) + "/" + std::to_string(month) + "/"+ std::to_string(year);
     return date;
+}
+
+
+Date Date::toDate(std::string s) {
+
+    QString str= QString::fromStdString(s);
+    QString format("d/M/yyyy");
+
+    QDate time=QDate::fromString(str, format);
+
+    unsigned int d= time.day();
+    unsigned int m= time.month();
+    unsigned int y= time.year();
+
+    Date date(d,m,y);
+
+    return date;
+
 }

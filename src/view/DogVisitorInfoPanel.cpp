@@ -108,9 +108,16 @@ void DogVisitorInfoPanel::visitBoarding(Boarding &boarding){
     ownerLayout->addWidget(owdate, 1 ,0);
     ownerLayout->addWidget(number, 2 ,0);
     ownerLayout->addWidget(address, 3 ,0);
-
-
     ownerBox->setLayout(ownerLayout);
+
+    //end button
+    QHBoxLayout* btnLayout= new QHBoxLayout;
+    InfoPanel->addLayout(btnLayout);
+    QPushButton* saveButton= new QPushButton("Save changes");
+    saveButton->setFocusPolicy(Qt::NoFocus);
+    saveButton->setMinimumSize(80,40);
+    btnLayout->addStretch();
+    btnLayout->addWidget(saveButton);
 }
 
 
@@ -229,5 +236,14 @@ void DogVisitorInfoPanel::visitBreeding(Breeding &breeding){
         vbox->setAlignment(Qt::AlignCenter);
         parentGroup->setLayout(vbox);
     }
+
+    //end button
+    QHBoxLayout* btnLayout= new QHBoxLayout;
+    InfoPanel->addLayout(btnLayout);
+    QPushButton* saveButton= new QPushButton("Save changes");
+    saveButton->setFocusPolicy(Qt::NoFocus);
+    saveButton->setMinimumSize(80,40);
+    btnLayout->addStretch();
+    btnLayout->addWidget(saveButton);
 
 }

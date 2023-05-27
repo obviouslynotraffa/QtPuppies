@@ -1,7 +1,7 @@
 #ifndef DOGVISITOREDITPANEL_H
 #define DOGVISITOREDITPANEL_H
 
-
+#include <QWidget>
 #include <QVBoxLayout>
 
 
@@ -19,6 +19,9 @@ public:
     QVBoxLayout* getEditPanel() const;
     virtual void visitBoarding(Boarding& boarding);
     virtual void visitBreeding(Breeding& breeding);
+
+public slots:
+
 
 };
 

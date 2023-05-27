@@ -33,6 +33,7 @@ bool Breeding::isPurchasable() const {
     return purchasable;
 }
 
+
 Breeding* Breeding::setVax(const bool b){
     vax=b;
     return this;
