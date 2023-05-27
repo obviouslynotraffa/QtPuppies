@@ -1,7 +1,8 @@
 #include "breeding.h"
 
-Breeding::Breeding(unsigned int d, unsigned int m, unsigned int y, std::string n, Breed* b, Breeding* mom, Breeding* dad)
-: Dog(d,m,y,n),breed(b), mother(mom), father(dad), vax(false), purchasable(false), booked(false) {}
+Breeding::Breeding(unsigned int d, unsigned int m, unsigned int y, std::string n,
+                   Breed* b, bool vax, bool booked, bool purch, Breeding* mom, Breeding* dad):
+                   Dog(d,m,y,n),breed(b), vax(vax), purchasable(purch), booked(booked) , mother(mom), father(dad){}
 
 Breeding::~Breeding() {}
 
@@ -32,17 +33,17 @@ bool Breeding::isPurchasable() const {
     return purchasable;
 }
 
-Breeding* Breeding::setVax(const bool& b){
+Breeding* Breeding::setVax(const bool b){
     vax=b;
     return this;
 }
 
-Breeding* Breeding::setPurch(const bool& b){
+Breeding* Breeding::setPurch(const bool b){
     purchasable=b;
     return this;
 }
 
-Breeding* Breeding::setBooked(const bool& b){
+Breeding* Breeding::setBooked(const bool b){
     booked=b;
     return this;
 }
