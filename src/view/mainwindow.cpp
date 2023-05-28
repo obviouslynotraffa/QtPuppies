@@ -66,19 +66,19 @@ MainWindow::MainWindow(QWidget *parent): QMainWindow{parent}{
     Breeding* BulFather= new Breeding(19,11,2015, "Pepe", bulldog,true, false, false);
     Breeding* BulMother= new Breeding(5,8,2016, "Vik", bulldog,true, false, false);
 
-    Breeding* Bulpuppie1= new Breeding(20,12,2022, "Bink", bulldog, true, false, true, BulMother, BulFather);
-    Breeding* Bulpuppie2= new Breeding(20,12,2022, "Sip", bulldog, true, false, true, BulMother, BulFather);
-    Breeding* Bulpuppie3= new Breeding(20,12,2022, "Zip", bulldog, true, true, true, BulMother, BulFather);
-    Breeding* Bulpuppie4= new Breeding(20,12,2022, "Ettore", bulldog, true, false, true, BulMother, BulFather);
+    Breeding* Bulpuppie1= new Breeding(20,1,2023, "Bink", bulldog, true, false, true, BulMother, BulFather);
+    Breeding* Bulpuppie2= new Breeding(20,1,2023, "Sip", bulldog, true, false, true, BulMother, BulFather);
+    Breeding* Bulpuppie3= new Breeding(20,1,2023, "Zip", bulldog, true, true, true, BulMother, BulFather);
+    Breeding* Bulpuppie4= new Breeding(20,1,2023, "Ettore", bulldog, true, false, true, BulMother, BulFather);
 
 
     Breeding* AmSFather= new Breeding(19,11,2015, "Orio",amsatff, true, false, false);
     Breeding* AmSMother= new Breeding(5,8,2016, "Nida", amsatff, true, false, false);
 
-    Breeding* AmSpuppie1= new Breeding(13,2,2023, "Zil", amsatff, true, true, true ,AmSMother, AmSFather);
-    Breeding* AmSpuppie2= new Breeding(13,2,2023, "Paky",amsatff, true, false, true,AmSMother, AmSFather);
-    Breeding* AmSpuppie3= new Breeding(13,2,2023, "Chuck", amsatff, true, true, true, AmSMother, AmSFather);
-    Breeding* AmSpuppie4= new Breeding(13,2,2023, "Bone", amsatff, true, false, true,AmSMother, AmSFather);
+    Breeding* AmSpuppie1= new Breeding(13,8,2022, "Zil", amsatff, true, true, true ,AmSMother, AmSFather);
+    Breeding* AmSpuppie2= new Breeding(13,8,2022, "Paky",amsatff, true, false, true,AmSMother, AmSFather);
+    Breeding* AmSpuppie3= new Breeding(13,8,2022, "Chuck", amsatff, true, true, true, AmSMother, AmSFather);
+    Breeding* AmSpuppie4= new Breeding(13,8,2022, "Bone", amsatff, true, false, true,AmSMother, AmSFather);
 
 
 

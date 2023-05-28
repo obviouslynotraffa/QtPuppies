@@ -110,14 +110,13 @@ void DogVisitorInfoPanel::visitBoarding(Boarding &boarding){
     ownerLayout->addWidget(address, 3 ,0);
     ownerBox->setLayout(ownerLayout);
 
-    //end button
-    QHBoxLayout* btnLayout= new QHBoxLayout;
-    InfoPanel->addLayout(btnLayout);
-    QPushButton* saveButton= new QPushButton("Save changes");
-    saveButton->setFocusPolicy(Qt::NoFocus);
-    saveButton->setMinimumSize(80,40);
-    btnLayout->addStretch();
-    btnLayout->addWidget(saveButton);
+    //price label
+    QHBoxLayout* priceLayout= new QHBoxLayout;
+    InfoPanel->addLayout(priceLayout);
+    QLabel* price= new QLabel("Current cost: "+ QString::number(boarding.totPrice()));
+    price->setStyleSheet("font-weight: bold;");
+    priceLayout->addStretch();
+    priceLayout->addWidget(price);
 }
 
 
@@ -237,13 +236,22 @@ void DogVisitorInfoPanel::visitBreeding(Breeding &breeding){
         parentGroup->setLayout(vbox);
     }
 
-    //end button
-    QHBoxLayout* btnLayout= new QHBoxLayout;
-    InfoPanel->addLayout(btnLayout);
-    QPushButton* saveButton= new QPushButton("Save changes");
-    saveButton->setFocusPolicy(Qt::NoFocus);
-    saveButton->setMinimumSize(80,40);
-    btnLayout->addStretch();
-    btnLayout->addWidget(saveButton);
+    //price label
+    if(breeding.isPurchasable()){
+
+        QHBoxLayout* priceLayout= new QHBoxLayout;
+        InfoPanel->addLayout(priceLayout);
+        QLabel* price= new QLabel("Current cost: "+ QString::number(breeding.totPrice()));
+        price->setStyleSheet("font-weight: bold;");
+        priceLayout->addStretch();
+        priceLayout->addWidget(price);
+    } else
+    {
+        QHBoxLayout* priceLayout= new QHBoxLayout;
+        InfoPanel->addLayout(priceLayout);
+        QLabel* price= new QLabel("Not for sale");
+        priceLayout->addStretch();
+        priceLayout->addWidget(price);
+    }
 
 }

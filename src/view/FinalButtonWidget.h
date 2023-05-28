@@ -7,6 +7,7 @@
 #include <QLineEdit>
 #include <QComboBox>
 #include <QCheckBox>
+#include <QMessageBox>
 
 #include "Dog/boarding.h"
 #include "Dog/breeding.h"
@@ -74,6 +75,7 @@ public:
 public slots:
     void setChangesBoarding();
     void setChangesBreeding();
+    void checkChanges();
 
 
 signals:

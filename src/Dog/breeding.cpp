@@ -75,15 +75,15 @@ double Breeding::totPrice() const{
     tm *ltm = localtime(&now);
 
     Date today(ltm->tm_mday,1+(ltm->tm_mon),1900+ltm->tm_year);
-    Date aux=getDate().addDays(90).addDays(180);
+    Date aux=getDate().addDays(180);
 
-    while((aux<today) && (tot>500)){
+    while((aux<today) && (tot>600)){
         tot-=75;
         aux=aux.addDays(180);
 
     }
-    if(tot>500)return tot;
-    else return 500;
+    if(tot>600)return tot;
+    else return 600;
 
 
 }

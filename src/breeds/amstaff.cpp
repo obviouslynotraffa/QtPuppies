@@ -1,6 +1,6 @@
 #include "amstaff.h"
 
-double AmStaff::p=900;
+double AmStaff::p=1100;
 
 double AmStaff::price() const{
     return p;

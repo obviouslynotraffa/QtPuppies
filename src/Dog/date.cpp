@@ -66,8 +66,11 @@ unsigned int Date::operator-(const Date& d){
 
 unsigned int Date::convert(const Date& d){
     const int daysMonth[12]={30,28,31,30,31,30,31,31,30,31,30,31};
+
     long n=d.getYear()*365+d.getDay();
+
     for(unsigned int i=0;i<d.getMonth()-1;i++)n+=daysMonth[i];
+
     n+=countLeapYear(d);
 
     return n;
@@ -137,7 +140,9 @@ Date Date::addDays(unsigned int x){
     }
     day=day+x;
 
-    return Date(day,month,year);
+    Date date(day,month,year);
+
+    return date;
 }
 
 

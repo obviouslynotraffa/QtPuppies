@@ -21,6 +21,7 @@ FinalButtonWidget::FinalButtonWidget(Boarding* boarding, QLineEdit* name, QLineE
 
     //connect signals
     connect(button, &QPushButton::released, this, &FinalButtonWidget::setChangesBoarding);
+    connect(button, &QPushButton::released, this, &FinalButtonWidget::checkChanges);
 
 
 
@@ -90,6 +91,8 @@ FinalButtonWidget::FinalButtonWidget(Breeding *breeding, QLineEdit *name, QLineE
 
     //connect signals
     connect(button, &QPushButton::released, this, &FinalButtonWidget::setChangesBreeding);
+    connect(button, &QPushButton::released, this, &FinalButtonWidget::checkChanges);
+
 
     setLayout(hbox);
 
@@ -116,5 +119,20 @@ void FinalButtonWidget::setChangesBreeding(){
         breeding->setBreed(bulldog);
     }
 
+}
+
+
+void FinalButtonWidget::checkChanges(){
+
+    QMessageBox msgBox;
+
+    msgBox.setIconPixmap(QPixmap(":/assets/icons8-done-48.png"));
+    msgBox.setWindowTitle("Status");
+
+    msgBox.setText("Changes set correctly");
+
+    msgBox.setStandardButtons(QMessageBox::Close);
+
+    msgBox.exec();
 
 }
