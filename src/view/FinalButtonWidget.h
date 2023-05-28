@@ -55,6 +55,8 @@ private:
     QCheckBox* purch= nullptr;
     QCheckBox* booked= nullptr;
 
+    //bool wrongData;
+
 
 
 
@@ -72,10 +74,13 @@ public:
 
 
 
+
+
 public slots:
     void setChangesBoarding();
     void setChangesBreeding();
-    void checkChanges();
+    //void correctChanges();
+    //void wrongChanges();
 
 
 signals:

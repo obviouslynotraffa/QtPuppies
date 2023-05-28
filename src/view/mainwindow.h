@@ -33,7 +33,10 @@ public:
     explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
-signals:
+public slots:
+        void addBreeding();
+        void addBoarding();
+        //void fieldsFilled();
 
 };
 

@@ -163,8 +163,14 @@ Date Date::toDate(std::string s) {
     unsigned int m= time.month();
     unsigned int y= time.year();
 
-    Date date(d,m,y);
+    //QDate::setDate(time.year(), time.month(), time.day());
 
-    return date;
+    Date date(d,m,y);
+    Date wrong(0,0,0);
+
+    if(time.isValid())
+        return date;
+    else
+        return wrong;
 
 }

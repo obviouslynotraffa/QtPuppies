@@ -1,4 +1,7 @@
+#include <QDate>
+
 #include "FinalButtonWidget.h"
+#include "Dog/date.h"
 
 FinalButtonWidget::FinalButtonWidget(Boarding* boarding, QLineEdit* name, QLineEdit* date, QLineEdit* breed, QComboBox* size,
                                      QCheckBox* bath, QCheckBox* walks, QCheckBox* diet, QCheckBox* training,
@@ -21,9 +24,6 @@ FinalButtonWidget::FinalButtonWidget(Boarding* boarding, QLineEdit* name, QLineE
 
     //connect signals
     connect(button, &QPushButton::released, this, &FinalButtonWidget::setChangesBoarding);
-    connect(button, &QPushButton::released, this, &FinalButtonWidget::checkChanges);
-
-
 
     setLayout(hbox);
 
@@ -32,8 +32,20 @@ FinalButtonWidget::FinalButtonWidget(Boarding* boarding, QLineEdit* name, QLineE
 
 void FinalButtonWidget::setChangesBoarding(){
 
-    boarding->setName(name->text().toStdString())
-            ->setDate(Date::toDate(date->text().toStdString()));
+    //set all fields based on QLinedit
+
+    boarding->setName(name->text().toStdString());
+
+    Date input=Date::toDate(date->text().toStdString());
+
+    QDate tryDate(input.getYear(), input.getMonth(), input.getDay());
+
+
+    if(tryDate.isValid())
+        boarding->setDate(input);
+    else
+        boarding->setDate(boarding->getDate());
+
 
     boarding->setBreed(breed->text().toStdString())
             ->setBath(bath->isChecked())
@@ -43,9 +55,18 @@ void FinalButtonWidget::setChangesBoarding(){
 
     Owner* ow= boarding->getOwner();
 
+    Date inputOwner=Date::toDate(owDate->text().toStdString());
+
+    QDate tryDateOw(inputOwner.getYear(), inputOwner.getMonth(), inputOwner.getDay());
+
+
+    if(tryDateOw.isValid())
+        ow->setBirthday(inputOwner);
+    else
+        ow->setBirthday(ow->getBirthD());
+
     ow->setName(owName->text().toStdString())
             ->setSurname(owSurname->text().toStdString())
-            ->setBirthday(Date::toDate(owDate->text().toStdString()))
             ->setAddress(owAddress->text().toStdString())
             ->setPhone(owPhone->text().toStdString())
             ->setHouseNumber(owHn->text().toStdString());
@@ -70,6 +91,27 @@ void FinalButtonWidget::setChangesBoarding(){
     }
 
 
+    //show message if all ok
+    if(tryDate.isValid() && tryDateOw.isValid()){
+        QMessageBox msgBox;
+        msgBox.setWindowTitle("Status");
+        msgBox.setText("Changes set correctly");
+        msgBox.setIconPixmap(QPixmap(":/assets/icons8-done-48.png"));
+        msgBox.setStandardButtons(QMessageBox::Close);
+        msgBox.exec();
+
+    }
+    else{
+        QMessageBox msgBox;
+        msgBox.setIconPixmap(QPixmap(":/assets/icons8-close-48.png"));
+        msgBox.setWindowTitle("Status");
+        msgBox.setText("Invalid date");
+        msgBox.setStandardButtons(QMessageBox::Close);
+        msgBox.exec();
+
+    }
+
+
 }
 
 
@@ -91,7 +133,6 @@ FinalButtonWidget::FinalButtonWidget(Breeding *breeding, QLineEdit *name, QLineE
 
     //connect signals
     connect(button, &QPushButton::released, this, &FinalButtonWidget::setChangesBreeding);
-    connect(button, &QPushButton::released, this, &FinalButtonWidget::checkChanges);
 
 
     setLayout(hbox);
@@ -101,8 +142,18 @@ FinalButtonWidget::FinalButtonWidget(Breeding *breeding, QLineEdit *name, QLineE
 
 void FinalButtonWidget::setChangesBreeding(){
 
-    breeding->setName(name->text().toStdString())
-            ->setDate(Date::toDate(date->text().toStdString()));
+    breeding->setName(name->text().toStdString());
+
+    Date input=Date::toDate(date->text().toStdString());
+
+    QDate tryDate(input.getYear(), input.getMonth(), input.getDay());
+
+
+    if(tryDate.isValid())
+        breeding->setDate(input);
+    else
+        breeding->setDate(breeding->getDate());
+
 
     breeding->setBooked(booked->isChecked())
             ->setPurch(purch->isChecked())
@@ -119,20 +170,28 @@ void FinalButtonWidget::setChangesBreeding(){
         breeding->setBreed(bulldog);
     }
 
+    if(tryDate.isValid()){
+        QMessageBox msgBox;
+        msgBox.setWindowTitle("Status");
+        msgBox.setText("Changes set correctly");
+        msgBox.setIconPixmap(QPixmap(":/assets/icons8-done-48.png"));
+        msgBox.setStandardButtons(QMessageBox::Close);
+        msgBox.exec();
+
+    }
+    else{
+        QMessageBox msgBox;
+        msgBox.setIconPixmap(QPixmap(":/assets/icons8-close-48.png"));
+        msgBox.setWindowTitle("Status");
+        msgBox.setText("Invalid date");
+        msgBox.setStandardButtons(QMessageBox::Close);
+        msgBox.exec();
+
+    }
+
 }
 
 
-void FinalButtonWidget::checkChanges(){
 
-    QMessageBox msgBox;
 
-    msgBox.setIconPixmap(QPixmap(":/assets/icons8-done-48.png"));
-    msgBox.setWindowTitle("Status");
 
-    msgBox.setText("Changes set correctly");
-
-    msgBox.setStandardButtons(QMessageBox::Close);
-
-    msgBox.exec();
-
-}
