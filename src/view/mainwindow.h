@@ -9,6 +9,7 @@
 #include <QToolBar>
 #include <QTabWidget>
 #include <QMainWindow>
+#include <QPushButton>
 
 #include "GeneralPanel.h"
 #include "BoardingPanel.h"
@@ -33,10 +34,16 @@ public:
     explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
+       QLineEdit* nameEdit=nullptr;
+       QLineEdit* dateEdit=nullptr;
+       QPushButton* btn;
+
+       //bool buttonOk;
+
 public slots:
         void addBreeding();
         void addBoarding();
-        //void fieldsFilled();
+      //s  void checkFields();
 
 };
 

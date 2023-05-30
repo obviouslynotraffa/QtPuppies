@@ -63,13 +63,25 @@ private:
 
 public:
 
-
+    //edit boarding
     explicit FinalButtonWidget(Boarding* boarding, QLineEdit* name, QLineEdit* date, QLineEdit* breed, QComboBox* size,
                                QCheckBox* bath, QCheckBox* walks, QCheckBox* diet, QCheckBox* training,
                                QLineEdit* owName, QLineEdit* owSurname, QLineEdit* owDate, QLineEdit* owPhone, QLineEdit* owAddress, QLineEdit* owHn,
                                QWidget *parent = nullptr);
 
+    //edit breeding
     explicit FinalButtonWidget(Breeding* breeding, QLineEdit* name, QLineEdit* date, QComboBox* breed,
+                               QCheckBox* vax,QCheckBox* purch, QCheckBox* booked ,QWidget *parent = nullptr);
+
+    //create boarding
+    explicit FinalButtonWidget(QLineEdit* name, QLineEdit* date, QLineEdit* breed, QComboBox* size,
+                               QCheckBox* bath, QCheckBox* walks, QCheckBox* diet, QCheckBox* training,
+                               QLineEdit* owName, QLineEdit* owSurname, QLineEdit* owDate, QLineEdit* owPhone, QLineEdit* owAddress, QLineEdit* owHn,
+                               QWidget *parent = nullptr);
+
+
+    //create breeding
+    explicit FinalButtonWidget(QLineEdit* name, QLineEdit* date, QComboBox* breed,
                                QCheckBox* vax,QCheckBox* purch, QCheckBox* booked ,QWidget *parent = nullptr);
 
 
@@ -79,8 +91,9 @@ public:
 public slots:
     void setChangesBoarding();
     void setChangesBreeding();
-    //void correctChanges();
-    //void wrongChanges();
+
+    void createBoarding();
+    void createBreeding();
 
 
 signals:

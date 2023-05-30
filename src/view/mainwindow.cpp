@@ -6,6 +6,7 @@
 #include <QGridLayout>
 #include <QGroupBox>
 #include <QDialog>
+#include <QDateTime>
 
 #include "mainwindow.h"
 
@@ -17,6 +18,7 @@
 #include "sizes/small.h"
 
 #include "Dog/owner.h"
+#include "FinalButtonWidget.h"
 
 
 MainWindow::MainWindow(QWidget *parent): QMainWindow{parent}{
@@ -160,21 +162,20 @@ void MainWindow::addBoarding(){
     //Name
     QLabel* dogname= new QLabel("Name: ");
     QLineEdit* nameEdit= new QLineEdit;
-    //nameEdit->setText(QString::fromStdString(boarding.getName()));
     nameEdit->setFixedWidth(150);
 
 
     //Date
     QLabel* dogdate= new QLabel("Arrival date: ");
     QLineEdit* dateEdit= new QLineEdit;
-    //dateEdit->setText(QString::fromStdString(boarding.getDate().toString()));
     dateEdit->setFixedWidth(150);
+    QString today= QDate::currentDate().toString("dd/MM/yyyy");
+    dateEdit->setText(today);
 
 
     //Breed
     QLabel* dogbreed= new QLabel("Breed: ");
     QLineEdit* breedEdit= new QLineEdit;
-    //breedEdit->setText(QString::fromStdString(boarding.getBreed()));
     breedEdit->setFixedWidth(150);
 
 
@@ -227,44 +228,37 @@ void MainWindow::addBoarding(){
     QGroupBox* ownerBox= new QGroupBox(tr("Owner's info"));
     hbox->addWidget(ownerBox);
 
-    //Owner* ow=boarding.getOwner();
 
     //Name
     QLabel* owname= new QLabel("Name: ");
     QLineEdit* ownameEdit= new QLineEdit;
-   // ownameEdit->setText(QString::fromStdString(ow->getName()));
     ownameEdit->setFixedWidth(150);
 
     //Surname
     QLabel* owsurname= new QLabel("Surname: ");
     QLineEdit* surnameEdit= new QLineEdit;
-    //surnameEdit->setText(QString::fromStdString(ow->getSurname()));
     surnameEdit->setFixedWidth(150);
 
     //Date
     QLabel* owdate= new QLabel("Day of birth: ");
     QLineEdit* owdateEdit= new QLineEdit;
-    //owdateEdit->setText(QString::fromStdString(ow->getBirthD().toString()));
     owdateEdit->setFixedWidth(150);
 
     //Phone number
     QLabel* number= new QLabel("Phone: ");
     QLineEdit* numberEdit= new QLineEdit;
-   // numberEdit->setText(QString::fromStdString(ow->getPhone()));
     numberEdit->setFixedWidth(150);
 
 
     //Addres
     QLabel* address= new QLabel("Address: ");
     QLineEdit* addressEdit= new QLineEdit;
-    //addressEdit->setText(QString::fromStdString(ow->getAddress()));
     addressEdit->setFixedWidth(150);
 
 
     //House number
     QLabel* hn= new QLabel("House's number: ");
     QLineEdit* hnEdit= new QLineEdit;
-    //hnEdit->setText(QString::fromStdString(ow->getHouseNumber()));
     hnEdit->setFixedWidth(150);
 
     //set up owner layout
@@ -290,22 +284,15 @@ void MainWindow::addBoarding(){
     ownerBox->setLayout(ownerLayout);
 
     //save button
-    QHBoxLayout* btnBox= new QHBoxLayout;
-    inputPanel->addLayout(btnBox);
-    QPushButton* btn= new QPushButton;
-    btn->setMinimumSize(80,40);
-    btn->setText("Add dog");
-    btn->setFocusPolicy(Qt::NoFocus);
-    btnBox->addStretch();
-    btnBox->addWidget(btn);
-
-    //connect(nameEdit, &QLineEdit::textChanged, this, &MainWindow::);
+    FinalButtonWidget* button= new FinalButtonWidget(nameEdit, dateEdit, breedEdit, sizeEdit,bath, walks, diet, training,
+                                                     ownameEdit, surnameEdit, owdateEdit, numberEdit, addressEdit, hnEdit);
+    inputPanel->addWidget(button);
 
 
     QDialog* window= new QDialog;
     window->setLayout(inputPanel);
     window->show();
-
+    window->setModal(true);
 
 }
 
@@ -335,6 +322,9 @@ void MainWindow::addBreeding(){
     QLabel* dogdate= new QLabel("Birthday: ");
     QLineEdit* dateEdit= new QLineEdit;
     dateEdit->setFixedWidth(150);
+    dateEdit->setFixedWidth(150);
+    QString today= QDate::currentDate().toString("dd/MM/yyyy");
+    dateEdit->setText(today);
 
 
     //Breed
@@ -414,21 +404,15 @@ void MainWindow::addBreeding(){
 
 
     //save button
-    QHBoxLayout* btnBox= new QHBoxLayout;
-    inputPanel->addLayout(btnBox);
-    QPushButton* btn= new QPushButton;
-    btn->setMinimumSize(80,40);
-    btn->setText("Add dog");
-    btn->setFocusPolicy(Qt::NoFocus);
-    btnBox->addStretch();
-    btnBox->addWidget(btn);
-
-    //connect(nameEdit, &QLineEdit::textChanged, this, &MainWindow::);
+    FinalButtonWidget* button= new FinalButtonWidget(nameEdit, dateEdit, breedEdit, vax, purch, booked);
+    inputPanel->addWidget(button);
 
 
+    //create window
     QDialog* window= new QDialog;
     window->setLayout(inputPanel);
     window->show();
-}
+    window->setModal(true);
 
+}
 
