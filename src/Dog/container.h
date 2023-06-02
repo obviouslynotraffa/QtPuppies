@@ -336,14 +336,20 @@ class Container{
 
 
 
-        /*
-        Container& operator=(const Container& c){
-        if(this!= &c){
-            destroy(head);
-            head=copy(c.head);
+        Container filterParent()const{
+            Container w;
+
+            Node* n=head;
+
+            while(n!=nullptr){
+                    if((!static_cast<Breeding*>(n->getDog())->isPurchasable())){
+                        w.push_back(n->getDog());
+                    }
+                    n=n->getNext();
+            }
+            return w;
         }
-            return *this;
-        }*/
+
 
 };
 
