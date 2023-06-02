@@ -29,13 +29,28 @@ class Container{
         };
     private:
         Node* head;
-        Node* tail;
+
+        /*
+        static Node* copy(Node* n){
+            if(!n) return 0;
+            return new Node(n->getDog(),copy(n->getNext()));
+        }
+
+        static void destroy(Node* n){
+        if(n){
+            destroy(n->getNext());
+            delete n;
+        }
+        }*/
+
     public:
-        Container(): head(nullptr), tail(nullptr) {}
+        Container(): head(nullptr) {}
         ~Container() {}
 
+        //Container(const Container& c){head(copy(c.head));}
+
         Node* getHead() const {return head;}
-        Node* getTail() const {return tail;}
+
 
 
         unsigned int getSize() const{
@@ -50,22 +65,7 @@ class Container{
 
 
         Container& push_back(Dog* d){
-            unsigned int size=getSize();
-
-            if(size==0){
-                head= new Node(d);
-                tail=head;
-                return *this;
-            }
-
-            if(size==1){
-                tail= new Node(d);
-                head->setNext(tail);
-                return *this;
-            }
-
-            tail->setNext(new Node(d));
-            tail=tail->getNext();
+            head = new Node(d,head);
             return *this;
         }
 
@@ -79,7 +79,6 @@ class Container{
                 if(curr->getDog()==d){
                     if(prev!=nullptr){
                         prev->setNext(curr->getNext());
-                        tail=prev;
                     } else {
                         head=curr->getNext();
                     }
@@ -94,8 +93,9 @@ class Container{
             return *this;
         }
 
+
         Container& clearAll(){
-            while(head!=tail->getNext()){
+            while(head!=nullptr){
                 Node* next=head->getNext();
                 delete head;
                 head=next;
@@ -112,6 +112,9 @@ class Container{
             return n->getNext();
         }
 
+
+
+        //filter functions
 
         Container filterBreeding() const{
                 Container w;
@@ -142,13 +145,25 @@ class Container{
             }
 
 
-        Dog* searchDog(std::string name) const{
+        Container searchDog(std::string name) const{
+            Container w;
+
             Node* n=head;
-            while(n!=nullptr){
-                if(n->getDog()->getName()==name) return n->getDog();
-                n=n->getNext();
+
+            if(name=="" || name==" "){ //if search bar is empty show all
+                while(n!=nullptr){
+                    w.push_back(n->getDog());
+                    n=n->getNext();
+                }
             }
-            return nullptr;
+            else{
+                while(n!=nullptr){
+                    if(n->getDog()->getName()==name) w.push_back(n->getDog());
+                 n=n->getNext();
+                }
+            }
+            return w;
+
         }
 
 
@@ -293,7 +308,7 @@ class Container{
         }
 
 
-        Container filterSize(Breed* b) const{
+        Container filterBreed(Breed* b) const{
             Container w;
 
             Node* n=head;
@@ -311,13 +326,24 @@ class Container{
                 while(n!=nullptr){
                     if(dynamic_cast<AmStaff*>((static_cast<Breeding*>(n->getDog()))->getBreed())){
                         w.push_back(n->getDog());
-                    }
+                    };
                     n=n->getNext();
                 }
             }
 
             return w;
         }
+
+
+
+        /*
+        Container& operator=(const Container& c){
+        if(this!= &c){
+            destroy(head);
+            head=copy(c.head);
+        }
+            return *this;
+        }*/
 
 };
 

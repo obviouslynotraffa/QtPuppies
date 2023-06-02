@@ -279,40 +279,49 @@ void DogVisitorEditPanel::visitBreeding(Breeding &breeding){
     hbox->addWidget(parentGroup);
 
 
-    //Mother
-    QGroupBox* mom = new QGroupBox(tr("Mom"));
+    if(breeding.getFather() && breeding.getMother()){
+        //Mother
+        QGroupBox* mom = new QGroupBox(tr("Mom"));
 
-    QLabel* mother= new QLabel("Select mother: ");
-    QComboBox* listmom= new QComboBox;
-    listmom->addItem(QString::fromStdString(breeding.getMother()->getName()));
+        QLabel* mother= new QLabel("Select mother: ");
+        QComboBox* listmom= new QComboBox;
+        listmom->addItem(QString::fromStdString(breeding.getMother()->getName()));
 
-    QGridLayout* momLayout= new QGridLayout;
+        QGridLayout* momLayout= new QGridLayout;
 
-    momLayout->addWidget(mother,0,0);
-    momLayout->addWidget(listmom,0,1);
-    mom->setLayout(momLayout);
-
-
-    //Father
-    QGroupBox* dad = new QGroupBox(tr("Dad"));
-    QLabel* father= new QLabel("Select father: ");
-    QComboBox* listdad= new QComboBox;
-    listdad->addItem(QString::fromStdString(breeding.getFather()->getName()));
+        momLayout->addWidget(mother,0,0);
+        momLayout->addWidget(listmom,0,1);
+        mom->setLayout(momLayout);
 
 
-    QGridLayout* dadLayout= new QGridLayout;
+        //Father
+        QGroupBox* dad = new QGroupBox(tr("Dad"));
+        QLabel* father= new QLabel("Select father: ");
+        QComboBox* listdad= new QComboBox;
+        listdad->addItem(QString::fromStdString(breeding.getFather()->getName()));
 
-    dadLayout->addWidget(father,0,0);
-    dadLayout->addWidget(listdad,0,1);
 
-    dad->setLayout(dadLayout);
+        QGridLayout* dadLayout= new QGridLayout;
 
-    //set up parent layout
-    QGridLayout* parentLayout= new QGridLayout;
-    parentLayout->addWidget(mom,0,0,1,10);
-    parentLayout->addWidget(dad,1,0,1,10);
+        dadLayout->addWidget(father,0,0);
+        dadLayout->addWidget(listdad,0,1);
 
-    parentGroup->setLayout(parentLayout);
+        dad->setLayout(dadLayout);
+
+        //set up parent layout
+        QGridLayout* parentLayout= new QGridLayout;
+        parentLayout->addWidget(mom,0,0,1,10);
+        parentLayout->addWidget(dad,1,0,1,10);
+
+        parentGroup->setLayout(parentLayout);
+    }
+    else{  //show no data
+            QLabel* noParents= new QLabel("No parental data available");
+            QVBoxLayout* vbox= new QVBoxLayout;
+            vbox->addWidget(noParents);
+            vbox->setAlignment(Qt::AlignCenter);
+            parentGroup->setLayout(vbox);
+        }
 
 
     //save button

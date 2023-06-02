@@ -31,21 +31,21 @@ BoardingPanel::BoardingPanel(Container c, QWidget *parent)
     hbox->addWidget(filter);
 
 
-    DogList* list= new DogList(c.filterBoarding());
+    list= new DogList(c);
 
     //right scroll area with only boarding dogs
     QScrollArea* scroll= new QScrollArea();
     QSizePolicy spRight(QSizePolicy::Preferred, QSizePolicy::Preferred);
     spRight.setHorizontalStretch(2);
     scroll->setSizePolicy(spRight);
-    hbox->addWidget(scroll);
-    hbox->setAlignment(Qt::AlignCenter|Qt::AlignTop);
-    scroll->setHorizontalScrollBarPolicy(Qt::ScrollBarAsNeeded);
-    scroll->setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);
     scroll->setWidgetResizable(true);
     scroll->setWidget(list);
+    scroll->setFixedHeight(410);
+    scroll->setFixedWidth(650);
+    scroll->setAlignment(Qt::AlignTop);
 
-
+    hbox->addWidget(scroll);
+    hbox->setAlignment(Qt::AlignCenter|Qt::AlignTop);
 
 
     //panel
@@ -55,5 +55,66 @@ BoardingPanel::BoardingPanel(Container c, QWidget *parent)
     all->addSpacing(-400);
     all->addLayout(hbox);
 
+    //connect
+    connect(filter, &BoardingFilterWidget::searchEvent, this, &BoardingPanel::search);
+
     setLayout(all);
+}
+
+
+
+void BoardingPanel::search(QString s, QRadioButton *size, QCheckBox *bath, QCheckBox *walks, QCheckBox *diet, QCheckBox *training){
+
+    Container aux=c;
+
+    if(size->text()=="All")
+    {
+        if(bath->isChecked())c=c.filterBath();
+        if(diet->isChecked())c=c.filterDiet();
+        if(training->isChecked())c=c.filterTraining();
+        if(walks->isChecked())c=c.filterWalks();
+
+        list->refresh(c.searchDog(s.toStdString()));
+    }
+
+    if(size->text()=="Large")
+    {
+        if(bath->isChecked())c=c.filterBath();
+        if(diet->isChecked())c=c.filterDiet();
+        if(training->isChecked())c=c.filterTraining();
+        if(walks->isChecked())c=c.filterWalks();
+
+        Large large;
+
+        list->refresh(c.searchDog(s.toStdString()).filterSize(&large));
+
+    }
+
+    if(size->text()=="Small")
+    {
+        if(bath->isChecked())c=c.filterBath();
+        if(diet->isChecked())c=c.filterDiet();
+        if(training->isChecked())c=c.filterTraining();
+        if(walks->isChecked())c=c.filterWalks();
+
+        Small small;
+
+        list->refresh(c.searchDog(s.toStdString()).filterSize(&small));
+
+    }
+
+    if(size->text()=="Medium")
+    {
+        if(bath->isChecked())c=c.filterBath();
+        if(diet->isChecked())c=c.filterDiet();
+        if(training->isChecked())c=c.filterTraining();
+        if(walks->isChecked())c=c.filterWalks();
+
+        Medium medium;
+
+        list->refresh(c.searchDog(s.toStdString()).filterSize(&medium));
+
+    }
+
+    c=aux;
 }

@@ -45,9 +45,9 @@ BreedingFilterWidget::BreedingFilterWidget(QWidget *parent)
     br->setText("Breeds:");
 
     QHBoxLayout* bre= new QHBoxLayout();
-    QRadioButton* bull= new QRadioButton();
-    QRadioButton* ams= new QRadioButton();
-    QRadioButton* all= new QRadioButton();
+    bull= new QRadioButton();
+    ams= new QRadioButton();
+    all= new QRadioButton();
 
     bre->addWidget(all);
     bre->addWidget(bull);
@@ -61,15 +61,17 @@ BreedingFilterWidget::BreedingFilterWidget(QWidget *parent)
     ams->setText("AmStaff");
 
     all->setChecked(true);
-
+    breedChose=all;
+    breedChose->setText("All");
 
 
     vbox->addSpacing(30);
 
 
     //more features
-    QCheckBox* opt= new QCheckBox();
-    opt->setText("Options:");
+    QPushButton* opt= new QPushButton();
+    opt->setFlat(true);
+    opt->setText("More options:");
     vbox->addWidget(opt);
 
     vax = new  QCheckBox();
@@ -91,9 +93,46 @@ BreedingFilterWidget::BreedingFilterWidget(QWidget *parent)
 
 
     //connect signals
-    connect(opt,SIGNAL(clicked(bool)),vax,SLOT(setVisible(bool)));
-    connect(opt,SIGNAL(clicked(bool)),booked,SLOT(setVisible(bool)));
-    connect(opt,SIGNAL(clicked(bool)),purch,SLOT(setVisible(bool)));
+    connect(all, &QRadioButton::pressed, this , &BreedingFilterWidget::searchAll);
+    connect(bull, &QRadioButton::pressed, this , &BreedingFilterWidget::searchBulldog);
+    connect(ams, &QRadioButton::pressed, this , &BreedingFilterWidget::searchAmstaff);
+    connect(opt, &QPushButton::released, this, &BreedingFilterWidget::untoggleOptions);
+    connect(search_button, &QPushButton::released, this, &BreedingFilterWidget::searchPressed);
 
     setLayout(vbox);
+}
+
+
+void BreedingFilterWidget::searchAll(){
+    breedChose=all;
+    breedChose->setText("All");
+}
+
+
+void BreedingFilterWidget::searchBulldog(){
+    breedChose=bull;
+    breedChose->setText("Bulldog");
+}
+
+void BreedingFilterWidget::searchAmstaff(){
+    breedChose=ams;
+    breedChose->setText("AmStaff");
+}
+
+
+void BreedingFilterWidget::searchPressed(){
+    emit searchEvent(filterString->text(), breedChose, vax, booked, purch);
+}
+
+
+
+void BreedingFilterWidget::untoggleOptions(){
+    vax->setVisible(!vax->isVisible());
+    purch->setVisible(!purch->isVisible());
+    booked->setVisible(!booked->isVisible());
+
+    if(!vax->isVisible())vax->setChecked(false);
+    if(!purch->isVisible())purch->setChecked(false);
+    if(!booked->isVisible())booked->setChecked(false);
+
 }

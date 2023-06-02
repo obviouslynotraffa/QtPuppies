@@ -7,6 +7,7 @@
 #include <QGroupBox>
 #include <QDialog>
 #include <QDateTime>
+#include <QStatusBar>
 
 #include "mainwindow.h"
 
@@ -88,30 +89,29 @@ MainWindow::MainWindow(QWidget *parent): QMainWindow{parent}{
     Breeding* AmSpuppie4= new Breeding(13,8,2022, "Bone", amsatff, true, false, true,AmSMother, AmSFather);
 
 
-
-    c.push_back(guest1);
-    c.push_back(guest2);
-    c.push_back(guest3);
-    c.push_back(guest4);
-
-    c.push_back(Bulpuppie1);
-    c.push_back(Bulpuppie2);
-    c.push_back(Bulpuppie3);
-    c.push_back(Bulpuppie4);
+    c.push_back(BulFather);
+    c.push_back(BulMother);
+    c.push_back(AmSFather);
+    c.push_back(AmSMother);
 
     c.push_back(AmSpuppie1);
     c.push_back(AmSpuppie2);
     c.push_back(AmSpuppie3);
     c.push_back(AmSpuppie4);
 
-    c.push_back(BulFather);
-    c.push_back(BulMother);
-    c.push_back(AmSFather);
-    c.push_back(AmSMother);
+    c.push_back(Bulpuppie1);
+    c.push_back(Bulpuppie2);
+    c.push_back(Bulpuppie3);
+    c.push_back(Bulpuppie4);
+
+    c.push_back(guest1);
+    c.push_back(guest2);
+    c.push_back(guest3);
+    c.push_back(guest4);
 
 
     //Toolbar
-    toolbar = addToolBar("File Toolbar");
+    toolbar = addToolBar("View Toolbar");
     toolbar->addAction(newfile);
     toolbar->addAction(openfile);
     toolbar->addAction(save);
@@ -123,8 +123,8 @@ MainWindow::MainWindow(QWidget *parent): QMainWindow{parent}{
 
     //Panel
     general= new GeneralPanel(c);
-    breeding= new BreedingPanel(c);
-    boarding= new BoardingPanel(c);
+    breeding= new BreedingPanel(c.filterBreeding());
+    boarding= new BoardingPanel(c.filterBoarding());
 
 
     //Tab
@@ -137,6 +137,7 @@ MainWindow::MainWindow(QWidget *parent): QMainWindow{parent}{
     //connect
     connect(breed, &QAction::triggered, this, &MainWindow::addBreeding);
     connect(board, &QAction::triggered, this, &MainWindow::addBoarding);
+    connect(toolb, &QAction::triggered, this, &MainWindow::toggleToolbar);
 
 
 }
@@ -414,5 +415,11 @@ void MainWindow::addBreeding(){
     window->show();
     window->setModal(true);
 
+}
+
+
+
+void MainWindow::toggleToolbar(){
+    toolbar->setVisible(!toolbar->isVisible());
 }
 

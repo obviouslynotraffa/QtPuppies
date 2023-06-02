@@ -3,6 +3,7 @@
 
 #include "BreedingFilterWidget.h"
 #include "Dog/container.h"
+#include "doglist.h"
 
 class BreedingPanel : public QWidget
 {
@@ -10,11 +11,13 @@ class BreedingPanel : public QWidget
 private:
     BreedingFilterWidget* filter;
     Container c;
+    DogList* list;
 
 public:
     explicit BreedingPanel(Container c, QWidget *parent = nullptr);
 
-signals:
+public slots:
+    void search(QString s, QRadioButton* r, QCheckBox* vax, QCheckBox* booked, QCheckBox* purch);
 
 };
 

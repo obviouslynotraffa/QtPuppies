@@ -18,6 +18,7 @@ private:
     QRadioButton* L;
     QRadioButton* S;
     QRadioButton* all;
+    QRadioButton* sizeChose;
 
     QCheckBox* bath;
     QCheckBox* walks;
@@ -28,10 +29,16 @@ public:
     explicit BoardingFilterWidget(QWidget *parent = nullptr);
 
 signals:
+    searchEvent(QString s,QRadioButton* size, QCheckBox* bath, QCheckBox* walks, QCheckBox* diet, QCheckBox* training);
 
+public slots:
+    void searchPressed();
+    void searchAll();
+    void searchM();
+    void searchL();
+    void searchS();
 
-private slots:
-
+    void untoggleOptions();
 
 };
 

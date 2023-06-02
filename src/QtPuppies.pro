@@ -26,6 +26,7 @@ SOURCES += \
     view/BreedingFilterWidget.cpp \
     view/BreedingPanel.cpp \
     view/ButtonsWidget.cpp \
+    view/DogListWidget.cpp \
     view/DogVisitorCard.cpp \
     view/DogVisitorEditPanel.cpp \
     view/DogVisitorInfoPanel.cpp \
@@ -57,6 +58,7 @@ HEADERS += \
     view/BreedingFilterWidget.h \
     view/BreedingPanel.h \
     view/ButtonsWidget.h \
+    view/DogListWidget.h \
     view/DogVisitorCard.h \
     view/DogVisitorEditPanel.h \
     view/DogVisitorInfoPanel.h \

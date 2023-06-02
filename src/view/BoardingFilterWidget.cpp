@@ -40,10 +40,10 @@ BoardingFilterWidget::BoardingFilterWidget(QWidget *parent)
     QLabel* size= new QLabel("Size:");
     vbox->addWidget(size);
 
-    QRadioButton* L= new QRadioButton();
-    QRadioButton* M= new QRadioButton();
-    QRadioButton* S= new QRadioButton();
-    QRadioButton* all= new QRadioButton();
+    L= new QRadioButton();
+    M= new QRadioButton();
+    S= new QRadioButton();
+    all= new QRadioButton();
 
     all->setText("All");
     L->setText("Large");
@@ -51,6 +51,8 @@ BoardingFilterWidget::BoardingFilterWidget(QWidget *parent)
     S->setText("Small");
     all->setChecked(true);
 
+    sizeChose=all;
+    sizeChose->setText("All");
 
 
     hbox1->addWidget(all);
@@ -60,7 +62,8 @@ BoardingFilterWidget::BoardingFilterWidget(QWidget *parent)
     vbox->addLayout(hbox1);
 
     //set up optional services
-    QCheckBox* opt= new QCheckBox();
+    QPushButton* opt= new QPushButton();
+    opt->setFlat(true);
     opt->setText("Options:");
 
     diet = new  QCheckBox();
@@ -90,11 +93,12 @@ BoardingFilterWidget::BoardingFilterWidget(QWidget *parent)
 
 
     //connect signals
-    connect(opt,SIGNAL(clicked(bool)),bath,SLOT(setVisible(bool)));
-    connect(opt,SIGNAL(clicked(bool)),diet,SLOT(setVisible(bool)));
-    connect(opt,SIGNAL(clicked(bool)),walks,SLOT(setVisible(bool)));
-    connect(opt,SIGNAL(clicked(bool)),training,SLOT(setVisible(bool)));
-
+    connect(all, &QRadioButton::pressed, this, &BoardingFilterWidget::searchAll);
+    connect(L, &QRadioButton::pressed, this, &BoardingFilterWidget::searchL);
+    connect(M, &QRadioButton::pressed, this, &BoardingFilterWidget::searchM);
+    connect(S, &QRadioButton::pressed, this, &BoardingFilterWidget::searchS);
+    connect(opt, &QPushButton::released, this, &BoardingFilterWidget::untoggleOptions);
+    connect(search_button, &QPushButton::released, this, &BoardingFilterWidget::searchPressed);
 
 
     setLayout(vbox);
@@ -103,6 +107,40 @@ BoardingFilterWidget::BoardingFilterWidget(QWidget *parent)
 
 
 
+void BoardingFilterWidget::searchAll(){
+    sizeChose=all;
+    sizeChose->setText("All");
+}
+
+void BoardingFilterWidget::searchM(){
+    sizeChose=M;
+    sizeChose->setText("Medium");
+}
+
+void BoardingFilterWidget::searchL(){
+    sizeChose=L;
+    sizeChose->setText("Large");
+}
+
+void BoardingFilterWidget::searchS(){
+    sizeChose=S;
+    sizeChose->setText("Small");
+}
+
+void BoardingFilterWidget::untoggleOptions(){
+    diet->setVisible(!diet->isVisible());
+    bath->setVisible(!bath->isVisible());
+    training->setVisible(!training->isVisible());
+    walks->setVisible(!walks->isVisible());
+
+    if(!walks->isVisible())walks->setChecked(false);
+    if(!bath->isVisible())bath->setChecked(false);
+    if(!diet->isVisible())diet->setChecked(false);
+    if(!training->isVisible())training->setChecked(false);
+}
 
 
+void BoardingFilterWidget::searchPressed(){
+    emit searchEvent(filterString->text(), sizeChose, bath, walks, diet, training);
+}
 

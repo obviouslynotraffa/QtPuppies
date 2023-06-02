@@ -43,7 +43,7 @@ public:
 public slots:
         void addBreeding();
         void addBoarding();
-      //s  void checkFields();
+        void toggleToolbar();
 
 };
 

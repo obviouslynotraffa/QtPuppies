@@ -151,9 +151,6 @@ void DogVisitorCard::visitBoarding(Boarding &boarding) {
     cardLayout->addLayout(hbox);
     cardLayout->addWidget(line);
 
-
-
-
 }
 
 
