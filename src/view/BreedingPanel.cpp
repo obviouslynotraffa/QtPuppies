@@ -106,3 +106,9 @@ void BreedingPanel::search(QString s, QRadioButton* r, QCheckBox* vax, QCheckBox
     c=aux;
 
 }
+
+
+
+void BreedingPanel::setContainer(Container w){
+    c=w;
+}

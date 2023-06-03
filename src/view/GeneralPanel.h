@@ -18,6 +18,7 @@ private:
 public:
 
     explicit GeneralPanel(Container c,QWidget *parent = nullptr);
+    void setContainer(Container w);
 
 
 public slots:

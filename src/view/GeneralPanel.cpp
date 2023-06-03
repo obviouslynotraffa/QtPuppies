@@ -75,4 +75,8 @@ void GeneralPanel::search(QString s){
 }
 
 
+void GeneralPanel::setContainer(Container w){
+    c=w;
+}
+
 

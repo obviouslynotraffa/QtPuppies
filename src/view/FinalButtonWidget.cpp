@@ -365,6 +365,22 @@ void FinalButtonWidget::createBoarding(){
 
         //To do: create dog
 
+        Large* large= new Large;
+        Medium* medium= new Medium;
+        Small* small= new Small;
+
+        Size* s;
+
+        if(size->currentText()=="Large") s=large;
+        if(size->currentText()=="Medium") s=medium;
+        if(size->currentText()=="Small") s=small;
+
+
+        Owner* owner = new Owner(owName->text().toStdString(), owSurname->text().toStdString(), owPhone->text().toStdString(), tryDateOw.day(), tryDateOw.month(), tryDateOw.year(), owAddress->text().toStdString(), owHn->text().toStdString());
+        Boarding* newDog= new Boarding(tryDate.day(),tryDate.month(), tryDate.year(), name->text().toStdString(),
+                                       s,owner,breed->text().toStdString(),bath->isChecked(), training->isChecked(), diet->isChecked(), walks->isChecked());
+        emit addBoarding(newDog);
+
     }
 
 }
@@ -429,6 +445,18 @@ void FinalButtonWidget::createBreeding(){
         msgBox.exec();
 
         //To do: -add dog -parents
+
+        Breed* brd;
+
+        if(breeds->currentText()=="Bulldog") brd= new Bulldog();
+        if(breeds->currentText()=="AmStaff") brd= new AmStaff();
+
+        Breeding* newDog= new Breeding(tryDate.day(), tryDate.month(), tryDate.year(), name->text().toStdString()
+                                       ,brd, vax->isChecked(), purch->isChecked(), booked->isChecked());
+
+        emit addBreeding(newDog);
+
+
     }
 
 }

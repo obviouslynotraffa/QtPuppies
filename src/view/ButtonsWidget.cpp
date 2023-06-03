@@ -95,6 +95,8 @@ void ButtonsWidget::createDeleteMessage(){
 
     if(ret == QMessageBox::Yes){
 
+        emit deleteDog(dog);
+
     }
 
 

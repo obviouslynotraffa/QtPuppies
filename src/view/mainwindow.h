@@ -15,6 +15,7 @@
 #include "BoardingPanel.h"
 #include "BreedingPanel.h"
 #include "Dog/container.h"
+#include "ButtonsWidget.h"
 
 class MainWindow : public QMainWindow
 {
@@ -37,11 +38,16 @@ public:
        QLineEdit* nameEdit=nullptr;
        QLineEdit* dateEdit=nullptr;
        QPushButton* btn;
+       ButtonsWidget* buttonsw;
 
 public slots:
         void addBreeding();
         void addBoarding();
         void toggleToolbar();
+
+        void insertBoarding(Boarding* boardingDog);
+        void insertBreeding(Breeding* breedingDog);
+        void removeDog(Dog* dog);
 
 };
 

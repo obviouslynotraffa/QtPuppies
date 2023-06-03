@@ -10,7 +10,7 @@ void DogListWidget::show(){
 
     DogVisitorCard visitor;
     QVBoxLayout* box= new QVBoxLayout;
-    box->setAlignment(Qt::AlignTop);
+    //box->setAlignment(Qt::AlignTop);
 
     Container::Node* node=c.getHead();
 

@@ -15,6 +15,7 @@ private:
 
 public:
     explicit BreedingPanel(Container c, QWidget *parent = nullptr);
+    void setContainer(Container w);
 
 public slots:
     void search(QString s, QRadioButton* r, QCheckBox* vax, QCheckBox* booked, QCheckBox* purch);

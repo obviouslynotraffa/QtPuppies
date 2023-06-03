@@ -118,3 +118,8 @@ void BoardingPanel::search(QString s, QRadioButton *size, QCheckBox *bath, QChec
 
     c=aux;
 }
+
+
+void BoardingPanel::setContainer(Container w){
+    c=w;
+}

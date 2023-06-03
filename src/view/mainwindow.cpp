@@ -138,6 +138,7 @@ MainWindow::MainWindow(QWidget *parent): QMainWindow{parent}{
     connect(breed, &QAction::triggered, this, &MainWindow::addBreeding);
     connect(board, &QAction::triggered, this, &MainWindow::addBoarding);
     connect(toolb, &QAction::triggered, this, &MainWindow::toggleToolbar);
+    //connect(buttonsw, &ButtonsWidget::deleteDog, this, &MainWindow::removeDog);
 
 
 }
@@ -289,11 +290,22 @@ void MainWindow::addBoarding(){
                                                      ownameEdit, surnameEdit, owdateEdit, numberEdit, addressEdit, hnEdit);
     inputPanel->addWidget(button);
 
+    connect(button, &FinalButtonWidget::addBoarding, this, &MainWindow::insertBoarding);
+
 
     QDialog* window= new QDialog;
     window->setLayout(inputPanel);
     window->show();
     window->setModal(true);
+
+}
+
+
+
+void MainWindow::insertBoarding(Boarding* boardingDog){
+    c=c.push_back(boardingDog);
+    general->setContainer(c);
+    boarding->setContainer(c.filterBoarding());
 
 }
 
@@ -408,6 +420,8 @@ void MainWindow::addBreeding(){
     FinalButtonWidget* button= new FinalButtonWidget(nameEdit, dateEdit, breedEdit, vax, purch, booked);
     inputPanel->addWidget(button);
 
+    connect(button, &FinalButtonWidget::addBreeding, this, &MainWindow::insertBreeding);
+
 
     //create window
     QDialog* window= new QDialog;
@@ -417,6 +431,21 @@ void MainWindow::addBreeding(){
 
 }
 
+
+void MainWindow::insertBreeding(Breeding *breedingDog){
+    c=c.push_back(breedingDog);
+    general->setContainer(c);
+    breeding->setContainer(c.filterBreeding());
+}
+
+
+void MainWindow::removeDog(Dog *dog){
+    c=c.erase(dog);
+    general->setContainer(c);
+
+    if(dynamic_cast<Breeding*>(dog))breeding->setContainer(c.filterBreeding());
+    if(dynamic_cast<Boarding*>(dog))boarding->setContainer(c.filterBoarding());
+}
 
 
 void MainWindow::toggleToolbar(){

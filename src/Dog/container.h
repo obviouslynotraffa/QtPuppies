@@ -30,27 +30,12 @@ class Container{
     private:
         Node* head;
 
-        /*
-        static Node* copy(Node* n){
-            if(!n) return 0;
-            return new Node(n->getDog(),copy(n->getNext()));
-        }
-
-        static void destroy(Node* n){
-        if(n){
-            destroy(n->getNext());
-            delete n;
-        }
-        }*/
 
     public:
         Container(): head(nullptr) {}
         ~Container() {}
 
-        //Container(const Container& c){head(copy(c.head));}
-
         Node* getHead() const {return head;}
-
 
 
         unsigned int getSize() const{

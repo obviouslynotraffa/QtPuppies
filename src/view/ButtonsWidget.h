@@ -30,6 +30,9 @@ public slots:
     void createEditPanel();
     void createDeleteMessage();
 
+signals:
+    void deleteDog(Dog* dog);
+
 
 };
 

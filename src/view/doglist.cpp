@@ -78,7 +78,6 @@ void DogList::deletePreviousList(){
     if(list){
         box->removeWidget(list);
         delete list;
-
     }
 
 }
