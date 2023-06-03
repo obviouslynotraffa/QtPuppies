@@ -8,8 +8,8 @@
 #include "DogVisitorCard.h"
 
 
-DogList::DogList(Container c,QWidget *parent)
-    :   QWidget(parent), main(c)
+DogList::DogList(QWidget *parent)
+    :   QWidget(parent)
 {
     box= new QVBoxLayout;
 
@@ -19,7 +19,6 @@ DogList::DogList(Container c,QWidget *parent)
     imageLabel->setPixmap(QPixmap(image));
     imageLabel->setAlignment(Qt::AlignCenter);
 
-    //box->addStretch();
     box->addWidget(imageLabel);
     box->setAlignment(Qt::AlignCenter);
 
@@ -29,7 +28,7 @@ DogList::DogList(Container c,QWidget *parent)
 
     text->setStyleSheet(QString("QLabel {font-weight: bold;}"));
     box->addWidget(text);
-   // box->addStretch();
+
 
     list=nullptr;
 

@@ -4,7 +4,7 @@ Boarding::Boarding(unsigned int d, unsigned int m, unsigned int y, std::string n
         bool bath, bool training, bool diet, bool walking): Dog(d,m,y,n), size(s), owner(o), breed(b), bath(bath),
         training(training), diet(diet), walking(walking) {}
 
-Boarding::~Boarding() {}
+Boarding::~Boarding() {delete owner;}
 
 
 Size* Boarding::getSize() const {

@@ -31,7 +31,7 @@ BoardingPanel::BoardingPanel(Container c, QWidget *parent)
     hbox->addWidget(filter);
 
 
-    list= new DogList(c);
+    list= new DogList();
 
     //right scroll area with only boarding dogs
     QScrollArea* scroll= new QScrollArea();

@@ -342,7 +342,7 @@ class Container{
             Node* n=head;
 
             while(n!=nullptr){
-                    if((!static_cast<Breeding*>(n->getDog())->isPurchasable())){
+                    if(!(static_cast<Breeding*>(n->getDog())->isPurchasable())){
                         w.push_back(n->getDog());
                     }
                     n=n->getNext();

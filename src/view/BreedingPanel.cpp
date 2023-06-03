@@ -33,7 +33,7 @@ BreedingPanel::BreedingPanel(Container c,QWidget *parent)
     hbox->addWidget(filter);
 
 
-    list= new DogList(c);
+    list= new DogList();
 
 
     //right search area with only breed dog

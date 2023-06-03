@@ -7,6 +7,7 @@
 #include "FinalButtonWidget.h"
 
 #include "Dog/dog.h"
+#include "Dog/container.h"
 
 
 class ButtonsWidget : public QWidget
@@ -17,6 +18,7 @@ public:
     QPushButton* view_button;
     QPushButton* edit_button;
     QPushButton* delete_button;
+    Container* c;
 
     QDialog* dialogEdit;
 
@@ -27,7 +29,7 @@ public slots:
     void createInfoPanel();
     void createEditPanel();
     void createDeleteMessage();
-    void closeDialog();
+
 
 };
 

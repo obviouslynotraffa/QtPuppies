@@ -38,8 +38,6 @@ public:
        QLineEdit* dateEdit=nullptr;
        QPushButton* btn;
 
-       //bool buttonOk;
-
 public slots:
         void addBreeding();
         void addBoarding();

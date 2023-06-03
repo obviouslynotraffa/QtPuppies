@@ -32,7 +32,7 @@ GeneralPanel::GeneralPanel(Container c,QWidget* parent)
     hbox->addWidget(filter);
 
 
-    list= new DogList(c);
+    list= new DogList();
 
 
 

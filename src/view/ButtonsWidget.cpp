@@ -74,9 +74,6 @@ void ButtonsWidget::createEditPanel(){
 }
 
 
-void ButtonsWidget::closeDialog(){
-    dialogEdit->reject();
-}
 
 
 void ButtonsWidget::createDeleteMessage(){
