@@ -54,6 +54,27 @@ class Container{
             return *this;
         }
 
+        Container& append(Dog* d){
+
+
+            if(!head){
+                Node* newNode= new Node(d);
+                head=newNode;
+            }
+            else{
+
+                Node* n= head;
+
+                while(n->getNext()!=nullptr){
+                    n=n->getNext();
+                }
+
+                Node* newNode= new Node(d);
+                n->setNext(newNode);
+            }
+            return *this;
+        }
+
 
 
         Container& erase(Dog* d){
@@ -107,7 +128,7 @@ class Container{
                 Node* n=head;
                 while(n!=nullptr){
                     if(dynamic_cast<Breeding*>(n->getDog())){
-                        w.push_back(n->getDog());
+                        w.append(n->getDog());
                     }
                     n=n->getNext();
 
@@ -121,7 +142,7 @@ class Container{
                 Node* n=head;
                 while(n!=nullptr){
                     if(dynamic_cast<Boarding*>(n->getDog())){
-                        w.push_back(n->getDog());
+                        w.append(n->getDog());
                     }
                     n=n->getNext();
 
@@ -137,13 +158,13 @@ class Container{
 
             if(name=="" || name==" "){ //if search bar is empty show all
                 while(n!=nullptr){
-                    w.push_back(n->getDog());
+                    w.append(n->getDog());
                     n=n->getNext();
                 }
             }
             else{
                 while(n!=nullptr){
-                    if(n->getDog()->getName()==name) w.push_back(n->getDog());
+                    if(n->getDog()->getName()==name) w.append(n->getDog());
                  n=n->getNext();
                 }
             }
@@ -160,7 +181,7 @@ class Container{
             if(dynamic_cast<Large*>(s)){
                 while(n!=nullptr){
                     if(dynamic_cast<Large*>((static_cast<Boarding*>(n->getDog()))->getSize())){
-                        w.push_back(n->getDog());
+                        w.append(n->getDog());
                     }
                     n=n->getNext();
                 }
@@ -171,7 +192,7 @@ class Container{
             if(dynamic_cast<Medium*>(s)){
                 while(n!=nullptr){
                      if(dynamic_cast<Medium*>((static_cast<Boarding*>(n->getDog()))->getSize())){
-                        w.push_back(n->getDog());
+                        w.append(n->getDog());
                     }
                     n=n->getNext();
 
@@ -182,7 +203,7 @@ class Container{
             if(dynamic_cast<Small*>(s)){
                 while(n!=nullptr){
                      if(dynamic_cast<Small*>((static_cast<Boarding*>(n->getDog()))->getSize())){
-                        w.push_back(n->getDog());
+                        w.append(n->getDog());
                     }
                     n=n->getNext();
 
@@ -200,7 +221,7 @@ class Container{
 
             while(n!=nullptr){
                     if((static_cast<Boarding*>(n->getDog())->didBath())){
-                        w.push_back(n->getDog());
+                        w.append(n->getDog());
                     }
                     n=n->getNext();
             }
@@ -214,7 +235,7 @@ class Container{
 
             while(n!=nullptr){
                     if((static_cast<Boarding*>(n->getDog())->didDiet())){
-                        w.push_back(n->getDog());
+                        w.append(n->getDog());
                     }
                     n=n->getNext();
             }
@@ -228,7 +249,7 @@ class Container{
 
             while(n!=nullptr){
                     if((static_cast<Boarding*>(n->getDog())->didTraining())){
-                        w.push_back(n->getDog());
+                        w.append(n->getDog());
                     }
                     n=n->getNext();
             }
@@ -242,7 +263,7 @@ class Container{
 
             while(n!=nullptr){
                     if((static_cast<Boarding*>(n->getDog())->didWalking())){
-                        w.push_back(n->getDog());
+                        w.append(n->getDog());
                     }
                     n=n->getNext();
             }
@@ -257,7 +278,7 @@ class Container{
 
             while(n!=nullptr){
                     if((static_cast<Breeding*>(n->getDog())->isVax())){
-                        w.push_back(n->getDog());
+                        w.append(n->getDog());
                     }
                     n=n->getNext();
             }
@@ -271,7 +292,7 @@ class Container{
 
             while(n!=nullptr){
                     if((static_cast<Breeding*>(n->getDog())->isPurchasable())){
-                        w.push_back(n->getDog());
+                        w.append(n->getDog());
                     }
                     n=n->getNext();
             }
@@ -285,7 +306,7 @@ class Container{
 
             while(n!=nullptr){
                     if((static_cast<Breeding*>(n->getDog())->isBooked())){
-                        w.push_back(n->getDog());
+                        w.append(n->getDog());
                     }
                     n=n->getNext();
             }
@@ -301,7 +322,7 @@ class Container{
             if(dynamic_cast<Bulldog*>(b)){
                 while(n!=nullptr){
                     if(dynamic_cast<Bulldog*>((static_cast<Breeding*>(n->getDog()))->getBreed())){
-                        w.push_back(n->getDog());
+                        w.append(n->getDog());
                     }
                     n=n->getNext();
                 }
@@ -310,7 +331,7 @@ class Container{
             if(dynamic_cast<AmStaff*>(b)){
                 while(n!=nullptr){
                     if(dynamic_cast<AmStaff*>((static_cast<Breeding*>(n->getDog()))->getBreed())){
-                        w.push_back(n->getDog());
+                        w.append(n->getDog());
                     };
                     n=n->getNext();
                 }
@@ -328,7 +349,7 @@ class Container{
 
             while(n!=nullptr){
                     if(!(static_cast<Breeding*>(n->getDog())->isPurchasable())){
-                        w.push_back(n->getDog());
+                        w.append(n->getDog());
                     }
                     n=n->getNext();
             }
