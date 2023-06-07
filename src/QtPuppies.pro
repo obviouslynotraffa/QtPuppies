@@ -33,7 +33,6 @@ SOURCES += \
     view/FinalButtonWidget.cpp \
     view/GeneralFilterWidget.cpp \
     view/GeneralPanel.cpp \
-    view/dogcard.cpp \
     view/doglist.cpp \
     view/mainwindow.cpp
 
@@ -65,7 +64,6 @@ HEADERS += \
     view/FinalButtonWidget.h \
     view/GeneralFilterWidget.h \
     view/GeneralPanel.h \
-    view/dogcard.h \
     view/doglist.h \
     view/mainwindow.h
 
