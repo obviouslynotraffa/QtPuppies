@@ -8,8 +8,6 @@ class Boarding;
 
 class DogVisitor: public QWidget
 {
-
-
     public:
         virtual ~DogVisitor() = default;
         virtual void visitBreeding(Breeding& breeding)=0;

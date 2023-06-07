@@ -13,7 +13,7 @@
 
 class DogVisitorCard: public DogVisitor
 {
-
+    Q_OBJECT
 private:
     QVBoxLayout* cardLayout;
     QPushButton* view_button;
@@ -28,15 +28,6 @@ public:
     QVBoxLayout* getCard() const;
     virtual void visitBoarding(Boarding& boarding);
     virtual void visitBreeding(Breeding& breeding);
-
-
-
-signals:
-
-
-
-public slots:
-
 
 
 };

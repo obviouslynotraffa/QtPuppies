@@ -8,11 +8,11 @@
 class Breeding: public Dog{
     private:
         Breed* breed;
-        Breeding* mother;
-        Breeding* father;
         bool vax;
         bool purchasable ;
         bool booked;
+        Breeding* mother;
+        Breeding* father;
     public:
         Breeding(unsigned int d, unsigned int m, unsigned int y, std::string n,
                  Breed* b,bool vax, bool purch, bool booked ,Breeding* mom=nullptr, Breeding* dad=nullptr);
