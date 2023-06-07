@@ -23,10 +23,10 @@ public:
 
 signals:
 
-    //signalDelete(Dog* d);
+    void signalDelete(Dog* d);
 
 public slots:
-    //receiveDelete(Dog* d);
+    void receiveDelete(Dog* d);
 
 };
 

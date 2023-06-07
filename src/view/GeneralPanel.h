@@ -22,11 +22,13 @@ public:
     explicit GeneralPanel(Container c,QWidget *parent = nullptr);
     void setContainer(Container w);
 
-
+signals:
+    void signalDelete(Dog* d);
 
 
 public slots:
     void search(QString s);
+    void receiveDelete(Dog* d);
 
 };
 

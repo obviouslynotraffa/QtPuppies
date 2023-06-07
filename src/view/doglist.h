@@ -29,10 +29,13 @@ public:
     void hideEmptyList();
 
 
-
+signals:
+    void signalDelete(Dog* d);
 
 public slots:
     void refresh(Container c);
+
+    void receiveDelete(Dog* d);
 
 
 

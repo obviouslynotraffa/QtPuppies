@@ -64,6 +64,8 @@ void DogList::refresh(Container c){
 
     setLayout(box);
 
+    connect(list, &DogListWidget::signalDelete, this, &DogList::receiveDelete);
+
 }
 
 
@@ -84,4 +86,6 @@ void DogList::deletePreviousList(){
 }
 
 
-
+void DogList::receiveDelete(Dog *d){
+    emit signalDelete(d);
+}

@@ -146,7 +146,10 @@ MainWindow::MainWindow(QWidget *parent): QMainWindow{parent}{
     connect(breed, &QAction::triggered, this, &MainWindow::addBreeding);
     connect(board, &QAction::triggered, this, &MainWindow::addBoarding);
     connect(toolb, &QAction::triggered, this, &MainWindow::toggleToolbar);
-    //connect(obj, &ButtonsWidget::deletePressed, this, &MainWindow::removeDog);
+    connect(general, &GeneralPanel::signalDelete, this, &MainWindow::removeDog);
+    connect(breeding, &BreedingPanel::signalDelete, this, &MainWindow::removeDog);
+    connect(boarding, &BoardingPanel::signalDelete, this, &MainWindow::removeDog);
+
 
 
 
@@ -459,6 +462,7 @@ void MainWindow::insertBreeding(Breeding *breedingDog){
 void MainWindow::removeDog(Dog *dog){
     c=c.erase(dog);
     general->setContainer(c);
+
 
     if(dynamic_cast<Breeding*>(dog))breeding->setContainer(c.filterBreeding());
     if(dynamic_cast<Boarding*>(dog))boarding->setContainer(c.filterBoarding());

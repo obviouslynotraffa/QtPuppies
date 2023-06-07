@@ -67,6 +67,7 @@ GeneralPanel::GeneralPanel(Container c,QWidget* parent)
 
     //connect
     connect(filter, &GeneralFilterWidget::searchEvent, this, &GeneralPanel::search);
+    connect(list, &DogList::signalDelete, this, &GeneralPanel::receiveDelete);
 
 }
 
@@ -81,4 +82,6 @@ void GeneralPanel::setContainer(Container w){
 }
 
 
-
+void GeneralPanel::receiveDelete(Dog *d){
+    emit signalDelete(d);
+}

@@ -67,6 +67,7 @@ BreedingPanel::BreedingPanel(Container c,QWidget *parent)
 
     //connect
     connect(filter, &BreedingFilterWidget::searchEvent, this, &BreedingPanel::search);
+    connect(list, &DogList::signalDelete, this, &BreedingPanel::receiveDelete);
 
 }
 
@@ -111,4 +112,10 @@ void BreedingPanel::search(QString s, QRadioButton* r, QCheckBox* vax, QCheckBox
 
 void BreedingPanel::setContainer(Container w){
     c=w;
+}
+
+
+
+void BreedingPanel::receiveDelete(Dog *d){
+    emit signalDelete(d);
 }

@@ -37,7 +37,7 @@ void DogListWidget::show(){
         node=c.getNextNode(node);
 
 
-        //connect(buttns, &ButtonsWidget::deletePressed, this, )
+        connect(buttns, &ButtonsWidget::deletePressed, this, &DogListWidget::receiveDelete);
 
     }
 
@@ -48,3 +48,7 @@ void DogListWidget::show(){
 }
 
 
+
+void DogListWidget::receiveDelete(Dog *d){
+    emit signalDelete(d);
+}
