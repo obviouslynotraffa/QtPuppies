@@ -136,12 +136,6 @@ MainWindow::MainWindow(QWidget *parent): QMainWindow{parent}{
 
 
 
-    //ButtonsWidget* figlio= general->findChild<DogList*>("list") ->findChild<DogListWidget*>("list")
-   //                 ->findChild<DogVisitorCard*>("visitor")->findChild<ButtonsWidget*>("buttons");
-
-
-
-
     //connect
     connect(breed, &QAction::triggered, this, &MainWindow::addBreeding);
     connect(board, &QAction::triggered, this, &MainWindow::addBoarding);
