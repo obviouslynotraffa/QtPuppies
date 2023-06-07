@@ -30,8 +30,9 @@ public slots:
     void createEditPanel();
     void createDeleteMessage();
 
+
 signals:
-    void deleteDog(Dog* dog);
+    void deletePressed(Dog* dog);
 
 
 };

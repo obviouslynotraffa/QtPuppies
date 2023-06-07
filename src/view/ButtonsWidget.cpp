@@ -71,9 +71,9 @@ void ButtonsWidget::createEditPanel(){
     dialogEdit->setWindowIcon(QIcon(":/assets/icons8-edit-48.png"));
     dialogEdit->show();
 
+
+
 }
-
-
 
 
 void ButtonsWidget::createDeleteMessage(){
@@ -95,7 +95,7 @@ void ButtonsWidget::createDeleteMessage(){
 
     if(ret == QMessageBox::Yes){
 
-        emit deleteDog(dog);
+        emit deletePressed(dog);
 
     }
 

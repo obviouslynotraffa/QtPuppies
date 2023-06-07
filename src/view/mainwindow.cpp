@@ -134,11 +134,20 @@ MainWindow::MainWindow(QWidget *parent): QMainWindow{parent}{
     tab_widget->addTab(boarding,"Boarding");
     setCentralWidget(tab_widget);
 
+
+
+    //ButtonsWidget* figlio= general->findChild<DogList*>("list") ->findChild<DogListWidget*>("list")
+   //                 ->findChild<DogVisitorCard*>("visitor")->findChild<ButtonsWidget*>("buttons");
+
+
+
+
     //connect
     connect(breed, &QAction::triggered, this, &MainWindow::addBreeding);
     connect(board, &QAction::triggered, this, &MainWindow::addBoarding);
     connect(toolb, &QAction::triggered, this, &MainWindow::toggleToolbar);
-    //connect(buttonsw, &ButtonsWidget::deleteDog, this, &MainWindow::removeDog);
+    //connect(obj, &ButtonsWidget::deletePressed, this, &MainWindow::removeDog);
+
 
 
 }
@@ -291,15 +300,21 @@ void MainWindow::addBoarding(){
     inputPanel->addWidget(button);
 
     connect(button, &FinalButtonWidget::addBoarding, this, &MainWindow::insertBoarding);
+    connect(button, &FinalButtonWidget::closeDialog, this, &MainWindow::closeWindow);
 
 
-    QDialog* window= new QDialog;
+    window= new QDialog;
     window->setLayout(inputPanel);
-    window->show();
     window->setModal(true);
+    window->show();
+
 
 }
 
+
+void MainWindow::closeWindow(){
+    window->hide();
+}
 
 
 void MainWindow::insertBoarding(Boarding* boardingDog){
@@ -421,13 +436,15 @@ void MainWindow::addBreeding(){
     inputPanel->addWidget(button);
 
     connect(button, &FinalButtonWidget::addBreeding, this, &MainWindow::insertBreeding);
+    connect(button, &FinalButtonWidget::closeDialog, this, &MainWindow::closeWindow);
 
 
     //create window
-    QDialog* window= new QDialog;
+    window= new QDialog;
     window->setLayout(inputPanel);
-    window->show();
     window->setModal(true);
+    window->show();
+
 
 }
 

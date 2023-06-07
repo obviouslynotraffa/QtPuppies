@@ -9,15 +9,18 @@
 #include "Dog/dogvisitor.h"
 #include "Dog/boarding.h"
 #include "Dog/breeding.h"
+#include "ButtonsWidget.h"
 
 class DogVisitorCard: public DogVisitor
 {
-    Q_OBJECT
+
 private:
     QVBoxLayout* cardLayout;
     QPushButton* view_button;
     QPushButton* edit_button;
     QPushButton* delete_button;
+
+    ButtonsWidget* buttons;
 
     Dog* dog=nullptr;
 
@@ -26,10 +29,15 @@ public:
     virtual void visitBoarding(Boarding& boarding);
     virtual void visitBreeding(Breeding& breeding);
 
+
+
 signals:
 
 
+
 public slots:
+
+
 
 };
 

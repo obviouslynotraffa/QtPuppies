@@ -4,6 +4,7 @@
 #include "GeneralFilterWidget.h"
 #include "Dog/container.h"
 #include "doglist.h"
+#include "ButtonsWidget.h"
 
 class GeneralPanel: public QWidget
 {
@@ -15,10 +16,13 @@ private:
     GeneralFilterWidget* filter;
     DogList* list;
 
+
 public:
 
     explicit GeneralPanel(Container c,QWidget *parent = nullptr);
     void setContainer(Container w);
+
+
 
 
 public slots:

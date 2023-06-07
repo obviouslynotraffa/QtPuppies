@@ -47,6 +47,7 @@ void DogList::refresh(Container c){
     list= new DogListWidget(c);
     box->addWidget(list);
 
+
     if(c.getSize()>0){
 
         hideEmptyList();
@@ -81,3 +82,6 @@ void DogList::deletePreviousList(){
     }
 
 }
+
+
+

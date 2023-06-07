@@ -328,4 +328,9 @@ void DogVisitorEditPanel::visitBreeding(Breeding &breeding){
     FinalButtonWidget* btn= new FinalButtonWidget(&breeding, nameEdit, dateEdit, breedEdit, vax, purch, booked);
     editPanel->addWidget(btn);
 
+
+
 }
+
+
+

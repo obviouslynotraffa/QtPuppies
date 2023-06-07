@@ -380,6 +380,7 @@ void FinalButtonWidget::createBoarding(){
         Boarding* newDog= new Boarding(tryDate.day(),tryDate.month(), tryDate.year(), name->text().toStdString(),
                                        s,owner,breed->text().toStdString(),bath->isChecked(), training->isChecked(), diet->isChecked(), walks->isChecked());
         emit addBoarding(newDog);
+        emit closeDialog();
 
     }
 
@@ -455,6 +456,7 @@ void FinalButtonWidget::createBreeding(){
                                        ,brd, vax->isChecked(), purch->isChecked(), booked->isChecked());
 
         emit addBreeding(newDog);
+        emit closeDialog();
 
 
     }

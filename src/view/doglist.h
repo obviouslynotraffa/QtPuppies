@@ -7,6 +7,7 @@
 
 #include "Dog/container.h"
 #include "DogListWidget.h"
+#include "ButtonsWidget.h"
 
 
 
@@ -20,12 +21,14 @@ private:
     QLabel* text;
     DogListWidget* list;
 
+
 public:
 
     explicit DogList(QWidget *parent = nullptr);
     void deletePreviousList();
-
     void hideEmptyList();
+
+
 
 
 public slots:

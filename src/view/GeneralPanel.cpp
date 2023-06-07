@@ -36,7 +36,6 @@ GeneralPanel::GeneralPanel(Container c,QWidget* parent)
 
 
 
-
     //right area - List of all dogs
     QScrollArea* scroll= new QScrollArea();
     QSizePolicy spRight(QSizePolicy::Preferred, QSizePolicy::Preferred);
@@ -64,6 +63,8 @@ GeneralPanel::GeneralPanel(Container c,QWidget* parent)
 
     setLayout(all);
 
+
+
     //connect
     connect(filter, &GeneralFilterWidget::searchEvent, this, &GeneralPanel::search);
 
@@ -78,5 +79,6 @@ void GeneralPanel::search(QString s){
 void GeneralPanel::setContainer(Container w){
     c=w;
 }
+
 
 
