@@ -25,6 +25,7 @@ private:
        GeneralPanel* general;
        BoardingPanel* boarding;
        BreedingPanel* breeding;
+       QDialog* window;
 
        Container c;
 
@@ -48,6 +49,8 @@ public slots:
         void insertBoarding(Boarding* boardingDog);
         void insertBreeding(Breeding* breedingDog);
         void removeDog(Dog* dog);
+
+        void closeWindow();
 
 };
 

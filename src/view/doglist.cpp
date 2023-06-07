@@ -47,6 +47,7 @@ void DogList::refresh(Container c){
     list= new DogListWidget(c);
     box->addWidget(list);
 
+
     if(c.getSize()>0){
 
         hideEmptyList();
@@ -62,6 +63,8 @@ void DogList::refresh(Container c){
     }
 
     setLayout(box);
+
+    connect(list, &DogListWidget::signalDelete, this, &DogList::receiveDelete);
 
 }
 
@@ -80,4 +83,9 @@ void DogList::deletePreviousList(){
         delete list;
     }
 
+}
+
+
+void DogList::receiveDelete(Dog *d){
+    emit signalDelete(d);
 }

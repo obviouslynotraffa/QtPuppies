@@ -19,6 +19,10 @@ public:
 
 public slots:
     void search(QString s, QRadioButton* r, QCheckBox* vax, QCheckBox* booked, QCheckBox* purch);
+    void receiveDelete(Dog* d);
+
+signals:
+    void signalDelete(Dog* d);
 
 };
 

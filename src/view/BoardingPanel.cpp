@@ -57,6 +57,7 @@ BoardingPanel::BoardingPanel(Container c, QWidget *parent)
 
     //connect
     connect(filter, &BoardingFilterWidget::searchEvent, this, &BoardingPanel::search);
+    connect(list, &DogList::signalDelete, this, &BoardingPanel::receiveDelete);
 
     setLayout(all);
 }
@@ -122,4 +123,9 @@ void BoardingPanel::search(QString s, QRadioButton *size, QCheckBox *bath, QChec
 
 void BoardingPanel::setContainer(Container w){
     c=w;
+}
+
+
+void BoardingPanel::receiveDelete(Dog *d){
+    emit signalDelete(d);
 }

@@ -23,6 +23,11 @@ public:
 public slots:
 
 
+
+signals:
+
+
+
 };
 
 #endif // DOGVISITOREDITPANEL_H

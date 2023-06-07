@@ -22,6 +22,10 @@ public:
 
 public slots:
     void search(QString s,QRadioButton* size, QCheckBox* bath, QCheckBox* walks, QCheckBox* diet, QCheckBox* training);
+    void receiveDelete(Dog* d);
+
+signals:
+    void signalDelete(Dog* d);
 
 };
 

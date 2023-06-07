@@ -101,6 +101,8 @@ signals:
     void addBoarding(Boarding* boarding);
     void addBreeding(Breeding* breeding);
 
+    void closeDialog();
+
 
 };
 
