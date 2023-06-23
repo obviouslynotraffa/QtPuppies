@@ -4,7 +4,7 @@
 #include <QDialog>
 
 #include "doglist.h"
-#include "dogcard.h"
+
 #include "DogVisitorCard.h"
 
 

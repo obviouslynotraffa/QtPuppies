@@ -8,6 +8,7 @@
 #include <QDialog>
 #include <QDateTime>
 #include <QStatusBar>
+#include <QFileDialog>
 
 #include "mainwindow.h"
 
@@ -29,9 +30,13 @@ MainWindow::MainWindow(QWidget *parent): QMainWindow{parent}{
     QAction *openfile = new QAction(QIcon(QPixmap((":/assets/icons8-folder-48.png"))),"Open file");
     QAction *save = new QAction(QIcon(QPixmap((":/assets/icons8-save-48.png"))),"Save");
     QAction *saveAs = new QAction(QIcon(QPixmap((":/assets/icons8-save-as-48.png"))),"Save as");
-    QAction *board = new QAction(QIcon(QPixmap((":/assets/icons8-doge-48.png"))),"Add boarding dog");
-    QAction *breed = new QAction(QIcon(QPixmap((":/assets/icons8-puppy-48.png"))),"Add breeding dog");
+    boardBtn = new QAction(QIcon(QPixmap((":/assets/icons8-doge-48.png"))),"Add boarding dog");
+    breedBtn = new QAction(QIcon(QPixmap((":/assets/icons8-puppy-48.png"))),"Add breeding dog");
     QAction *toolb = new QAction(QIcon(QPixmap((":/assets/icons8-invisible-48.png"))),"Toggled toolbar");
+
+
+    boardBtn->setEnabled(false);
+    breedBtn->setEnabled(false);
 
 
     //Menubar
@@ -44,14 +49,15 @@ MainWindow::MainWindow(QWidget *parent): QMainWindow{parent}{
     file->addAction(save);
     file->addAction(saveAs);
 
-    addDog->addAction(board);
-    addDog->addAction(breed);
+    addDog->addAction(boardBtn);
+    addDog->addAction(breedBtn);
 
     options->addAction(toolb);
 
 
 
     //set up container
+    /*
     Large* large= new Large();
     Medium* medium= new Medium();
     Small* small= new Small();
@@ -107,7 +113,7 @@ MainWindow::MainWindow(QWidget *parent): QMainWindow{parent}{
     c.push_back(guest1);
     c.push_back(guest2);
     c.push_back(guest3);
-    c.push_back(guest4);
+    c.push_back(guest4);*/
 
 
     //Toolbar
@@ -116,8 +122,8 @@ MainWindow::MainWindow(QWidget *parent): QMainWindow{parent}{
     toolbar->addAction(openfile);
     toolbar->addAction(save);
     toolbar->addAction(saveAs);
-    toolbar->addAction(breed);
-    toolbar->addAction(board);
+    toolbar->addAction(breedBtn);
+    toolbar->addAction(boardBtn);
     toolbar->setIconSize(QSize(32,32));
 
 
@@ -137,15 +143,16 @@ MainWindow::MainWindow(QWidget *parent): QMainWindow{parent}{
 
 
     //connect
-    connect(breed, &QAction::triggered, this, &MainWindow::addBreeding);
-    connect(board, &QAction::triggered, this, &MainWindow::addBoarding);
+    connect(breedBtn, &QAction::triggered, this, &MainWindow::addBreeding);
+    connect(boardBtn, &QAction::triggered, this, &MainWindow::addBoarding);
     connect(toolb, &QAction::triggered, this, &MainWindow::toggleToolbar);
     connect(general, &GeneralPanel::signalDelete, this, &MainWindow::removeDog);
     connect(breeding, &BreedingPanel::signalDelete, this, &MainWindow::removeDog);
     connect(boarding, &BoardingPanel::signalDelete, this, &MainWindow::removeDog);
-
-
-
+    connect(newfile, &QAction::triggered, this, &MainWindow::newDataset);
+    connect(openfile, &QAction::triggered, this, &MainWindow::openDataset);
+    connect(save, &QAction::triggered, this, &MainWindow::saveDataset);
+    connect(saveAs, &QAction::triggered, this, &MainWindow::saveAsDataset);
 
 }
 
@@ -458,12 +465,112 @@ void MainWindow::removeDog(Dog *dog){
     general->setContainer(c);
 
 
+
     if(dynamic_cast<Breeding*>(dog))breeding->setContainer(c.filterBreeding());
     if(dynamic_cast<Boarding*>(dog))boarding->setContainer(c.filterBoarding());
+
+    dog->~Dog();
 }
 
 
 void MainWindow::toggleToolbar(){
     toolbar->setVisible(!toolbar->isVisible());
+}
+
+
+MainWindow& MainWindow::reloadData(){
+    owners.clear();
+    std::vector<Owner*> owns (repository->readAll());
+
+    for (auto it= owns.begin();
+         it!= owns.end();
+         it++)
+    {
+        owners.push_back(*it);
+    }
+
+    return *this;
+}
+
+
+void MainWindow::newDataset(){
+    QString path = QFileDialog::getSaveFileName(
+                this,
+                "Creates new Dataset",
+                "./",
+                "JSON files *.json"
+            );
+
+    if(path.isEmpty()){
+        return;
+    }
+
+    if(!repository){
+        delete repository;
+    }
+
+    Reader reader;
+    Json converter(reader);
+    JsonFile data_mapper(path.toStdString(),converter);
+    repository =  new JsonRepo(data_mapper);
+
+    boardBtn->setEnabled(true);
+    breedBtn->setEnabled(true);
+
+}
+
+
+
+
+void MainWindow::openDataset(){
+    QString path = QFileDialog::getSaveFileName(
+                this,
+                "Creates new Dataset",
+                "./",
+                "JSON files *.json"
+            );
+
+    if(path.isEmpty()){
+        return;
+    }
+
+    if(!repository){
+        delete repository;
+    }
+
+    Reader reader;
+    Json converter(reader);
+    JsonFile data_mapper(path.toStdString(),converter);
+    repository =  new JsonRepo(data_mapper);
+
+    reloadData();
+
+    boardBtn->setEnabled(true);
+    breedBtn->setEnabled(true);
+
+}
+
+
+void MainWindow::saveDataset(){
+
+    if(repository==nullptr)return;
+
+    repository->store();
+
+}
+
+
+void MainWindow::saveAsDataset(){
+    QString path = QFileDialog::getSaveFileName(
+            this,
+            "Creates new Dataset",
+            "./",
+            "JSON files *.json"
+        );
+        if (path.isEmpty() || repository == nullptr) {
+            return;
+        }
+
+        repository->setPath(path.toStdString()).store();
 }
 
