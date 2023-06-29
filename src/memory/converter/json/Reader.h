@@ -6,34 +6,40 @@
 #include "Dog/breeding.h"
 #include "Dog/boarding.h"
 #include "Dog/owner.h"
+#include <QIODevice>
+
 
 #include <QJsonObject>
+#include <vector>
 
 class Reader
 {
-
 private:
-    QList<Dog*> dogList;
-    QList<Owner*> ownerList;
+    std::vector<Owner*> owners;
+    std::vector<Dog*> dogs;
+
+    //Dog* lastDog;
+    //Owner* lastOwner;
 
 public:
 
-    //const QList<Dog*> getListDog() const;
-    const QList<Owner*> getListOwner() const;
+    const std::vector<Dog*> getDogs() const;
+    const std::vector<Owner*> getOWners() const;
 
-    //Reader& clearDog();
-    Reader& clearOwner();
+    Reader& clearCache();
 
-    //Dog* readDog(const QJsonObject& object);
-    Owner* readOwner(const QJsonObject& object);
+
+    //Dog* getLastDog() const;
+    //Owner* getLastOwner() const;
+
+    void read(const QJsonObject& object);
 
 
 private:
-    //Dog* readBreeding(const QJsonObject& object) const;
-    //Dog* readBoarding(const QJsonObject& object) const;
 
-    Owner* readOwner(const QJsonObject& object) const;
-
+    Dog* readBoarding(const QJsonObject& object)const;
+    //Dog* readBreeding(const QJsonObject& object)const;
+    Owner* readOwner(const QJsonObject& object)const;
 
 };
 

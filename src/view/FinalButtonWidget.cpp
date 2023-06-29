@@ -371,9 +371,9 @@ void FinalButtonWidget::createBoarding(){
 
         Size* s;
 
-        if(size->currentText()=="Large") s=large;
-        if(size->currentText()=="Medium") s=medium;
-        if(size->currentText()=="Small") s=small;
+        if(size->currentText()=="Large")s=large;
+        else if(size->currentText()=="Medium") s=medium;
+        else  s=small;
 
 
         Owner* owner = new Owner(owName->text().toStdString(), owSurname->text().toStdString(), owPhone->text().toStdString(), tryDateOw.day(), tryDateOw.month(), tryDateOw.year(), owAddress->text().toStdString(), owHn->text().toStdString());

@@ -30,6 +30,8 @@ private:
 
        QAction *boardBtn;
        QAction *breedBtn;
+       QAction* save;
+       QAction* saveAs;
 
        Container c;
        std::vector<Owner*> owners;
@@ -37,7 +39,7 @@ private:
        QTabWidget* tab_widget;
        QToolBar* toolbar;
 
-       JsonRepo* repository;
+       JsonRepo* repository=nullptr;
 
 public:
     explicit MainWindow(QWidget *parent = nullptr);

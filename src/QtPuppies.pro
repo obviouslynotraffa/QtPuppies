@@ -18,6 +18,7 @@ SOURCES += \
     breeds/bulldog.cpp \
     main.cpp \
     memory/converter/json/Json.cpp \
+    memory/converter/json/JsonVisitor.cpp \
     memory/converter/json/Reader.cpp \
     memory/datamapper/JsonFile.cpp \
     memory/repository/JsonRepo.cpp \
@@ -53,6 +54,7 @@ HEADERS += \
     breeds/breed.h \
     breeds/bulldog.h \
     memory/converter/json/Json.h \
+    memory/converter/json/JsonVisitor.h \
     memory/converter/json/Reader.h \
     memory/datamapper/JsonFile.h \
     memory/repository/JsonRepo.h \

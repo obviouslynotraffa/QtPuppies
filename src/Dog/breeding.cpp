@@ -5,7 +5,7 @@ Breeding::Breeding(unsigned int d, unsigned int m, unsigned int y, std::string n
                    Dog(d,m,y,n),breed(b), vax(vax), purchasable(purch), booked(booked) , mother(mom), father(dad){}
 
 Breeding::~Breeding() {
-    //delete breed;
+    delete breed;
 }
 
 Breed* Breeding::getBreed() const {

@@ -6,7 +6,7 @@ Boarding::Boarding(unsigned int d, unsigned int m, unsigned int y, std::string n
 
 Boarding::~Boarding() {
     delete owner;
-    //delete size;
+    delete size;
 }
 
 

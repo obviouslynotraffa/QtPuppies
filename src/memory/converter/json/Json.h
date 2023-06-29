@@ -18,11 +18,10 @@ class Json {
         Json(Reader& reader);
         const Reader& getReader() const;
 
-        //QJsonObject fromObject(const Breeding& dog) const;
-        //QJsonObject fromObject(const Boarding& dog) const;
-        QJsonObject fromObject(const Owner& owner) const;
+        QJsonObject fromDog(Dog& dog) const;
+        QJsonObject fromOwner(const Owner& owner) const;
 
-        //Dog* toDogObject(const QJsonObject& json) const;
+        Dog* toDogObject(const QJsonObject& json) const;
         Owner* toOwnerObject(const QJsonObject &json) const;
 
 };

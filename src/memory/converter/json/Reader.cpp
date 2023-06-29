@@ -7,133 +7,101 @@
 #include "breeds/amstaff.h"
 #include "breeds/bulldog.h"
 
-/*
-const QList<Dog*> Reader::getListDog()const{
-    return dogList;
-}
-*/
 
-const QList<Owner*> Reader::getListOwner()const{
-    return ownerList;
+const std::vector<Dog*> Reader::getDogs() const{
+    return dogs;
 }
 
+const std::vector<Owner*> Reader::getOWners()const{
+    return owners;
+}
 
-/*
-Reader& Reader::clearDog(){
-    dogList.clear();
+
+
+Reader& Reader::clearCache(){
+    dogs.clear();
+    owners.clear();
     return *this;
 }
 
-*/
-
-Reader& Reader::clearOwner(){
-    ownerList.clear();
-    return *this;
+/*
+Dog* Reader::getLastDog() const{
+    return lastDog;
 }
 
-
-/*
-Dog* Reader::readDog(const QJsonObject& object){
-
-    QJsonValue type = object.value("type");
-
-    if (type.isUndefined()) {
-            throw std::invalid_argument("Missing item type.");
-    }
-
-    if(type.toString().compare("breeding")==0){
-        dogList.append(readBreeding(object));
-    }
-
-    else if(type.toString().compare("boarding")==0){
-        dogList.append(readBoarding(object));
-    }
-
-    return dogList.last();
-
+Owner* Reader::getLastOwner() const{
+    return lastOwner;
 }
 */
-
-
-Owner* Reader::readOwner(const QJsonObject& object){
-
+void Reader::read(const QJsonObject &object){
     QJsonValue type = object.value("type");
 
-    if (type.isUndefined()) {
-        throw std::invalid_argument("Missing item type.");
+    if(!type.isUndefined()){
+
+        if(type.toString().compare("boarding") == 0){
+            dogs.push_back(readBoarding(object));
+
+        }
+        else if (type.toString().compare("owner") == 0){
+            owners.push_back(readOwner(object));
+
+        }
     }
-
-
-
-    if(type.toString().compare("owner")){
-        ownerList.append(readOwner(object));
-    }
-
-    return ownerList.last();
-
 }
 
 
-Owner* Reader::readOwner(const QJsonObject &object) const{
-    return new Owner(object.value("name").toString().toStdString(),
-                     object.value("surname").toString().toStdString(),
-                     object.value("phone").toString().toStdString(),
-                     object.value("day").toInt(),
-                     object.value("month").toInt(),
-                     object.value("year").toInt(),
-                     object.value("address").toString().toStdString(),
-                     object.value("house_number").toString().toStdString());
-}
-
-/*
 Dog* Reader::readBoarding(const QJsonObject &object) const{
 
-    QString sizeDog=object.value("size").toString();
+    Size* size=nullptr;
+    std::string s= object.value("size").toString().toStdString();
 
-    Size*s;
+    if(s=="Large"){
+        size = new Large();
+    }
+    else if(s=="Medium"){
+        size = new Medium();
+    }
+    else if(s=="Small"){
+        size= new Small();
+    }
 
 
-    if(sizeDog=="small") s= new Small();
-    else if(sizeDog=="medium") s= new Medium();
-    else if (sizeDog=="large") s = new Large();
+    Owner* owner=nullptr;
+    std::string phone = object.value("owner").toString().toStdString();
+
+    for(auto it = owners.begin(); it!=owners.end(); it++){
+        if(phone==(*it)->getPhone()){
+            owner = *it;
+        }
+    }
+
 
     return new Boarding(
                 object.value("day").toInt(),
                 object.value("month").toInt(),
                 object.value("year").toInt(),
                 object.value("name").toString().toStdString(),
-                s,
-                nullptr,
+                size,
+                owner,
                 object.value("breed").toString().toStdString(),
                 object.value("bath").toBool(),
                 object.value("training").toBool(),
                 object.value("diet").toBool(),
-                object.value("walks").toBool()
+                object.value("walking").toBool()
                 );
 }
 
 
-Dog* Reader::readBreeding(const QJsonObject &object) const{
 
-    QString breedDog=object.value("breed").toString();
-
-    Breed* b;
-
-    if(breedDog=="bulldog") b= new Bulldog();
-    else if (breedDog=="amstaff") b= new AmStaff();
-
-
-    return new Breeding(
+Owner* Reader::readOwner(const QJsonObject &object) const{
+    return new Owner(
+                object.value("name").toString().toStdString(),
+                object.value("surname").toString().toStdString(),
+                object.value("phone").toString().toStdString(),
                 object.value("day").toInt(),
                 object.value("month").toInt(),
                 object.value("year").toInt(),
-                object.value("name").toString().toStdString(),
-                b,
-                object.value("vax").toBool(),
-                object.value("purch").toBool(),
-                object.value("booked").toBool(),
-                nullptr,
-                nullptr
+                object.value("address").toString().toStdString(),
+                object.value("house_number").toString().toStdString()
                 );
 }
-*/

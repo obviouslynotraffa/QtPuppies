@@ -13,20 +13,18 @@ private:
     Json& converter;
 
 public:
-    JsonFile(const std::string& path, Json& converter);
+    JsonFile(const std::string path, Json& converter);
 
     static JsonFile fromPath(const std::string& path);
-    JsonFile& setPath(const std::string path);
-
-    const Json& getConverter() const;
     const std::string& getPath() const;
+    JsonFile& setPath(const std::string& path);
+    const Json& getConverter() const;
 
 
-    //JsonFile& store(const std::vector<Dog*> dogs);
-    JsonFile& storeOwners(const std::vector<Owner*> owners);
+    JsonFile& store(const std::vector<Dog*> dogs, const std::vector<Owner*> owners);
 
-    //std::vector<Dog*> loadDogs();
     std::vector<Owner*> loadOwners();
+    std::vector<Dog*> loadDogs();
 
 };
 
