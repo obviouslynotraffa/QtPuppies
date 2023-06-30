@@ -3,13 +3,13 @@
 #include <QStyle>
 #include <QMessageBox>
 
-
+#include "Dog/container.h"
 #include "ButtonsWidget.h"
 #include "DogVisitorInfoPanel.h"
 #include "DogVisitorEditPanel.h"
 
-ButtonsWidget::ButtonsWidget(Dog* dog, QWidget *parent)
-    : QWidget{parent}, dog(dog)
+ButtonsWidget::ButtonsWidget(Dog* dog, Container& c, QWidget *parent)
+    : QWidget{parent}, dog(dog), c(c)
 {
 
     //Buttons
@@ -60,6 +60,7 @@ void ButtonsWidget::createInfoPanel(){
 void ButtonsWidget::createEditPanel(){
 
     DogVisitorEditPanel visitor;
+    visitor.setContainer(c);
     dog->accept(visitor);
 
     dialogEdit =  new QDialog;
@@ -70,7 +71,6 @@ void ButtonsWidget::createEditPanel(){
     dialogEdit->setWindowTitle("Editing "+QString::fromStdString(dog->getName()));
     dialogEdit->setWindowIcon(QIcon(":/assets/icons8-edit-48.png"));
     dialogEdit->show();
-
 
 
 }

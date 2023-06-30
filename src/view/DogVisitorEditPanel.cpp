@@ -24,10 +24,9 @@ QVBoxLayout* DogVisitorEditPanel::getEditPanel()const{
     return editPanel;
 }
 
-
-
-
-
+void DogVisitorEditPanel::setContainer(Container contn){
+    c=contn;
+}
 
 void DogVisitorEditPanel::visitBoarding(Boarding &boarding){
 
@@ -279,13 +278,35 @@ void DogVisitorEditPanel::visitBreeding(Breeding &breeding){
     hbox->addWidget(parentGroup);
 
 
-    if(breeding.getFather() && breeding.getMother()){
+
+    std::vector<Breeding*> parents(c.filterParent()) ;
+
+
         //Mother
         QGroupBox* mom = new QGroupBox(tr("Mom"));
 
         QLabel* mother= new QLabel("Select mother: ");
         QComboBox* listmom= new QComboBox;
-        listmom->addItem(QString::fromStdString(breeding.getMother()->getName()));
+
+        if(breeding.getMother()){
+            listmom->addItem(QString::fromStdString(breeding.getMother()->getName()));
+            for(Breeding* b : parents){
+                if((b->getName() != (breeding.getMother()->getName())) && b->getName()!=breeding.getName())
+                {
+                    listmom->addItem(QString::fromStdString(b->getName()));
+                }
+            }
+            listmom->addItem("None");
+        }
+        else
+        {
+            listmom->addItem("None");
+            for(Breeding* b:parents){
+                if(b->getName() != breeding.getName())
+                listmom->addItem(QString::fromStdString(b->getName()));
+            }
+        }
+
 
         QGridLayout* momLayout= new QGridLayout;
 
@@ -298,7 +319,27 @@ void DogVisitorEditPanel::visitBreeding(Breeding &breeding){
         QGroupBox* dad = new QGroupBox(tr("Dad"));
         QLabel* father= new QLabel("Select father: ");
         QComboBox* listdad= new QComboBox;
-        listdad->addItem(QString::fromStdString(breeding.getFather()->getName()));
+
+        if(breeding.getFather()){//check parent point
+            listdad->addItem(QString::fromStdString(breeding.getFather()->getName()));
+            for(Breeding* b : parents){
+                if((b->getName() != (breeding.getFather()->getName())) && b->getName()!=breeding.getName())
+                {
+                    listdad->addItem(QString::fromStdString(b->getName()));
+                }
+
+            }
+            listdad->addItem("None");
+        }
+        else{
+            listdad->addItem("None");
+            for(Breeding* b:parents){
+                if(b->getName() != breeding.getName())
+                listdad->addItem(QString::fromStdString(b->getName()));
+            }
+        }
+
+
 
 
         QGridLayout* dadLayout= new QGridLayout;
@@ -314,18 +355,11 @@ void DogVisitorEditPanel::visitBreeding(Breeding &breeding){
         parentLayout->addWidget(dad,1,0,1,10);
 
         parentGroup->setLayout(parentLayout);
-    }
-    else{  //show no data
-            QLabel* noParents= new QLabel("No parental data available");
-            QVBoxLayout* vbox= new QVBoxLayout;
-            vbox->addWidget(noParents);
-            vbox->setAlignment(Qt::AlignCenter);
-            parentGroup->setLayout(vbox);
-        }
+
 
 
     //save button
-    FinalButtonWidget* btn= new FinalButtonWidget(&breeding, nameEdit, dateEdit, breedEdit, vax, purch, booked);
+    FinalButtonWidget* btn= new FinalButtonWidget(&breeding, nameEdit, dateEdit, breedEdit, vax, purch, booked, listmom, listdad, c);
     editPanel->addWidget(btn);
 
 

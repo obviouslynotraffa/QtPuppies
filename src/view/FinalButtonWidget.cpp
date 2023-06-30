@@ -164,9 +164,9 @@ void FinalButtonWidget::setChangesBoarding(){
 
 
 FinalButtonWidget::FinalButtonWidget(Breeding *breeding, QLineEdit *name, QLineEdit *date, QComboBox *breed,
-                                     QCheckBox *vax, QCheckBox *purch, QCheckBox *booked, QWidget *parent):
+                                     QCheckBox *vax, QCheckBox *purch, QCheckBox *booked,QComboBox* mom, QComboBox* dad, Container parents, QWidget *parent):
                     QWidget{parent}, breeding(breeding), name(name), date(date), breeds(breed),
-                    vax(vax), purch(purch), booked(booked)
+                    vax(vax), purch(purch), booked(booked), mom(mom), dad(dad), parents(parents)
 {
 
     QHBoxLayout* hbox= new QHBoxLayout;
@@ -239,6 +239,14 @@ void FinalButtonWidget::setChangesBreeding(){
             breeding->setBreed(bulldog);
         }
 
+        Breeding* momp= static_cast<Breeding*>(parents.searchDogUnique(mom->currentText().toStdString()));
+        if(mom->currentText()!="None") breeding->setMom(momp);
+        else breeding->setMom(nullptr);
+
+
+        Breeding* dadp = static_cast<Breeding*>(parents.searchDogUnique(mom->currentText().toStdString()));
+        if(dad->currentText()!="None") breeding->setDad(dadp);
+        else breeding->setDad(nullptr);
 
     }
 
@@ -365,15 +373,12 @@ void FinalButtonWidget::createBoarding(){
 
         //To do: create dog
 
-        Large* large= new Large;
-        Medium* medium= new Medium;
-        Small* small= new Small;
 
         Size* s;
 
-        if(size->currentText()=="Large")s=large;
-        else if(size->currentText()=="Medium") s=medium;
-        else  s=small;
+        if(size->currentText()=="Large")s=new Large;
+        else if(size->currentText()=="Medium") s=new Medium;
+        else  s=new Small;
 
 
         Owner* owner = new Owner(owName->text().toStdString(), owSurname->text().toStdString(), owPhone->text().toStdString(), tryDateOw.day(), tryDateOw.month(), tryDateOw.year(), owAddress->text().toStdString(), owHn->text().toStdString());
@@ -388,9 +393,10 @@ void FinalButtonWidget::createBoarding(){
 
 
 FinalButtonWidget::FinalButtonWidget(QLineEdit *name, QLineEdit *date, QComboBox *breed,
-                                     QCheckBox *vax, QCheckBox *purch, QCheckBox *booked, QWidget *parent):
+                                     QCheckBox *vax, QCheckBox *purch, QCheckBox *booked,
+                                     QComboBox* mom, QComboBox* dad, Container parents, QWidget *parent):
                     QWidget{parent},  name(name), date(date), breeds(breed),
-                    vax(vax), purch(purch), booked(booked)
+                    vax(vax), purch(purch), booked(booked), mom(mom), dad(dad), parents(parents)
 {
     //button
     QHBoxLayout* hbox= new QHBoxLayout;
@@ -445,15 +451,19 @@ void FinalButtonWidget::createBreeding(){
         msgBox.setStandardButtons(QMessageBox::Close);
         msgBox.exec();
 
-        //To do: -add dog -parents
+        Breeding* mother=nullptr;
+        Breeding* father=nullptr;
+
+        if(mom->currentText().toStdString()!="None") mother= static_cast<Breeding*>(parents.searchDogUnique(mom->currentText().toStdString()));
+        if(dad->currentText().toStdString()!="None") father= static_cast<Breeding*>(parents.searchDogUnique(dad->currentText().toStdString()));
+
 
         Breed* brd;
-
         if(breeds->currentText()=="Bulldog") brd= new Bulldog();
         if(breeds->currentText()=="AmStaff") brd= new AmStaff();
 
         Breeding* newDog= new Breeding(tryDate.day(), tryDate.month(), tryDate.year(), name->text().toStdString()
-                                       ,brd, vax->isChecked(), purch->isChecked(), booked->isChecked());
+                                       ,brd, vax->isChecked(), purch->isChecked(), booked->isChecked(), mother, father);
 
         emit addBreeding(newDog);
         emit closeDialog();

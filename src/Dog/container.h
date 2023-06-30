@@ -342,18 +342,39 @@ class Container{
 
 
 
-        Container filterParent()const{
-            Container w;
+
+
+        std::vector<Breeding*> filterParent()const{
+
+            std::vector<Breeding*> w;
+            Node* n=head;
+
+            while(n!=nullptr){
+
+                Breeding* dog= dynamic_cast<Breeding*>(n->getDog());
+                if(dog && (!dog->isPurchasable())){
+                    w.push_back(dog);
+                }
+
+                n=n->getNext();
+            }
+
+            return w;
+        }
+
+
+
+        Dog* searchDogUnique(std::string name) const{
 
             Node* n=head;
 
             while(n!=nullptr){
-                    if(!(static_cast<Breeding*>(n->getDog())->isPurchasable())){
-                        w.append(n->getDog());
-                    }
-                    n=n->getNext();
+                if(n->getDog()->getName()==name) return n->getDog();
+             n=n->getNext();
             }
-            return w;
+
+            return nullptr;
+
         }
 
 

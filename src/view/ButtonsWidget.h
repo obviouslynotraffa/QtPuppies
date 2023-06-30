@@ -18,11 +18,11 @@ public:
     QPushButton* view_button;
     QPushButton* edit_button;
     QPushButton* delete_button;
-    Container* c;
+    Container c;
 
     QDialog* dialogEdit;
 
-    explicit ButtonsWidget(Dog* dog, QWidget *parent = nullptr);
+    explicit ButtonsWidget(Dog* dog, Container& c, QWidget *parent = nullptr);
 
 
 public slots:

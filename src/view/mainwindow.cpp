@@ -331,12 +331,13 @@ void MainWindow::closeWindow(){
 
 void MainWindow::insertBoarding(Boarding* boardingDog){
     c=c.push_back(boardingDog);
-    //owners.push_back(boardingDog->getOwner());
+
     repository->create(boardingDog);
     repository->create(boardingDog->getOwner());
 
     general->setContainer(c);
     boarding->setContainer(c.filterBoarding());
+    breeding->setContainer(c.filterBreeding());
 
 }
 
@@ -410,13 +411,28 @@ void MainWindow::addBreeding(){
     QGroupBox* parentGroup= new QGroupBox(tr("Parent's info"));
     hbox->addWidget(parentGroup);
 
+    std::vector<Breeding*> parents = c.filterParent();
 
     //Mother
     QGroupBox* mom = new QGroupBox(tr("Mom"));
 
     QLabel* mother= new QLabel("Select mother: ");
     QComboBox* listmom= new QComboBox;
-    listmom->addItem("None");
+    if(parents.empty())
+    {
+        listmom->addItem("None");
+    }
+    else
+    {
+        listmom->addItem("None");
+        for(auto it=parents.begin(); it!= parents.end(); it++){
+            listmom->addItem(QString::fromStdString((*it)->getName()));
+        }
+
+
+    }
+
+
 
     QGridLayout* momLayout= new QGridLayout;
 
@@ -429,7 +445,20 @@ void MainWindow::addBreeding(){
     QGroupBox* dad = new QGroupBox(tr("Dad"));
     QLabel* father= new QLabel("Select father: ");
     QComboBox* listdad= new QComboBox;
-    listdad->addItem("None");
+    if(parents.empty())
+    {
+        listdad->addItem("None");
+    }
+    else
+    {
+        listdad->addItem("None");
+        for(auto it=parents.begin(); it!= parents.end(); it++){
+            listdad->addItem(QString::fromStdString((*it)->getName()));
+        }
+
+
+    }
+
 
 
     QGridLayout* dadLayout= new QGridLayout;
@@ -447,8 +476,9 @@ void MainWindow::addBreeding(){
     parentGroup->setLayout(parentLayout);
 
 
+
     //save button
-    FinalButtonWidget* button= new FinalButtonWidget(nameEdit, dateEdit, breedEdit, vax, purch, booked);
+    FinalButtonWidget* button= new FinalButtonWidget(nameEdit, dateEdit, breedEdit, vax, booked, purch, listmom, listdad, c);
     inputPanel->addWidget(button);
 
     connect(button, &FinalButtonWidget::addBreeding, this, &MainWindow::insertBreeding);
