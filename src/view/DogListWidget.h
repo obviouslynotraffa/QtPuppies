@@ -17,7 +17,7 @@ private:
 
 
 public:
-    explicit DogListWidget(Container c,QWidget *parent = nullptr);
+    explicit DogListWidget(Container& c,QWidget *parent = nullptr);
 
     void show();
 

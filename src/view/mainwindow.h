@@ -16,6 +16,7 @@
 #include "BreedingPanel.h"
 #include "Dog/container.h"
 #include "ButtonsWidget.h"
+#include "../memory/repository/JsonRepo.h"
 
 class MainWindow : public QMainWindow
 {
@@ -27,10 +28,18 @@ private:
        BreedingPanel* breeding;
        QDialog* window;
 
+       QAction *boardBtn;
+       QAction *breedBtn;
+       QAction* save;
+       QAction* saveAs;
+
        Container c;
+       std::vector<Owner*> owners;
 
        QTabWidget* tab_widget;
        QToolBar* toolbar;
+
+       JsonRepo* repository=nullptr;
 
 public:
     explicit MainWindow(QWidget *parent = nullptr);
@@ -40,6 +49,8 @@ public:
        QLineEdit* dateEdit=nullptr;
        QPushButton* btn;
        ButtonsWidget* buttonsw;
+
+       MainWindow& reloadData();
 
 public slots:
         void addBreeding();
@@ -51,6 +62,13 @@ public slots:
         void removeDog(Dog* dog);
 
         void closeWindow();
+
+        void newDataset();
+        void openDataset();
+        void saveDataset();
+        void saveAsDataset();
+
+
 
 };
 

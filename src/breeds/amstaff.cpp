@@ -7,6 +7,6 @@ double AmStaff::price() const{
 }
 
 std::string AmStaff::toString() const{
-    std::string b = " AmStaff ";
+    std::string b = "AmStaff";
     return b;
 }

@@ -4,7 +4,9 @@ Breeding::Breeding(unsigned int d, unsigned int m, unsigned int y, std::string n
                    Breed* b, bool vax, bool booked, bool purch, Breeding* mom, Breeding* dad):
                    Dog(d,m,y,n),breed(b), vax(vax), purchasable(purch), booked(booked) , mother(mom), father(dad){}
 
-Breeding::~Breeding() {}
+Breeding::~Breeding() {
+    delete breed;
+}
 
 Breed* Breeding::getBreed() const {
     return breed;

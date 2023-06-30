@@ -20,6 +20,7 @@
 #include "breeds/bulldog.h"
 
 #include "ButtonsWidget.h"
+#include "Dog/container.h"
 
 class FinalButtonWidget : public QWidget
 {
@@ -55,7 +56,9 @@ private:
     QCheckBox* purch= nullptr;
     QCheckBox* booked= nullptr;
 
-    //bool wrongData;
+    QComboBox* mom;
+    QComboBox* dad;
+    Container parents;
 
 
 
@@ -71,7 +74,7 @@ public:
 
     //edit breeding
     explicit FinalButtonWidget(Breeding* breeding, QLineEdit* name, QLineEdit* date, QComboBox* breed,
-                               QCheckBox* vax,QCheckBox* purch, QCheckBox* booked ,QWidget *parent = nullptr);
+                               QCheckBox* vax,QCheckBox* purch, QCheckBox* booked , QComboBox* mom, QComboBox* dad, Container c,QWidget *parent = nullptr);
 
     //create boarding
     explicit FinalButtonWidget(QLineEdit* name, QLineEdit* date, QLineEdit* breed, QComboBox* size,
@@ -82,7 +85,7 @@ public:
 
     //create breeding
     explicit FinalButtonWidget(QLineEdit* name, QLineEdit* date, QComboBox* breed,
-                               QCheckBox* vax,QCheckBox* purch, QCheckBox* booked ,QWidget *parent = nullptr);
+                               QCheckBox* vax,QCheckBox* purch, QCheckBox* booked , QComboBox* mom, QComboBox* dad, Container parents, QWidget *parent = nullptr);
 
 
 

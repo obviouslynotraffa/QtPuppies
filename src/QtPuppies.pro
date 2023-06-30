@@ -17,6 +17,11 @@ SOURCES += \
     breeds/amstaff.cpp \
     breeds/bulldog.cpp \
     main.cpp \
+    memory/converter/json/Json.cpp \
+    memory/converter/json/JsonVisitor.cpp \
+    memory/converter/json/Reader.cpp \
+    memory/datamapper/JsonFile.cpp \
+    memory/repository/JsonRepo.cpp \
     sizes/large.cpp \
     sizes/medium.cpp \
     sizes/size.cpp \
@@ -48,6 +53,11 @@ HEADERS += \
     breeds/amstaff.h \
     breeds/breed.h \
     breeds/bulldog.h \
+    memory/converter/json/Json.h \
+    memory/converter/json/JsonVisitor.h \
+    memory/converter/json/Reader.h \
+    memory/datamapper/JsonFile.h \
+    memory/repository/JsonRepo.h \
     sizes/large.h \
     sizes/medium.h \
     sizes/size.h \
@@ -78,7 +88,6 @@ RESOURCES += \
 
 FORMS +=
 
-DISTFILES += \
 
 
 

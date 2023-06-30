@@ -1,7 +1,7 @@
 #include "DogListWidget.h"
 #include "ButtonsWidget.h"
 
-DogListWidget::DogListWidget(Container c, QWidget *parent)
+DogListWidget::DogListWidget(Container& c, QWidget *parent)
     : QWidget{parent}, c(c)
 {
 
@@ -20,7 +20,7 @@ void DogListWidget::show(){
         c.getDog(node)->accept(visitor);
 
         QHBoxLayout* hbox= new QHBoxLayout;
-        buttns= new ButtonsWidget(c.getDog(node));
+        buttns= new ButtonsWidget(c.getDog(node),c);
 
         box->addLayout(hbox);
 
