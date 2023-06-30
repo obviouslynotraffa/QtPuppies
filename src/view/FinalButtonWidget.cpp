@@ -244,7 +244,7 @@ void FinalButtonWidget::setChangesBreeding(){
         else breeding->setMom(nullptr);
 
 
-        Breeding* dadp = static_cast<Breeding*>(parents.searchDogUnique(mom->currentText().toStdString()));
+        Breeding* dadp = static_cast<Breeding*>(parents.searchDogUnique(dad->currentText().toStdString()));
         if(dad->currentText()!="None") breeding->setDad(dadp);
         else breeding->setDad(nullptr);
 
