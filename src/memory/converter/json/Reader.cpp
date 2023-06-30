@@ -24,15 +24,7 @@ Reader& Reader::clearCache(){
     return *this;
 }
 
-/*
-Dog* Reader::getLastDog() const{
-    return lastDog;
-}
 
-Owner* Reader::getLastOwner() const{
-    return lastOwner;
-}
-*/
 void Reader::read(const QJsonObject &object){
     QJsonValue type = object.value("type");
 
@@ -45,6 +37,9 @@ void Reader::read(const QJsonObject &object){
         else if (type.toString().compare("owner") == 0){
             owners.push_back(readOwner(object));
 
+        }
+        else if(type.toString().compare("breeding") == 0){
+            dogs.push_back(readBreeding(object));
         }
     }
 }
@@ -89,6 +84,66 @@ Dog* Reader::readBoarding(const QJsonObject &object) const{
                 object.value("diet").toBool(),
                 object.value("walking").toBool()
                 );
+}
+
+
+
+Dog* Reader::readBreeding(const QJsonObject &object) const{
+
+
+    Breed* breed=nullptr;
+    std::string br=object.value("breed").toString().toStdString();
+
+    if(br=="Bulldog"){
+        breed= new Bulldog();
+    }
+    else if(br=="AmStaff"){
+
+        breed= new AmStaff();
+    }
+
+
+    std::string momString=object.value("mother").toString().toStdString();
+    Breeding* momPointer=nullptr;
+
+    std::string dadString=object.value("father").toString().toStdString();
+    Breeding* dadPointer=nullptr;
+
+    if(momString!=""){
+        for(Dog* dog : dogs)
+        {
+            Breeding* isBreeding=dynamic_cast<Breeding*>(dog);
+            if(isBreeding && isBreeding->getName()==momString)
+            {
+                momPointer=isBreeding;
+            }
+        }
+    }
+
+    if(dadString!=""){
+        for(Dog* dog : dogs)
+        {
+            Breeding* isBreeding=dynamic_cast<Breeding*>(dog);
+            if(isBreeding && isBreeding->getName()==dadString)
+            {
+                dadPointer=isBreeding;
+            }
+        }
+    }
+
+
+
+    return new Breeding(
+                object.value("day").toInt(),
+                object.value("month").toInt(),
+                object.value("year").toInt(),
+                object.value("name").toString().toStdString(),
+                breed,
+                object.value("vax").toBool(),
+                object.value("purch").toBool(),
+                object.value("booked").toBool(),
+                momPointer,
+                dadPointer);
 }
 
 

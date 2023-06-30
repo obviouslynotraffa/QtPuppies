@@ -337,7 +337,7 @@ void MainWindow::insertBoarding(Boarding* boardingDog){
 
     general->setContainer(c);
     boarding->setContainer(c.filterBoarding());
-    breeding->setContainer(c.filterBreeding());
+    //breeding->setContainer(c.filterBreeding());
 
 }
 
@@ -497,6 +497,9 @@ void MainWindow::addBreeding(){
 
 void MainWindow::insertBreeding(Breeding *breedingDog){
     c=c.push_back(breedingDog);
+
+    repository->create(breedingDog);
+
     general->setContainer(c);
     breeding->setContainer(c.filterBreeding());
 }

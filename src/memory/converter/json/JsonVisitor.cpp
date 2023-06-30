@@ -35,6 +35,24 @@ void JsonVisitor::visitBreeding(Breeding &breeding){
     breedingObject.insert("day", QJsonValue::fromVariant(breeding.getDate().getDay()));
     breedingObject.insert("month", QJsonValue::fromVariant(breeding.getDate().getMonth()));
     breedingObject.insert("year", QJsonValue::fromVariant(breeding.getDate().getYear()));
+    breedingObject.insert("name", QJsonValue::fromVariant(breeding.getName().c_str()));
+    breedingObject.insert("breed", QJsonValue::fromVariant(breeding.getBreed()->toString().c_str()));
+    breedingObject.insert("vax", QJsonValue::fromVariant(breeding.isVax()));
+    breedingObject.insert("purch", QJsonValue::fromVariant(breeding.isPurchasable()));
+    breedingObject.insert("booked", QJsonValue::fromVariant(breeding.isBooked()));
+
+    if(breeding.getMother() && breeding.getFather())
+    {
+        breedingObject.insert("mother",QJsonValue::fromVariant(breeding.getMother()->getName().c_str()));
+        breedingObject.insert("father",QJsonValue::fromVariant(breeding.getFather()->getName().c_str()));
+    }
+    else
+    {
+        breedingObject.insert("mother",QJsonValue::fromVariant(""));
+        breedingObject.insert("father",QJsonValue::fromVariant(""));
+    }
+
+
 
     object = breedingObject;
 
