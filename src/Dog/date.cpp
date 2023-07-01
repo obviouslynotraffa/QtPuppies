@@ -4,7 +4,7 @@
 
 Date::Date(unsigned int d, unsigned int m, unsigned int y) : day(d), month(m), year(y) {}
 
-Date::~Date() {}
+//Date::~Date() {}
 
 
 unsigned int Date::getYear() const {

@@ -27,12 +27,7 @@ JsonRepo::JsonRepo(JsonFile dataMapper)
 
 JsonRepo::~JsonRepo(){
 
-    for(auto it = owners.begin();
-        it!=owners.end();
-        it++)
-    {
-        delete *it;
-    }
+    owners.clear();
 
 
     for(auto it = dogs.begin();

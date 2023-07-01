@@ -15,7 +15,7 @@ class Date{
     public:
     Date() {}
     Date(unsigned int d, unsigned int m, unsigned int y);
-    ~Date();
+    ~Date()=default;
 
     unsigned int getDay() const;
     unsigned int getMonth() const;
