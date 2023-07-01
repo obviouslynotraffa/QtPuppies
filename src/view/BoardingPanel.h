@@ -5,7 +5,7 @@
 
 #include "BoardingFilterWidget.h"
 #include "Dog/container.h"
-#include "doglist.h"
+#include "DogList.h"
 
 class BoardingPanel : public QWidget
 {

@@ -29,7 +29,6 @@ JsonRepo::~JsonRepo(){
 
     owners.clear();
 
-
     for(auto it = dogs.begin();
         it!=dogs.end();
         it++)

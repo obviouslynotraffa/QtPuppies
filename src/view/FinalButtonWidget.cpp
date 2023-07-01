@@ -141,21 +141,24 @@ void FinalButtonWidget::setChangesBoarding(){
 
         if(size->currentText()=="Large"){
 
-            Large* large= new Large;
+            Size* large= new Large;
             boarding->setSize(large);
         }
 
         if(size->currentText()=="Medium"){
 
-            Medium* medium= new Medium;
+            Size* medium= new Medium;
             boarding->setSize(medium);
         }
 
         if(size->currentText()=="Small"){
 
-            Small* small= new Small;
+            Size* small= new Small;
             boarding->setSize(small);
         }
+
+        emit closeDialog();
+
 
     }
 
@@ -247,6 +250,9 @@ void FinalButtonWidget::setChangesBreeding(){
         Breeding* dadp = static_cast<Breeding*>(parents.searchDogUnique(dad->currentText().toStdString()));
         if(dad->currentText()!="None") breeding->setDad(dadp);
         else breeding->setDad(nullptr);
+
+        emit closeDialog();
+
 
     }
 

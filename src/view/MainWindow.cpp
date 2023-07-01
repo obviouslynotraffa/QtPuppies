@@ -41,6 +41,12 @@ MainWindow::MainWindow(QWidget *parent): QMainWindow{parent}{
     breedBtn->setEnabled(false);
 
 
+    newfile->setShortcut(QKeySequence(Qt::CTRL | Qt::Key_N));
+    openfile->setShortcut(QKeySequence(Qt::CTRL | Qt::Key_O));
+    save->setShortcut(QKeySequence(Qt::CTRL | Qt::Key_S));
+    saveAs->setShortcut(QKeySequence(Qt::CTRL | Qt::SHIFT | Qt::Key_N));
+
+
     //Menubar
     QMenu *file = menuBar()->addMenu("&File");
     QMenu *addDog = menuBar()->addMenu("&New Dog");
@@ -325,7 +331,7 @@ void MainWindow::addBoarding(){
 
 
 void MainWindow::closeWindow(){
-    window->hide();
+    window->deleteLater();
 }
 
 
@@ -337,7 +343,7 @@ void MainWindow::insertBoarding(Boarding* boardingDog){
 
     general->setContainer(c);
     boarding->setContainer(c.filterBoarding());
-    //breeding->setContainer(c.filterBreeding());
+
 
 }
 

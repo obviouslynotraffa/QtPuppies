@@ -1,7 +1,7 @@
 #include <QApplication>
 #include <QIcon>
 
-#include "view/mainwindow.h"
+#include "view/MainWindow.h"
 
 
 int main(int argc, char *argv[])

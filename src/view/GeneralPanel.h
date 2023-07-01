@@ -3,7 +3,7 @@
 
 #include "GeneralFilterWidget.h"
 #include "Dog/container.h"
-#include "doglist.h"
+#include "DogList.h"
 #include "ButtonsWidget.h"
 
 class GeneralPanel: public QWidget
