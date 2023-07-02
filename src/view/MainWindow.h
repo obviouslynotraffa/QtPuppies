@@ -34,7 +34,6 @@ private:
        QAction* saveAs;
 
        Container c;
-       std::vector<Owner*> owners;
 
        QTabWidget* tab_widget;
        QToolBar* toolbar;

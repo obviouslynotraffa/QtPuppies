@@ -31,6 +31,7 @@ public slots:
     void createDeleteMessage();
 
 
+
 signals:
     void deletePressed(Dog* dog);
 

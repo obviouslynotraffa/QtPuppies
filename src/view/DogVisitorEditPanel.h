@@ -30,6 +30,8 @@ signals:
 
 
 
+
+
 };
 
 #endif // DOGVISITOREDITPANEL_H

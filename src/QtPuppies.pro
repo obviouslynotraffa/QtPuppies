@@ -31,6 +31,7 @@ SOURCES += \
     view/BreedingFilterWidget.cpp \
     view/BreedingPanel.cpp \
     view/ButtonsWidget.cpp \
+    view/DogList.cpp \
     view/DogListWidget.cpp \
     view/DogVisitorCard.cpp \
     view/DogVisitorEditPanel.cpp \
@@ -38,8 +39,7 @@ SOURCES += \
     view/FinalButtonWidget.cpp \
     view/GeneralFilterWidget.cpp \
     view/GeneralPanel.cpp \
-    view/doglist.cpp \
-    view/mainwindow.cpp
+    view/MainWindow.cpp
 
 
 HEADERS += \
@@ -67,6 +67,7 @@ HEADERS += \
     view/BreedingFilterWidget.h \
     view/BreedingPanel.h \
     view/ButtonsWidget.h \
+    view/DogList.h \
     view/DogListWidget.h \
     view/DogVisitorCard.h \
     view/DogVisitorEditPanel.h \
@@ -74,8 +75,7 @@ HEADERS += \
     view/FinalButtonWidget.h \
     view/GeneralFilterWidget.h \
     view/GeneralPanel.h \
-    view/doglist.h \
-    view/mainwindow.h
+    view/MainWindow.h
 
 
 # Default rules for deployment.

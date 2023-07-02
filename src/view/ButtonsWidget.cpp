@@ -57,6 +57,8 @@ void ButtonsWidget::createInfoPanel(){
 
 
 
+
+
 void ButtonsWidget::createEditPanel(){
 
     DogVisitorEditPanel visitor;
@@ -73,7 +75,10 @@ void ButtonsWidget::createEditPanel(){
     dialogEdit->show();
 
 
+
 }
+
+
 
 
 void ButtonsWidget::createDeleteMessage(){

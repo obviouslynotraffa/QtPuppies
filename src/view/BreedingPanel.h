@@ -3,7 +3,7 @@
 
 #include "BreedingFilterWidget.h"
 #include "Dog/container.h"
-#include "doglist.h"
+#include "DogList.h"
 
 class BreedingPanel : public QWidget
 {

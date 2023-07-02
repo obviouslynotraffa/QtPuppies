@@ -27,13 +27,7 @@ JsonRepo::JsonRepo(JsonFile dataMapper)
 
 JsonRepo::~JsonRepo(){
 
-    for(auto it = owners.begin();
-        it!=owners.end();
-        it++)
-    {
-        delete *it;
-    }
-
+    owners.clear();
 
     for(auto it = dogs.begin();
         it!=dogs.end();
@@ -69,10 +63,6 @@ const std::vector<Dog*>& JsonRepo::getRepoDog() const{
     return dogs;
 }
 
-/*
-const std::string& JsonRepo::getPath() const{
-    return dataMapper.getPath();
-}*/
 
 JsonRepo& JsonRepo::setPath(const std::string path){
     dataMapper.setPath(path);
@@ -99,9 +89,9 @@ Owner* JsonRepo::readOwner(std::string number) const{
 
 JsonRepo& JsonRepo::removeOwner(std::string number){
 
-    for(std::vector<Owner*>::const_iterator it = owners.begin(); it!=owners.end(); it++)
+    for(std::vector<Owner*>::iterator it = owners.begin(); it!=owners.end(); it++)
     {
-        if((*it)->getPhone()==number) delete *it;
+        if((*it)->getPhone()==number) owners.erase(it);
         return *this;
     }
 
@@ -144,12 +134,12 @@ Dog* JsonRepo::readDog(std::string name) const{
 
 JsonRepo& JsonRepo::removeDog(Dog *dog){
 
-    for(auto it = dogs.begin();
-        it!=dogs.end();
-        it++)
+    for(auto it=dogs.begin(); it!= dogs.end()-1;++it)
     {
-    if((*it)==dog) dogs.erase(it);
+        if(*it == dog) dogs.erase(it);
     }
+
+    dogs.pop_back();
 
     return *this;
 }

@@ -193,9 +193,9 @@ void DogVisitorEditPanel::visitBoarding(Boarding &boarding){
                                                   ownameEdit, surnameEdit, owdateEdit, numberEdit, addressEdit, hnEdit);
     editPanel->addWidget(btn);
 
+    connect(btn, &FinalButtonWidget::closeDialog, this, &DogVisitorEditPanel::deleteLater );
+
 }
-
-
 
 
 
