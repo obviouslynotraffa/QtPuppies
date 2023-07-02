@@ -86,12 +86,12 @@ MainWindow::MainWindow(QWidget *parent): QMainWindow{parent}{
     tab_widget->addTab(boarding,"Boarding");
     setCentralWidget(tab_widget);
 
-    //status= new QStatusBar();
 
-    QMainWindow::statusBar()->showMessage("Ready",3000);
-
+    QMainWindow::statusBar()->showMessage("Ready",3069);
 
 
+    //todo
+    //erase in general
 
     //connect
     connect(breedBtn, &QAction::triggered, this, &MainWindow::addBreeding);
@@ -453,8 +453,31 @@ void MainWindow::removeDog(Dog *dog){
     c=c.erase(dog);
     general->setContainer(c);
 
-    if(dynamic_cast<Breeding*>(dog))breeding->setContainer(c.filterBreeding());
-    if(dynamic_cast<Boarding*>(dog))boarding->setContainer(c.filterBoarding());
+    if(dynamic_cast<Breeding*>(dog))
+    {
+        breeding->setContainer(c.filterBreeding());
+
+        std::vector<Dog*>w (repository->readAllDogs());
+
+        for(Dog* d: w)
+        {
+            Breeding* breeding = dynamic_cast<Breeding*>(d);
+            if(breeding)
+            {
+                if(breeding->getFather()==dog)breeding->setDad(nullptr);
+                if(breeding->getMother()==dog)breeding->setMom(nullptr);
+            }
+        }
+
+    }
+    else if(dynamic_cast<Boarding*>(dog))
+    {
+        boarding->setContainer(c.filterBoarding());
+        repository->removeOwner(static_cast<Boarding*>(dog)->getOwner()->getPhone());
+
+    }
+
+    repository->removeDog(dog);
 
     delete dog;
 }
@@ -466,17 +489,10 @@ void MainWindow::toggleToolbar(){
 
 
 MainWindow& MainWindow::reloadData(){
-    owners.clear();
-    c.clearAll();
-    std::vector<Owner*> owns (repository->readAllOwners());
-    std::vector<Dog*> dogs (repository->readAllDogs());
 
-    for (auto it= owns.begin();
-         it!= owns.end();
-         it++)
-    {
-        owners.push_back(*it);
-    }
+    c.clearAll();
+
+    std::vector<Dog*> dogs (repository->readAllDogs());
 
 
     for(auto it = dogs.begin();
@@ -520,7 +536,7 @@ void MainWindow::newDataset(){
     JsonFile data_mapper(path.toStdString(),converter);
     repository =  new JsonRepo(data_mapper);
 
-    owners.clear();
+
     c.clearAll();
 
     boardBtn->setEnabled(true);
@@ -564,7 +580,7 @@ void MainWindow::openDataset(){
     saveAs->setEnabled(true);
 
 
-   QMainWindow::statusBar()->showMessage("Dataset opened correctly",3000);
+   QMainWindow::statusBar()->showMessage("Dataset loaded correctly",3000);
 }
 
 

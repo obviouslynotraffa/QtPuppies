@@ -27,20 +27,17 @@ public:
 
 
     static JsonRepo fromPath(const std::string path);
-    //const std::string& getPath() const;
     JsonRepo& setPath(const std::string path);
 
 
     JsonRepo& create(Owner* owns);
     Owner* readOwner(std::string number) const;
-    //JsonRepo& update(Owner* owner);
     JsonRepo& removeOwner(std::string number);
     std::vector<Owner*> readAllOwners() const;
 
 
     JsonRepo& create(Dog* dog);
     Dog* readDog(std::string name) const;
-    //JsonRepo& update(Dog* dog);
     JsonRepo& removeDog(Dog* dog);
     std::vector<Dog*> readAllDogs() const;
 
