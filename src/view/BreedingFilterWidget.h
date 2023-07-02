@@ -24,7 +24,7 @@ public:
     explicit BreedingFilterWidget(QWidget *parent = nullptr);
 
 signals:
-    searchEvent(QString s,QRadioButton* r, QCheckBox* v, QCheckBox* b, QCheckBox* p);
+    void searchEvent(QString s,QRadioButton* r, QCheckBox* v, QCheckBox* b, QCheckBox* p);
 
 public slots:
     void searchPressed();

@@ -11,7 +11,7 @@
 #include <QFileDialog>
 #include <QFileDevice>
 
-#include "mainwindow.h"
+#include "MainWindow.h"
 
 #include "breeds/amstaff.h"
 #include "breeds/bulldog.h"

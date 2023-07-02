@@ -3,7 +3,7 @@
 #include <QLabel>
 #include <QDialog>
 
-#include "doglist.h"
+#include "DogList.h"
 
 #include "DogVisitorCard.h"
 

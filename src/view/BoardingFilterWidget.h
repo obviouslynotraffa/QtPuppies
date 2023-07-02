@@ -29,7 +29,7 @@ public:
     explicit BoardingFilterWidget(QWidget *parent = nullptr);
 
 signals:
-    searchEvent(QString s,QRadioButton* size, QCheckBox* bath, QCheckBox* walks, QCheckBox* diet, QCheckBox* training);
+    void searchEvent(QString s,QRadioButton* size, QCheckBox* bath, QCheckBox* walks, QCheckBox* diet, QCheckBox* training);
 
 public slots:
     void searchPressed();
