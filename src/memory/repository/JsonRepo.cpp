@@ -87,13 +87,9 @@ Owner* JsonRepo::readOwner(std::string number) const{
 
 
 
-JsonRepo& JsonRepo::removeOwner(std::string number){
+JsonRepo& JsonRepo::removeOwner(Owner* ow){
 
-    for(std::vector<Owner*>::iterator it = owners.begin(); it!=owners.end(); it++)
-    {
-        if((*it)->getPhone()==number) owners.erase(it);
-        return *this;
-    }
+    owners.erase(std::remove(owners.begin(), owners.end(), ow), owners.end());
 
     return *this;
 }
@@ -134,12 +130,7 @@ Dog* JsonRepo::readDog(std::string name) const{
 
 JsonRepo& JsonRepo::removeDog(Dog *dog){
 
-    for(auto it=dogs.begin(); it!= dogs.end()-1;++it)
-    {
-        if(*it == dog) dogs.erase(it);
-    }
-
-    dogs.pop_back();
+    dogs.erase(std::remove(dogs.begin(), dogs.end(), dog), dogs.end());
 
     return *this;
 }

@@ -281,6 +281,7 @@ void MainWindow::insertBoarding(Boarding* boardingDog){
     general->setContainer(c);
     boarding->setContainer(c.filterBoarding());
 
+    QMainWindow::statusBar()->showMessage("New dog created",3000);
 
 
 }
@@ -446,12 +447,12 @@ void MainWindow::insertBreeding(Breeding *breedingDog){
 
     general->setContainer(c);
     breeding->setContainer(c.filterBreeding());
+    QMainWindow::statusBar()->showMessage("New dog created",3000);
 }
 
 
 void MainWindow::removeDog(Dog *dog){
-    c=c.erase(dog);
-    general->setContainer(c);
+
 
     if(dynamic_cast<Breeding*>(dog))
     {
@@ -473,11 +474,17 @@ void MainWindow::removeDog(Dog *dog){
     else if(dynamic_cast<Boarding*>(dog))
     {
         boarding->setContainer(c.filterBoarding());
-        repository->removeOwner(static_cast<Boarding*>(dog)->getOwner()->getPhone());
+        repository->removeOwner(static_cast<Boarding*>(dog)->getOwner());
 
     }
 
+    QMainWindow::statusBar()->showMessage(QString::fromStdString(dog->getName()) + " has been deleted",3000);
     repository->removeDog(dog);
+
+
+    c=c.erase(dog);
+    general->setContainer(c);
+
 
     delete dog;
 }
@@ -533,11 +540,11 @@ void MainWindow::newDataset(){
     Reader reader;
     Json converter(reader);
 
+    c.clearAll();
+
     JsonFile data_mapper(path.toStdString(),converter);
     repository =  new JsonRepo(data_mapper);
 
-
-    c.clearAll();
 
     boardBtn->setEnabled(true);
     breedBtn->setEnabled(true);

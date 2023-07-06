@@ -15,6 +15,7 @@ void DogListWidget::show(){
 
     Container::Node* node=c.getHead();
 
+
     for(unsigned int i=0;i<c.getSize();i++){
 
         c.getDog(node)->accept(visitor);

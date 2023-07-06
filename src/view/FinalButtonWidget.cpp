@@ -464,7 +464,7 @@ void FinalButtonWidget::createBreeding(){
         if(dad->currentText().toStdString()!="None") father= static_cast<Breeding*>(parents.searchDogUnique(dad->currentText().toStdString()));
 
 
-        Breed* brd=nullprt;
+        Breed* brd=nullptr;
         if(breeds->currentText()=="Bulldog") brd= new Bulldog();
         if(breeds->currentText()=="AmStaff") brd= new AmStaff();
 

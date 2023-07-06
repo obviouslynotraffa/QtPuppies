@@ -32,7 +32,7 @@ public:
 
     JsonRepo& create(Owner* owns);
     Owner* readOwner(std::string number) const;
-    JsonRepo& removeOwner(std::string number);
+    JsonRepo& removeOwner(Owner* ow);
     std::vector<Owner*> readAllOwners() const;
 
 
