@@ -291,7 +291,8 @@ void DogVisitorEditPanel::visitBreeding(Breeding &breeding){
         if(breeding.getMother()){
             listmom->addItem(QString::fromStdString(breeding.getMother()->getName()));
             for(Breeding* b : parents){
-                if((b->getName() != (breeding.getMother()->getName())) && b->getName()!=breeding.getName())
+                if((b->getName() != (breeding.getMother()->getName())) && b->getName()!=breeding.getName()
+                        && b->getBreed()->toString()==breeding.getBreed()->toString())
                 {
                     listmom->addItem(QString::fromStdString(b->getName()));
                 }
@@ -323,7 +324,8 @@ void DogVisitorEditPanel::visitBreeding(Breeding &breeding){
         if(breeding.getFather()){//check parent point
             listdad->addItem(QString::fromStdString(breeding.getFather()->getName()));
             for(Breeding* b : parents){
-                if((b->getName() != (breeding.getFather()->getName())) && b->getName()!=breeding.getName())
+                if((b->getName() != (breeding.getFather()->getName())) && b->getName()!=breeding.getName()
+                        && b->getBreed()->toString()==breeding.getBreed()->toString())
                 {
                     listdad->addItem(QString::fromStdString(b->getName()));
                 }

@@ -533,6 +533,7 @@ void MainWindow::newDataset(){
 
 
     if(repository != nullptr){
+        repository->store();
         delete repository;
     }
 
@@ -540,7 +541,11 @@ void MainWindow::newDataset(){
     Reader reader;
     Json converter(reader);
 
-    c.clearAll();
+    c=c.clearAll();
+    general->setContainer(c);
+    breeding->setContainer(c.filterBreeding());
+    boarding->setContainer(c.filterBoarding());
+
 
     JsonFile data_mapper(path.toStdString(),converter);
     repository =  new JsonRepo(data_mapper);
@@ -550,6 +555,8 @@ void MainWindow::newDataset(){
     breedBtn->setEnabled(true);
     save->setEnabled(true);
     saveAs->setEnabled(true);
+
+
 
     QMainWindow::statusBar()->showMessage("New dataset created",3000);
 

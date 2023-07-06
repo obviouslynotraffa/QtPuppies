@@ -352,7 +352,7 @@ class Container{
             while(n!=nullptr){
 
                 Breeding* dog= dynamic_cast<Breeding*>(n->getDog());
-                if(dog && (!dog->isPurchasable())){
+                if(dog && (!(dog->isPurchasable()))){
                     w.push_back(dog);
                 }
 

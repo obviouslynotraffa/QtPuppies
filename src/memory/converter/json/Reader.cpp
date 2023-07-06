@@ -140,8 +140,8 @@ Dog* Reader::readBreeding(const QJsonObject &object) const{
                 object.value("name").toString().toStdString(),
                 breed,
                 object.value("vax").toBool(),
-                object.value("purch").toBool(),
                 object.value("booked").toBool(),
+                object.value("purch").toBool(),
                 momPointer,
                 dadPointer);
 }
