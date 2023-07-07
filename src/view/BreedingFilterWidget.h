@@ -5,6 +5,7 @@
 #include <QRadioButton>
 #include <QLineEdit>
 #include <QCheckBox>
+#include <QPushButton>
 
 class BreedingFilterWidget: public QWidget
 {
@@ -16,6 +17,8 @@ private:
     QRadioButton* bull;
     QRadioButton* ams;
     QRadioButton* breedChose;
+
+    QPushButton* opt;
 
     QCheckBox* vax;
     QCheckBox* booked;

@@ -62,9 +62,9 @@ BoardingFilterWidget::BoardingFilterWidget(QWidget *parent)
     vbox->addLayout(hbox1);
 
     //set up optional services
-    QPushButton* opt= new QPushButton();
+    opt= new QPushButton();
     opt->setFlat(true);
-    opt->setText("Options:");
+    opt->setText("More options ▼");
 
     diet = new  QCheckBox();
     diet->setText("Diet");
@@ -132,6 +132,9 @@ void BoardingFilterWidget::untoggleOptions(){
     bath->setVisible(!bath->isVisible());
     training->setVisible(!training->isVisible());
     walks->setVisible(!walks->isVisible());
+
+    if(diet->isVisible())opt->setText("More options ▲");
+    else opt->setText("More options ▼");
 
     if(!walks->isVisible())walks->setChecked(false);
     if(!bath->isVisible())bath->setChecked(false);

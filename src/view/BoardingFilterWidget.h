@@ -5,7 +5,7 @@
 #include <QRadioButton>
 #include <QLineEdit>
 #include <QCheckBox>
-
+#include <QPushButton>
 
 
 class BoardingFilterWidget: public QWidget
@@ -19,6 +19,8 @@ private:
     QRadioButton* S;
     QRadioButton* all;
     QRadioButton* sizeChose;
+
+    QPushButton* opt;
 
     QCheckBox* bath;
     QCheckBox* walks;

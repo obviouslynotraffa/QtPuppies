@@ -69,9 +69,9 @@ BreedingFilterWidget::BreedingFilterWidget(QWidget *parent)
 
 
     //more features
-    QPushButton* opt= new QPushButton();
+    opt= new QPushButton();
     opt->setFlat(true);
-    opt->setText("More options:");
+    opt->setText("More options ▼");
     vbox->addWidget(opt);
 
     vax = new  QCheckBox();
@@ -130,6 +130,10 @@ void BreedingFilterWidget::untoggleOptions(){
     vax->setVisible(!vax->isVisible());
     purch->setVisible(!purch->isVisible());
     booked->setVisible(!booked->isVisible());
+
+
+    if(vax->isVisible())opt->setText("More options ▲");
+    else opt->setText("More options ▼");
 
     if(!vax->isVisible())vax->setChecked(false);
     if(!purch->isVisible())purch->setChecked(false);
