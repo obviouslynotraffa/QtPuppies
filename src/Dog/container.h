@@ -345,8 +345,6 @@ class Container{
 
 
 
-
-
         std::vector<Breeding*> filterParent()const{
 
             std::vector<Breeding*> w;
