@@ -75,11 +75,11 @@ BreedingFilterWidget::BreedingFilterWidget(QWidget *parent)
     vbox->addWidget(opt);
 
     vax = new  QCheckBox();
-    vax->setText("Vaccinated");
+    vax->setText("Not Vaccinated");
     vax->setVisible(false);
 
     booked = new  QCheckBox();
-    booked->setText("Booked");
+    booked->setText("Not Booked");
     booked->setVisible(false);
 
     purch = new  QCheckBox();

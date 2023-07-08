@@ -19,8 +19,6 @@ private:
     DogList* list;
 
 
-
-
 public:
 
     explicit GeneralPanel(Container c, QWidget *parent = nullptr);

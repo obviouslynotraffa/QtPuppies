@@ -122,8 +122,6 @@ void BreedingPanel::receiveDelete(Dog *d){
 
 
 
-
-
 void BreedingPanel::refresh() const{
 
     list->refresh(c);

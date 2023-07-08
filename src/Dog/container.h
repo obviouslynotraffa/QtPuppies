@@ -277,7 +277,8 @@ class Container{
             Node* n=head;
 
             while(n!=nullptr){
-                    if((static_cast<Breeding*>(n->getDog())->isVax())){
+                auto d=static_cast<Breeding*>(n->getDog());
+                    if(!(d->isVax())){
                         w.append(n->getDog());
                     }
                     n=n->getNext();
@@ -305,7 +306,9 @@ class Container{
             Node* n=head;
 
             while(n!=nullptr){
-                    if((static_cast<Breeding*>(n->getDog())->isBooked())){
+
+                auto d = static_cast<Breeding*>(n->getDog());
+                    if(!(d->isBooked())){
                         w.append(n->getDog());
                     }
                     n=n->getNext();

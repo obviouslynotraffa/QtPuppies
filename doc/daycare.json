@@ -44,6 +44,28 @@
         "year": 1982
     },
     {
+        "address": "Via Luigi X",
+        "day": 12,
+        "house_number": "23",
+        "month": 7,
+        "name": "Enrico",
+        "phone": "+39 3625612354",
+        "surname": "Mosca",
+        "type": "owner",
+        "year": 1993
+    },
+    {
+        "address": "Via C. Colombo",
+        "day": 19,
+        "house_number": "7",
+        "month": 2,
+        "name": "Lucia",
+        "phone": "+39 3321569523",
+        "surname": "Chiozza",
+        "type": "owner",
+        "year": 2000
+    },
+    {
         "booked": false,
         "breed": "AmStaff",
         "day": 15,
@@ -131,7 +153,7 @@
         "name": "Benny",
         "purch": false,
         "type": "breeding",
-        "vax": true,
+        "vax": false,
         "year": 2023
     },
     {
@@ -157,7 +179,7 @@
         "name": "Dolly",
         "purch": false,
         "type": "breeding",
-        "vax": true,
+        "vax": false,
         "year": 2023
     },
     {
@@ -183,7 +205,7 @@
         "name": "Dado",
         "purch": true,
         "type": "breeding",
-        "vax": true,
+        "vax": false,
         "year": 2023
     },
     {
@@ -222,7 +244,7 @@
         "name": "Argo",
         "purch": true,
         "type": "breeding",
-        "vax": true,
+        "vax": false,
         "year": 2023
     },
     {
@@ -240,7 +262,7 @@
         "year": 2023
     },
     {
-        "bath": false,
+        "bath": true,
         "breed": "Boxer",
         "day": 28,
         "diet": false,
@@ -277,6 +299,34 @@
         "owner": "+39 3653298456",
         "size": "Large",
         "training": false,
+        "type": "boarding",
+        "walking": true,
+        "year": 2023
+    },
+    {
+        "bath": true,
+        "breed": "Bastardino",
+        "day": 5,
+        "diet": false,
+        "month": 7,
+        "name": "Presidente Bau",
+        "owner": "+39 3625612354",
+        "size": "Medium",
+        "training": false,
+        "type": "boarding",
+        "walking": true,
+        "year": 2023
+    },
+    {
+        "bath": true,
+        "breed": "Levriero",
+        "day": 3,
+        "diet": false,
+        "month": 7,
+        "name": "Ozy",
+        "owner": "+39 3321569523",
+        "size": "Large",
+        "training": true,
         "type": "boarding",
         "walking": true,
         "year": 2023
