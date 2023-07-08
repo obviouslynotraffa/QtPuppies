@@ -4,8 +4,6 @@
 
 Date::Date(unsigned int d, unsigned int m, unsigned int y) : day(d), month(m), year(y) {}
 
-//Date::~Date() {}
-
 
 unsigned int Date::getYear() const {
     return year;
@@ -162,8 +160,6 @@ Date Date::toDate(std::string s) {
     unsigned int d= time.day();
     unsigned int m= time.month();
     unsigned int y= time.year();
-
-    //QDate::setDate(time.year(), time.month(), time.day());
 
     Date date(d,m,y);
     Date wrong(0,0,0);

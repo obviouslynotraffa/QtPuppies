@@ -51,6 +51,7 @@ public:
 
        MainWindow& reloadData();
 
+
 public slots:
         void addBreeding();
         void addBoarding();
@@ -66,8 +67,6 @@ public slots:
         void openDataset();
         void saveDataset();
         void saveAsDataset();
-
-
 
 };
 

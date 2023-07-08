@@ -119,3 +119,13 @@ void BreedingPanel::setContainer(Container w){
 void BreedingPanel::receiveDelete(Dog *d){
     emit signalDelete(d);
 }
+
+
+
+
+
+void BreedingPanel::refresh() const{
+
+    list->refresh(c);
+
+}

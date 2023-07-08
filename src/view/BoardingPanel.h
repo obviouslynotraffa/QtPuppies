@@ -19,6 +19,7 @@ private:
 public:
     explicit BoardingPanel(Container c,QWidget *parent = nullptr);
     void setContainer(Container w);
+    void refresh() const;
 
 public slots:
     void search(QString s,QRadioButton* size, QCheckBox* bath, QCheckBox* walks, QCheckBox* diet, QCheckBox* training);

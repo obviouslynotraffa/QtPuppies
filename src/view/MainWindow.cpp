@@ -74,9 +74,9 @@ MainWindow::MainWindow(QWidget *parent): QMainWindow{parent}{
 
 
     //Panel
-    general= new GeneralPanel(c);
-    breeding= new BreedingPanel(c.filterBreeding());
-    boarding= new BoardingPanel(c.filterBoarding());
+    general= new GeneralPanel(c,this);
+    breeding= new BreedingPanel(c.filterBreeding(),this);
+    boarding= new BoardingPanel(c.filterBoarding(),this);
 
 
     //Tab
@@ -90,8 +90,6 @@ MainWindow::MainWindow(QWidget *parent): QMainWindow{parent}{
     QMainWindow::statusBar()->showMessage("Ready",3069);
 
 
-    //todo
-    //erase in general
 
     //connect
     connect(breedBtn, &QAction::triggered, this, &MainWindow::addBreeding);
@@ -281,6 +279,9 @@ void MainWindow::insertBoarding(Boarding* boardingDog){
     general->setContainer(c);
     boarding->setContainer(c.filterBoarding());
 
+    general->refresh();
+    boarding->refresh();
+
     QMainWindow::statusBar()->showMessage("New dog created",3000);
 
 
@@ -447,13 +448,17 @@ void MainWindow::insertBreeding(Breeding *breedingDog){
 
     general->setContainer(c);
     breeding->setContainer(c.filterBreeding());
+
+    general->refresh();
+    breeding->refresh();
+
     QMainWindow::statusBar()->showMessage("New dog created",3000);
 }
 
 
 void MainWindow::removeDog(Dog *dog){
 
-
+    c=c.erase(dog);
     if(dynamic_cast<Breeding*>(dog))
     {
         breeding->setContainer(c.filterBreeding());
@@ -482,8 +487,12 @@ void MainWindow::removeDog(Dog *dog){
     repository->removeDog(dog);
 
 
-    c=c.erase(dog);
+
     general->setContainer(c);
+
+    general->refresh();
+    breeding->refresh();
+    boarding->refresh();
 
 
     delete dog;
@@ -593,6 +602,9 @@ void MainWindow::openDataset(){
     save->setEnabled(true);
     saveAs->setEnabled(true);
 
+    general->refresh();
+    breeding->refresh();
+    boarding->refresh();
 
    QMainWindow::statusBar()->showMessage("Dataset loaded correctly",3000);
 }
@@ -601,6 +613,10 @@ void MainWindow::openDataset(){
 void MainWindow::saveDataset(){
 
     if(repository==nullptr)return;
+
+    general->refresh();
+    breeding->refresh();
+    boarding->refresh();
 
     repository->store();
     QMainWindow::statusBar()->showMessage("Dataset saved",3000);

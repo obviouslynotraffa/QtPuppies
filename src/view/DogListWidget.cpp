@@ -12,38 +12,13 @@ void DogListWidget::show(){
     DogVisitorCard visitor;
     QVBoxLayout* box= new QVBoxLayout;
 
-
-
-    if(c.getSize()==0)
-    {
-        /*
-
-        QLabel* imageLabel = new QLabel;
-        QPixmap image(":/assets/icons8-pug-under-96.png");
-
-        imageLabel->setPixmap(QPixmap(image));
-        imageLabel->setAlignment(Qt::AlignCenter);
-
-        box->addWidget(imageLabel);
-        box->setAlignment(Qt::AlignCenter);
-
-        QLabel* text= new QLabel();
-        text->setText("Nothing found");
-        text->setAlignment(Qt::AlignCenter);
-
-        text->setStyleSheet(QString("QLabel {font-weight: bold;}"));
-        box->addWidget(text);*/
-
-
-    }
-
-    else
-    {
         Container::Node* node=c.getHead();
 
-        for(unsigned int i=0;i<c.getSize();i++){
+
+        while(node!=nullptr){
 
             c.getDog(node)->accept(visitor);
+
 
             QHBoxLayout* hbox= new QHBoxLayout;
             buttns= new ButtonsWidget(c.getDog(node),c);
@@ -66,9 +41,6 @@ void DogListWidget::show(){
             connect(buttns, &ButtonsWidget::deletePressed, this, &DogListWidget::receiveDelete);
 
         }
-    }
-
-
 
 
     setLayout(box);

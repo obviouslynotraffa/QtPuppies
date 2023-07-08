@@ -9,7 +9,7 @@
 #include "DogList.h"
 
 
-GeneralPanel::GeneralPanel(Container c,QWidget* parent)
+GeneralPanel::GeneralPanel(Container c ,QWidget* parent)
     :  QWidget{parent}, c(c)
 {
 
@@ -64,7 +64,6 @@ GeneralPanel::GeneralPanel(Container c,QWidget* parent)
     setLayout(all);
 
 
-
     //connect
     connect(filter, &GeneralFilterWidget::searchEvent, this, &GeneralPanel::search);
     connect(list, &DogList::signalDelete, this, &GeneralPanel::receiveDelete);
@@ -85,3 +84,12 @@ void GeneralPanel::setContainer(Container w){
 void GeneralPanel::receiveDelete(Dog *d){
     emit signalDelete(d);
 }
+
+
+void GeneralPanel::refresh() const{
+
+    list->refresh(c);
+
+}
+
+

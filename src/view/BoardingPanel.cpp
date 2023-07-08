@@ -129,3 +129,10 @@ void BoardingPanel::setContainer(Container w){
 void BoardingPanel::receiveDelete(Dog *d){
     emit signalDelete(d);
 }
+
+
+void BoardingPanel::refresh() const{
+
+    list->refresh(c);
+
+}
