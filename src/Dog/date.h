@@ -2,7 +2,9 @@
 #define DATE_H
 
 #include <iostream>
+#include <sstream>
 #include <ctime>
+#include <chrono>
 #include <string>
 
 class Date{
@@ -13,7 +15,7 @@ class Date{
     public:
     Date() {}
     Date(unsigned int d, unsigned int m, unsigned int y);
-    ~Date();
+    ~Date()=default;
 
     unsigned int getDay() const;
     unsigned int getMonth() const;
@@ -33,6 +35,7 @@ class Date{
     static bool checkLeapYear(int x);
 
     std::string toString() const;
+    static Date toDate(std::string s);
 
 
 };

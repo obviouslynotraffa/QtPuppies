@@ -7,6 +7,6 @@ double Bulldog::price() const{
 }
 
 std::string Bulldog::toString() const{
-    std::string b = " Bulldog ";
+    std::string b = "Bulldog";
     return b;
 }

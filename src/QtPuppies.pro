@@ -17,6 +17,11 @@ SOURCES += \
     breeds/amstaff.cpp \
     breeds/bulldog.cpp \
     main.cpp \
+    memory/converter/json/Json.cpp \
+    memory/converter/json/JsonVisitor.cpp \
+    memory/converter/json/Reader.cpp \
+    memory/datamapper/JsonFile.cpp \
+    memory/repository/JsonRepo.cpp \
     sizes/large.cpp \
     sizes/medium.cpp \
     sizes/size.cpp \
@@ -26,14 +31,15 @@ SOURCES += \
     view/BreedingFilterWidget.cpp \
     view/BreedingPanel.cpp \
     view/ButtonsWidget.cpp \
+    view/DogList.cpp \
+    view/DogListWidget.cpp \
     view/DogVisitorCard.cpp \
     view/DogVisitorEditPanel.cpp \
     view/DogVisitorInfoPanel.cpp \
+    view/FinalButtonWidget.cpp \
     view/GeneralFilterWidget.cpp \
     view/GeneralPanel.cpp \
-    view/dogcard.cpp \
-    view/doglist.cpp \
-    view/mainwindow.cpp
+    view/MainWindow.cpp
 
 
 HEADERS += \
@@ -47,6 +53,11 @@ HEADERS += \
     breeds/amstaff.h \
     breeds/breed.h \
     breeds/bulldog.h \
+    memory/converter/json/Json.h \
+    memory/converter/json/JsonVisitor.h \
+    memory/converter/json/Reader.h \
+    memory/datamapper/JsonFile.h \
+    memory/repository/JsonRepo.h \
     sizes/large.h \
     sizes/medium.h \
     sizes/size.h \
@@ -56,14 +67,15 @@ HEADERS += \
     view/BreedingFilterWidget.h \
     view/BreedingPanel.h \
     view/ButtonsWidget.h \
+    view/DogList.h \
+    view/DogListWidget.h \
     view/DogVisitorCard.h \
     view/DogVisitorEditPanel.h \
     view/DogVisitorInfoPanel.h \
+    view/FinalButtonWidget.h \
     view/GeneralFilterWidget.h \
     view/GeneralPanel.h \
-    view/dogcard.h \
-    view/doglist.h \
-    view/mainwindow.h
+    view/MainWindow.h
 
 
 # Default rules for deployment.
@@ -76,7 +88,6 @@ RESOURCES += \
 
 FORMS +=
 
-DISTFILES += \
 
 
 

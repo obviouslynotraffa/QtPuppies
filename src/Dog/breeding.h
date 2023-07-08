@@ -8,13 +8,14 @@
 class Breeding: public Dog{
     private:
         Breed* breed;
-        Breeding* mother;
-        Breeding* father;
         bool vax;
         bool purchasable ;
         bool booked;
+        Breeding* mother;
+        Breeding* father;
     public:
-        Breeding(unsigned int d, unsigned int m, unsigned int y, std::string n, Breed* b, Breeding* mom=nullptr, Breeding* dad=nullptr);
+        Breeding(unsigned int d, unsigned int m, unsigned int y, std::string n,
+                 Breed* b,bool vax, bool purch, bool booked ,Breeding* mom=nullptr, Breeding* dad=nullptr);
         ~Breeding();
 
         Breeding* getFather() const;
@@ -25,9 +26,10 @@ class Breeding: public Dog{
         bool isPurchasable() const;
         bool isBooked() const;
 
-        Breeding* setBooked(const bool& b);
-        Breeding* setVax(const bool& b);
-        Breeding* setPurch(const bool& b);
+
+        Breeding* setBooked(const bool b);
+        Breeding* setVax(const bool b);
+        Breeding* setPurch(const bool b);
         Breeding* setDad(Breeding* b);
         Breeding* setMom(Breeding* b);
         Breeding* setBreed(Breed* p);

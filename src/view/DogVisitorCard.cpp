@@ -132,26 +132,14 @@ void DogVisitorCard::visitBoarding(Boarding &boarding) {
     hbox->addStretch();
     hbox->addStretch();
 
-    //Buttons
-    ButtonsWidget* buttons= new ButtonsWidget(&boarding);
-    hbox->addWidget(buttons);
 
 
     hbox->addSpacing(25);
 
 
-    //End line
-    QFrame* line= new QFrame;
-    line->setFrameShape(QFrame::HLine);
-    line->setFrameShadow(QFrame::Sunken);
-
-
     //put all things togheter
     cardLayout= new QVBoxLayout();
     cardLayout->addLayout(hbox);
-    cardLayout->addWidget(line);
-
-
 
 
 }
@@ -260,26 +248,17 @@ void DogVisitorCard::visitBreeding(Breeding &breeding) {
     hbox->addStretch();
     hbox->addStretch();
 
-    //Buttons
-    ButtonsWidget* buttons= new ButtonsWidget(&breeding);
-    hbox->addWidget(buttons);
-
 
     hbox->addSpacing(25);
-
-
-    //End line
-    QFrame* line= new QFrame;
-    line->setFrameShape(QFrame::HLine);
-    line->setFrameShadow(QFrame::Sunken);
 
 
     //put all things togheter
     cardLayout= new QVBoxLayout();
     cardLayout->addLayout(hbox);
-    cardLayout->addWidget(line);
+
 
 }
+
 
 
 

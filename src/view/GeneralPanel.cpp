@@ -6,10 +6,10 @@
 #include <QScrollArea>
 
 #include "GeneralPanel.h"
-#include "doglist.h"
+#include "DogList.h"
 
 
-GeneralPanel::GeneralPanel(Container c,QWidget* parent)
+GeneralPanel::GeneralPanel(Container c ,QWidget* parent)
     :  QWidget{parent}, c(c)
 {
 
@@ -32,7 +32,8 @@ GeneralPanel::GeneralPanel(Container c,QWidget* parent)
     hbox->addWidget(filter);
 
 
-    DogList* list= new DogList(c);
+    list= new DogList();
+
 
 
     //right area - List of all dogs
@@ -40,12 +41,17 @@ GeneralPanel::GeneralPanel(Container c,QWidget* parent)
     QSizePolicy spRight(QSizePolicy::Preferred, QSizePolicy::Preferred);
     spRight.setHorizontalStretch(2);
     scroll->setSizePolicy(spRight);
-    hbox->addWidget(scroll);
-    hbox->setAlignment(Qt::AlignCenter|Qt::AlignTop);
-    scroll->setHorizontalScrollBarPolicy(Qt::ScrollBarAsNeeded);
-    scroll->setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);
     scroll->setWidgetResizable(true);
     scroll->setWidget(list);
+    scroll->setFixedHeight(410);
+    scroll->setFixedWidth(650);
+    scroll->setAlignment(Qt::AlignTop);
+
+
+
+    hbox->addWidget(scroll);
+    hbox->setAlignment(Qt::AlignCenter|Qt::AlignTop);
+
 
 
     //set up panel
@@ -57,4 +63,33 @@ GeneralPanel::GeneralPanel(Container c,QWidget* parent)
 
     setLayout(all);
 
+
+    //connect
+    connect(filter, &GeneralFilterWidget::searchEvent, this, &GeneralPanel::search);
+    connect(list, &DogList::signalDelete, this, &GeneralPanel::receiveDelete);
+
 }
+
+
+void GeneralPanel::search(QString s){
+    list->refresh(c.searchDog(s.toStdString()));
+}
+
+
+void GeneralPanel::setContainer(Container w){
+    c=w;
+}
+
+
+void GeneralPanel::receiveDelete(Dog *d){
+    emit signalDelete(d);
+}
+
+
+void GeneralPanel::refresh() const{
+
+    list->refresh(c);
+
+}
+
+

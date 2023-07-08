@@ -28,6 +28,7 @@ class Boarding: public Dog{
         bool didDiet() const;
         bool didWalking() const;
 
+
         Boarding* setBath(const bool& b);
         Boarding* setTraining(const bool& b);
         Boarding* setDiet(const bool& b);

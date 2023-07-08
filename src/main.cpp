@@ -1,7 +1,7 @@
 #include <QApplication>
 #include <QIcon>
 
-#include "view/mainwindow.h"
+#include "view/MainWindow.h"
 
 
 int main(int argc, char *argv[])
@@ -13,8 +13,6 @@ int main(int argc, char *argv[])
     w.resize(900, 600);
     w.setMinimumHeight(600);
     w.setMinimumWidth(1000);
-    w.setMaximumHeight(600);
-    w.setMaximumWidth(1000);
     w.show();
     return a.exec();
 }

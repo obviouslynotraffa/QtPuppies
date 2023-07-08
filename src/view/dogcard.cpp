@@ -192,33 +192,6 @@ DogCard::DogCard(Dog* dog, QWidget *parent)
     hbox->addSpacing(25);
 
 
-    /*
-     * Button to fix
-     *
-    QVBoxLayout * bts= new QVBoxLayout();
-    hbox->addLayout(bts);
-
-    QPushButton* edit= new QPushButton();
-    edit->setIcon(QIcon(":/assets/icons8-edit-48.png"));
-    edit->setIconSize(QSize(26,26));
-    edit->setFixedSize(QSize(26,26));
-    bts->addWidget(edit);
-    edit->setStyleSheet(QString("QPushButton {border: 0px;}"));
-
-    QPushButton* view= new QPushButton();
-    view->setIcon(QIcon(":/assets/icons8-view-more-48.png"));
-    view->setIconSize(QSize(30,30));
-    view->setFixedSize(QSize(30,30));
-    bts->addWidget(view);
-    view->setStyleSheet(QString("QPushButton {border: 0px;}"));
-
-    QPushButton* release= new QPushButton();
-    release->setIcon(QIcon(":/assets/icons8-dog-collar-64.png"));
-    release->setIconSize(QSize(30,30));
-    release->setFixedSize(QSize(30,30));
-    bts->addWidget(release);
-    release->setStyleSheet(QString("QPushButton {border: 0px;}"));
-    */
 
     QVBoxLayout* all= new QVBoxLayout();
     all->addLayout(hbox);

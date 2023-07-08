@@ -1,9 +1,8 @@
 #include "date.h"
 
+#include <QDate>
 
 Date::Date(unsigned int d, unsigned int m, unsigned int y) : day(d), month(m), year(y) {}
-
-Date::~Date() {}
 
 
 unsigned int Date::getYear() const {
@@ -65,8 +64,11 @@ unsigned int Date::operator-(const Date& d){
 
 unsigned int Date::convert(const Date& d){
     const int daysMonth[12]={30,28,31,30,31,30,31,31,30,31,30,31};
+
     long n=d.getYear()*365+d.getDay();
+
     for(unsigned int i=0;i<d.getMonth()-1;i++)n+=daysMonth[i];
+
     n+=countLeapYear(d);
 
     return n;
@@ -121,7 +123,6 @@ Date Date::addDays(unsigned int x){
     x=x-daysMonth[month-1]+day;
     day=1;
     month++;
-    //std::cout<<day<<" "<<month<<" "<<x<<std::endl;
 
     while(x>=daysMonth[month-1]){
         if(month!=12){
@@ -137,11 +138,35 @@ Date Date::addDays(unsigned int x){
     }
     day=day+x;
 
-    return Date(day,month,year);
+    Date date(day,month,year);
+
+    return date;
 }
 
 
 std::string Date::toString() const{
     std::string date= ""+ std::to_string(day) + "/" + std::to_string(month) + "/"+ std::to_string(year);
     return date;
+}
+
+
+Date Date::toDate(std::string s) {
+
+    QString str= QString::fromStdString(s);
+    QString format("d/M/yyyy");
+
+    QDate time=QDate::fromString(str, format);
+
+    unsigned int d= time.day();
+    unsigned int m= time.month();
+    unsigned int y= time.year();
+
+    Date date(d,m,y);
+    Date wrong(0,0,0);
+
+    if(time.isValid())
+        return date;
+    else
+        return wrong;
+
 }

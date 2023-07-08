@@ -4,8 +4,11 @@
 #include <QPushButton>
 #include <QPixmap>
 
-#include "doglist.h"
+#include "DogList.h"
 #include "BreedingPanel.h"
+
+#include "breeds/amstaff.h"
+#include "breeds/bulldog.h"
 
 
 BreedingPanel::BreedingPanel(Container c,QWidget *parent)
@@ -30,7 +33,7 @@ BreedingPanel::BreedingPanel(Container c,QWidget *parent)
     hbox->addWidget(filter);
 
 
-    DogList* list= new DogList(c.filterBreeding());
+    list= new DogList();
 
 
     //right search area with only breed dog
@@ -38,14 +41,16 @@ BreedingPanel::BreedingPanel(Container c,QWidget *parent)
     QSizePolicy spRight(QSizePolicy::Preferred, QSizePolicy::Preferred);
     spRight.setHorizontalStretch(2);
     scroll->setSizePolicy(spRight);
-    hbox->addWidget(scroll);
-    hbox->setAlignment(Qt::AlignCenter|Qt::AlignTop);
-
-
-    scroll->setHorizontalScrollBarPolicy(Qt::ScrollBarAsNeeded);
-    scroll->setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);
     scroll->setWidgetResizable(true);
     scroll->setWidget(list);
+    scroll->setFixedHeight(410);
+    scroll->setFixedWidth(650);
+    scroll->setAlignment(Qt::AlignTop);
+
+
+
+    hbox->addWidget(scroll);
+    hbox->setAlignment(Qt::AlignCenter|Qt::AlignTop);
 
 
 
@@ -59,4 +64,66 @@ BreedingPanel::BreedingPanel(Container c,QWidget *parent)
 
 
     setLayout(all);
+
+    //connect
+    connect(filter, &BreedingFilterWidget::searchEvent, this, &BreedingPanel::search);
+    connect(list, &DogList::signalDelete, this, &BreedingPanel::receiveDelete);
+
+}
+
+
+void BreedingPanel::search(QString s, QRadioButton* r, QCheckBox* vax, QCheckBox* booked, QCheckBox* purch ){
+
+    Container aux=c;
+
+    if(r->text()=="All")
+    {
+        if(vax->isChecked())c=c.filterVax();
+        if(booked->isChecked())c=c.filterBooked();
+        if(purch->isChecked())c=c.filterPurch();
+
+        list->refresh(c.searchDog(s.toStdString()));
+
+    }
+    if(r->text()=="Bulldog"){
+
+        if(vax->isChecked())c=c.filterVax();
+        if(booked->isChecked())c=c.filterBooked();
+        if(purch->isChecked())c=c.filterPurch();
+
+        Bulldog bulldog;
+        list->refresh(c.searchDog(s.toStdString()).filterBreed(&bulldog));
+    }
+
+    if(r->text()=="AmStaff"){
+
+        if(vax->isChecked())c=c.filterVax();
+        if(booked->isChecked())c=c.filterBooked();
+        if(purch->isChecked())c=c.filterPurch();
+
+        AmStaff amstaff;
+        list->refresh(c.searchDog(s.toStdString()).filterBreed(&amstaff));
+    }
+    c=aux;
+
+}
+
+
+
+void BreedingPanel::setContainer(Container w){
+    c=w;
+}
+
+
+
+void BreedingPanel::receiveDelete(Dog *d){
+    emit signalDelete(d);
+}
+
+
+
+void BreedingPanel::refresh() const{
+
+    list->refresh(c);
+
 }

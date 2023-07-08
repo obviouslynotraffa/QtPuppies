@@ -4,7 +4,10 @@
 #include <QWidget>
 #include <QPushButton>
 
+#include "FinalButtonWidget.h"
+
 #include "Dog/dog.h"
+#include "Dog/container.h"
 
 
 class ButtonsWidget : public QWidget
@@ -15,12 +18,23 @@ public:
     QPushButton* view_button;
     QPushButton* edit_button;
     QPushButton* delete_button;
+    Container c;
 
-    explicit ButtonsWidget(Dog* dog, QWidget *parent = nullptr);
+    QDialog* dialogEdit;
+
+    explicit ButtonsWidget(Dog* dog, Container& c, QWidget *parent = nullptr);
+
 
 public slots:
     void createInfoPanel();
     void createEditPanel();
+    void createDeleteMessage();
+
+
+
+signals:
+    void deletePressed(Dog* dog);
+
 
 };
 

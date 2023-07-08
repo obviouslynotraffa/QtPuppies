@@ -1,14 +1,15 @@
 #include <QDialog>
 #include <QHBoxLayout>
 #include <QStyle>
+#include <QMessageBox>
 
-
+#include "Dog/container.h"
 #include "ButtonsWidget.h"
 #include "DogVisitorInfoPanel.h"
 #include "DogVisitorEditPanel.h"
 
-ButtonsWidget::ButtonsWidget(Dog* dog, QWidget *parent)
-    : QWidget{parent}, dog(dog)
+ButtonsWidget::ButtonsWidget(Dog* dog, Container& c, QWidget *parent)
+    : QWidget{parent}, dog(dog), c(c)
 {
 
     //Buttons
@@ -30,6 +31,9 @@ ButtonsWidget::ButtonsWidget(Dog* dog, QWidget *parent)
     //Connect
     connect(view_button, &QPushButton::released, this, &ButtonsWidget::createInfoPanel);
     connect(edit_button, &QPushButton::released, this, &ButtonsWidget::createEditPanel);
+    connect(delete_button, &QPushButton::released, this, &ButtonsWidget::createDeleteMessage);
+
+
 
     setLayout(buttons);
 
@@ -41,30 +45,66 @@ void ButtonsWidget::createInfoPanel(){
    DogVisitorInfoPanel visitor;
    dog->accept(visitor);
 
-   QDialog* dialog =  new QDialog;
-   dialog->setLayout(visitor.getInfoPanel());
-   dialog->setModal(true);
-   dialog->setMinimumHeight(250);
-   dialog->setMinimumWidth(650);
-   dialog->setWindowTitle(QString::fromStdString(dog->getName()));
-   dialog->setWindowIcon(QIcon(":/assets/icons8-info-48.png"));
-   dialog->show();
+   QDialog* dialogInfo =  new QDialog;
+   dialogInfo->setLayout(visitor.getInfoPanel());
+   dialogInfo->setModal(true);
+   dialogInfo->setMinimumHeight(250);
+   dialogInfo->setMinimumWidth(650);
+   dialogInfo->setWindowTitle(QString::fromStdString(dog->getName()));
+   dialogInfo->setWindowIcon(QIcon(":/assets/icons8-info-48.png"));
+   dialogInfo->show();
 }
+
+
 
 
 
 void ButtonsWidget::createEditPanel(){
 
     DogVisitorEditPanel visitor;
+    visitor.setContainer(c);
     dog->accept(visitor);
 
-    QDialog* dialog =  new QDialog;
-    dialog->setLayout(visitor.getEditPanel());
-    dialog->setModal(true);
-    dialog->setMinimumHeight(250);
-    dialog->setMinimumWidth(650);
-    dialog->setWindowTitle("Editing "+QString::fromStdString(dog->getName()));
-    dialog->setWindowIcon(QIcon(":/assets/icons8-edit-48.png"));
-    dialog->show();
+    dialogEdit =  new QDialog;
+    dialogEdit->setLayout(visitor.getEditPanel());
+    dialogEdit->setModal(true);
+    dialogEdit->setMinimumHeight(250);
+    dialogEdit->setMinimumWidth(650);
+    dialogEdit->setWindowTitle("Editing "+QString::fromStdString(dog->getName()));
+    dialogEdit->setWindowIcon(QIcon(":/assets/icons8-edit-48.png"));
+    dialogEdit->show();
+
+
 
 }
+
+
+
+
+void ButtonsWidget::createDeleteMessage(){
+
+
+    QMessageBox msgBox;
+
+    msgBox.setIcon(QMessageBox::Warning);
+    msgBox.setWindowTitle("Warning");
+
+    msgBox.setText("Are you sure to delete "+ QString::fromStdString(dog->getName())+ " ?\t\t");
+    msgBox.setInformativeText("This action can not be undone later.");
+
+    msgBox.setStandardButtons(QMessageBox::Yes|QMessageBox::No);
+    msgBox.setDefaultButton(QMessageBox::No);
+
+
+    int ret = msgBox.exec();
+
+    if(ret == QMessageBox::Yes){
+
+        emit deletePressed(dog);
+
+    }
+
+
+}
+
+

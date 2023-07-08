@@ -29,13 +29,13 @@ class Container{
         };
     private:
         Node* head;
-        Node* tail;
+
+
     public:
-        Container(): head(nullptr), tail(nullptr) {}
+        Container(): head(nullptr) {}
         ~Container() {}
 
         Node* getHead() const {return head;}
-        Node* getTail() const {return tail;}
 
 
         unsigned int getSize() const{
@@ -50,22 +50,28 @@ class Container{
 
 
         Container& push_back(Dog* d){
-            unsigned int size=getSize();
+            head = new Node(d,head);
+            return *this;
+        }
 
-            if(size==0){
-                head= new Node(d);
-                tail=head;
-                return *this;
+        Container& append(Dog* d){
+
+
+            if(!head){
+                Node* newNode= new Node(d);
+                head=newNode;
             }
+            else{
 
-            if(size==1){
-                tail= new Node(d);
-                head->setNext(tail);
-                return *this;
+                Node* n= head;
+
+                while(n->getNext()!=nullptr){
+                    n=n->getNext();
+                }
+
+                Node* newNode= new Node(d);
+                n->setNext(newNode);
             }
-
-            tail->setNext(new Node(d));
-            tail=tail->getNext();
             return *this;
         }
 
@@ -79,7 +85,6 @@ class Container{
                 if(curr->getDog()==d){
                     if(prev!=nullptr){
                         prev->setNext(curr->getNext());
-                        tail=prev;
                     } else {
                         head=curr->getNext();
                     }
@@ -94,8 +99,9 @@ class Container{
             return *this;
         }
 
+
         Container& clearAll(){
-            while(head!=tail->getNext()){
+            while(head!=nullptr){
                 Node* next=head->getNext();
                 delete head;
                 head=next;
@@ -113,13 +119,16 @@ class Container{
         }
 
 
+
+        //filter functions
+
         Container filterBreeding() const{
                 Container w;
 
                 Node* n=head;
                 while(n!=nullptr){
                     if(dynamic_cast<Breeding*>(n->getDog())){
-                        w.push_back(n->getDog());
+                        w.append(n->getDog());
                     }
                     n=n->getNext();
 
@@ -133,7 +142,7 @@ class Container{
                 Node* n=head;
                 while(n!=nullptr){
                     if(dynamic_cast<Boarding*>(n->getDog())){
-                        w.push_back(n->getDog());
+                        w.append(n->getDog());
                     }
                     n=n->getNext();
 
@@ -142,13 +151,25 @@ class Container{
             }
 
 
-        Dog* searchDog(std::string name) const{
+        Container searchDog(std::string name) const{
+            Container w;
+
             Node* n=head;
-            while(n!=nullptr){
-                if(n->getDog()->getName()==name) return n->getDog();
-                n=n->getNext();
+
+            if(name=="" || name==" "){ //if search bar is empty show all
+                while(n!=nullptr){
+                    w.append(n->getDog());
+                    n=n->getNext();
+                }
             }
-            return nullptr;
+            else{
+                while(n!=nullptr){
+                    if(n->getDog()->getName()==name) w.append(n->getDog());
+                 n=n->getNext();
+                }
+            }
+            return w;
+
         }
 
 
@@ -160,7 +181,7 @@ class Container{
             if(dynamic_cast<Large*>(s)){
                 while(n!=nullptr){
                     if(dynamic_cast<Large*>((static_cast<Boarding*>(n->getDog()))->getSize())){
-                        w.push_back(n->getDog());
+                        w.append(n->getDog());
                     }
                     n=n->getNext();
                 }
@@ -171,7 +192,7 @@ class Container{
             if(dynamic_cast<Medium*>(s)){
                 while(n!=nullptr){
                      if(dynamic_cast<Medium*>((static_cast<Boarding*>(n->getDog()))->getSize())){
-                        w.push_back(n->getDog());
+                        w.append(n->getDog());
                     }
                     n=n->getNext();
 
@@ -182,7 +203,7 @@ class Container{
             if(dynamic_cast<Small*>(s)){
                 while(n!=nullptr){
                      if(dynamic_cast<Small*>((static_cast<Boarding*>(n->getDog()))->getSize())){
-                        w.push_back(n->getDog());
+                        w.append(n->getDog());
                     }
                     n=n->getNext();
 
@@ -200,7 +221,7 @@ class Container{
 
             while(n!=nullptr){
                     if((static_cast<Boarding*>(n->getDog())->didBath())){
-                        w.push_back(n->getDog());
+                        w.append(n->getDog());
                     }
                     n=n->getNext();
             }
@@ -214,7 +235,7 @@ class Container{
 
             while(n!=nullptr){
                     if((static_cast<Boarding*>(n->getDog())->didDiet())){
-                        w.push_back(n->getDog());
+                        w.append(n->getDog());
                     }
                     n=n->getNext();
             }
@@ -228,7 +249,7 @@ class Container{
 
             while(n!=nullptr){
                     if((static_cast<Boarding*>(n->getDog())->didTraining())){
-                        w.push_back(n->getDog());
+                        w.append(n->getDog());
                     }
                     n=n->getNext();
             }
@@ -242,7 +263,7 @@ class Container{
 
             while(n!=nullptr){
                     if((static_cast<Boarding*>(n->getDog())->didWalking())){
-                        w.push_back(n->getDog());
+                        w.append(n->getDog());
                     }
                     n=n->getNext();
             }
@@ -256,8 +277,9 @@ class Container{
             Node* n=head;
 
             while(n!=nullptr){
-                    if((static_cast<Breeding*>(n->getDog())->isVax())){
-                        w.push_back(n->getDog());
+                auto d=static_cast<Breeding*>(n->getDog());
+                    if(!(d->isVax())){
+                        w.append(n->getDog());
                     }
                     n=n->getNext();
             }
@@ -271,7 +293,7 @@ class Container{
 
             while(n!=nullptr){
                     if((static_cast<Breeding*>(n->getDog())->isPurchasable())){
-                        w.push_back(n->getDog());
+                        w.append(n->getDog());
                     }
                     n=n->getNext();
             }
@@ -284,8 +306,10 @@ class Container{
             Node* n=head;
 
             while(n!=nullptr){
-                    if((static_cast<Breeding*>(n->getDog())->isBooked())){
-                        w.push_back(n->getDog());
+
+                auto d = static_cast<Breeding*>(n->getDog());
+                    if(!(d->isBooked())){
+                        w.append(n->getDog());
                     }
                     n=n->getNext();
             }
@@ -293,7 +317,7 @@ class Container{
         }
 
 
-        Container filterSize(Breed* b) const{
+        Container filterBreed(Breed* b) const{
             Container w;
 
             Node* n=head;
@@ -301,7 +325,7 @@ class Container{
             if(dynamic_cast<Bulldog*>(b)){
                 while(n!=nullptr){
                     if(dynamic_cast<Bulldog*>((static_cast<Breeding*>(n->getDog()))->getBreed())){
-                        w.push_back(n->getDog());
+                        w.append(n->getDog());
                     }
                     n=n->getNext();
                 }
@@ -310,14 +334,50 @@ class Container{
             if(dynamic_cast<AmStaff*>(b)){
                 while(n!=nullptr){
                     if(dynamic_cast<AmStaff*>((static_cast<Breeding*>(n->getDog()))->getBreed())){
-                        w.push_back(n->getDog());
-                    }
+                        w.append(n->getDog());
+                    };
                     n=n->getNext();
                 }
             }
 
             return w;
         }
+
+
+
+        std::vector<Breeding*> filterParent()const{
+
+            std::vector<Breeding*> w;
+            Node* n=head;
+
+            while(n!=nullptr){
+
+                Breeding* dog= dynamic_cast<Breeding*>(n->getDog());
+                if(dog && (!(dog->isPurchasable()))){
+                    w.push_back(dog);
+                }
+
+                n=n->getNext();
+            }
+
+            return w;
+        }
+
+
+
+        Dog* searchDogUnique(std::string name) const{
+
+            Node* n=head;
+
+            while(n!=nullptr){
+                if(n->getDog()->getName()==name) return n->getDog();
+             n=n->getNext();
+            }
+
+            return nullptr;
+
+        }
+
 
 };
 

@@ -5,9 +5,11 @@
 #include <QPushButton>
 #include <QWidget>
 
+
 #include "Dog/dogvisitor.h"
 #include "Dog/boarding.h"
 #include "Dog/breeding.h"
+#include "ButtonsWidget.h"
 
 class DogVisitorCard: public DogVisitor
 {
@@ -18,6 +20,8 @@ private:
     QPushButton* edit_button;
     QPushButton* delete_button;
 
+    ButtonsWidget* buttons;
+
     Dog* dog=nullptr;
 
 public:
@@ -25,10 +29,6 @@ public:
     virtual void visitBoarding(Boarding& boarding);
     virtual void visitBreeding(Breeding& breeding);
 
-signals:
-
-
-public slots:
 
 };
 

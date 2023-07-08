@@ -40,8 +40,14 @@ GeneralFilterWidget::GeneralFilterWidget(QWidget *parent)
     vbox->addLayout(hbox);
 
 
+    //connect signals
+    connect(search_input, &QPushButton::released, this, &GeneralFilterWidget::searchPressed);
 
 }
 
+
+void GeneralFilterWidget::searchPressed(){
+    emit searchEvent(filterString->text());
+}
 
 

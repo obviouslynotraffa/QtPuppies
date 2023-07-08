@@ -7,7 +7,8 @@ Owner::Owner(std::string n, std::string s, std::string p, unsigned int d, unsign
 name(n), surname(s), phone(p), address(a), house_number(h), birth(Date(d,m,y))  {}
 
 
-Owner::~Owner() {}
+Owner::~Owner() {
+}
 
 
 std::string Owner::getName() const{

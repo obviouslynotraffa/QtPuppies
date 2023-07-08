@@ -8,9 +8,14 @@
 #include <QPushButton>
 
 #include "DogVisitorEditPanel.h"
+#include "FinalButtonWidget.h"
+
 #include "sizes/large.h"
 #include "sizes/medium.h"
 #include "sizes/small.h"
+
+#include "breeds/amstaff.h"
+#include "breeds/bulldog.h"
 
 
 
@@ -19,10 +24,9 @@ QVBoxLayout* DogVisitorEditPanel::getEditPanel()const{
     return editPanel;
 }
 
-
-
-
-
+void DogVisitorEditPanel::setContainer(Container contn){
+    c=contn;
+}
 
 void DogVisitorEditPanel::visitBoarding(Boarding &boarding){
 
@@ -42,21 +46,21 @@ void DogVisitorEditPanel::visitBoarding(Boarding &boarding){
     QLineEdit* nameEdit= new QLineEdit;
     nameEdit->setText(QString::fromStdString(boarding.getName()));
     nameEdit->setFixedWidth(150);
-    nameEdit->setFocusPolicy(Qt::NoFocus);
+
 
     //Date
     QLabel* dogdate= new QLabel("Arrival date: ");
     QLineEdit* dateEdit= new QLineEdit;
     dateEdit->setText(QString::fromStdString(boarding.getDate().toString()));
     dateEdit->setFixedWidth(150);
-    dateEdit->setFocusPolicy(Qt::NoFocus);
+
 
     //Breed
     QLabel* dogbreed= new QLabel("Breed: ");
     QLineEdit* breedEdit= new QLineEdit;
     breedEdit->setText(QString::fromStdString(boarding.getBreed()));
     breedEdit->setFixedWidth(150);
-    breedEdit->setFocusPolicy(Qt::NoFocus);
+
 
     //Size
     QLabel* dogsize= new QLabel("Size: ");
@@ -66,7 +70,7 @@ void DogVisitorEditPanel::visitBoarding(Boarding &boarding){
     sizeEdit->addItem(tr("Medium"));
     sizeEdit->addItem(tr("Small"));
 
-    /* causa crash
+
     if(dynamic_cast<Large*>(boarding.getSize()))
         sizeEdit->setCurrentIndex(0);
 
@@ -75,7 +79,7 @@ void DogVisitorEditPanel::visitBoarding(Boarding &boarding){
 
     if(dynamic_cast<Small*>(boarding.getSize()))
         sizeEdit->setCurrentIndex(2);
-    */
+
 
 
     //Optionals
@@ -184,16 +188,14 @@ void DogVisitorEditPanel::visitBoarding(Boarding &boarding){
 
 
     //save button
-    QHBoxLayout* btnLayout= new QHBoxLayout;
-    editPanel->addLayout(btnLayout);
-    QPushButton* saveButton= new QPushButton("Save changes");
-    saveButton->setFocusPolicy(Qt::NoFocus);
-    saveButton->setMinimumSize(80,40);
-    btnLayout->addStretch();
-    btnLayout->addWidget(saveButton);
+
+    FinalButtonWidget* btn= new FinalButtonWidget(&boarding, nameEdit, dateEdit, breedEdit, sizeEdit,bath, walks, diet, training,
+                                                  ownameEdit, surnameEdit, owdateEdit, numberEdit, addressEdit, hnEdit);
+    editPanel->addWidget(btn);
+
+    connect(btn, &FinalButtonWidget::closeDialog, this, &DogVisitorEditPanel::deleteLater );
 
 }
-
 
 
 
@@ -218,14 +220,14 @@ void DogVisitorEditPanel::visitBreeding(Breeding &breeding){
     QLineEdit* nameEdit= new QLineEdit;
     nameEdit->setText(QString::fromStdString(breeding.getName()));
     nameEdit->setFixedWidth(150);
-    nameEdit->setFocusPolicy(Qt::NoFocus);
+
 
     //Date
     QLabel* dogdate= new QLabel("Birthday: ");
     QLineEdit* dateEdit= new QLineEdit;
     dateEdit->setText(QString::fromStdString(breeding.getDate().toString()));
     dateEdit->setFixedWidth(150);
-    dateEdit->setFocusPolicy(Qt::NoFocus);
+
 
     //Breed
     QLabel* breedDog= new QLabel("Breed: ");
@@ -233,6 +235,11 @@ void DogVisitorEditPanel::visitBreeding(Breeding &breeding){
     breedEdit->setFixedWidth(150);
     breedEdit->addItem(tr("AmStaff"));
     breedEdit->addItem(tr("Bulldog"));
+
+    if(dynamic_cast<AmStaff*>(breeding.getBreed()))
+        breedEdit->setCurrentIndex(0);
+    if(dynamic_cast<Bulldog*>(breeding.getBreed()))
+        breedEdit->setCurrentIndex(1);
 
 
     //Optionals
@@ -271,50 +278,95 @@ void DogVisitorEditPanel::visitBreeding(Breeding &breeding){
     hbox->addWidget(parentGroup);
 
 
-    //Mother
-    QGroupBox* mom = new QGroupBox(tr("Mom"));
 
-    QLabel* mother= new QLabel("Select mother: ");
-    QComboBox* listmom= new QComboBox;
-    listmom->addItem("None");
-
-    QGridLayout* momLayout= new QGridLayout;
-
-    momLayout->addWidget(mother,0,0);
-    momLayout->addWidget(listmom,0,1);
-    mom->setLayout(momLayout);
+    std::vector<Breeding*> parents(c.filterParent()) ;
 
 
-    //Father
-    QGroupBox* dad = new QGroupBox(tr("Dad"));
-    QLabel* father= new QLabel("Select father: ");
-    QComboBox* listdad= new QComboBox;
-    listdad->addItem("None");
+        //Mother
+        QGroupBox* mom = new QGroupBox(tr("Mom"));
+
+        QLabel* mother= new QLabel("Select mother: ");
+        QComboBox* listmom= new QComboBox;
+
+        if(breeding.getMother()){
+            listmom->addItem(QString::fromStdString(breeding.getMother()->getName()));
+            for(Breeding* b : parents){
+                if((b->getName() != (breeding.getMother()->getName())) && b->getName()!=breeding.getName()
+                        && b->getBreed()->toString()==breeding.getBreed()->toString())
+                {
+                    listmom->addItem(QString::fromStdString(b->getName()));
+                }
+            }
+            listmom->addItem("None");
+        }
+        else
+        {
+            listmom->addItem("None");
+            for(Breeding* b:parents){
+                if(b->getName() != breeding.getName())
+                listmom->addItem(QString::fromStdString(b->getName()));
+            }
+        }
 
 
-    QGridLayout* dadLayout= new QGridLayout;
+        QGridLayout* momLayout= new QGridLayout;
 
-    dadLayout->addWidget(father,0,0);
-    dadLayout->addWidget(listdad,0,1);
+        momLayout->addWidget(mother,0,0);
+        momLayout->addWidget(listmom,0,1);
+        mom->setLayout(momLayout);
 
-    dad->setLayout(dadLayout);
 
-    //set up parent layout
-    QGridLayout* parentLayout= new QGridLayout;
-    parentLayout->addWidget(mom,0,0,1,10);
-    parentLayout->addWidget(dad,1,0,1,10);
+        //Father
+        QGroupBox* dad = new QGroupBox(tr("Dad"));
+        QLabel* father= new QLabel("Select father: ");
+        QComboBox* listdad= new QComboBox;
 
-    parentGroup->setLayout(parentLayout);
+        if(breeding.getFather()){//check parent point
+            listdad->addItem(QString::fromStdString(breeding.getFather()->getName()));
+            for(Breeding* b : parents){
+                if((b->getName() != (breeding.getFather()->getName())) && b->getName()!=breeding.getName()
+                        && b->getBreed()->toString()==breeding.getBreed()->toString())
+                {
+                    listdad->addItem(QString::fromStdString(b->getName()));
+                }
+
+            }
+            listdad->addItem("None");
+        }
+        else{
+            listdad->addItem("None");
+            for(Breeding* b:parents){
+                if(b->getName() != breeding.getName())
+                listdad->addItem(QString::fromStdString(b->getName()));
+            }
+        }
+
+
+
+
+        QGridLayout* dadLayout= new QGridLayout;
+
+        dadLayout->addWidget(father,0,0);
+        dadLayout->addWidget(listdad,0,1);
+
+        dad->setLayout(dadLayout);
+
+        //set up parent layout
+        QGridLayout* parentLayout= new QGridLayout;
+        parentLayout->addWidget(mom,0,0,1,10);
+        parentLayout->addWidget(dad,1,0,1,10);
+
+        parentGroup->setLayout(parentLayout);
+
 
 
     //save button
-    QHBoxLayout* btnLayout= new QHBoxLayout;
-    editPanel->addLayout(btnLayout);
-    QPushButton* saveButton= new QPushButton("Save changes");
-    saveButton->setFocusPolicy(Qt::NoFocus);
-    saveButton->setMinimumSize(80,40);
-    btnLayout->addStretch();
-    btnLayout->addWidget(saveButton);
+    FinalButtonWidget* btn= new FinalButtonWidget(&breeding, nameEdit, dateEdit, breedEdit, vax, purch, booked, listmom, listdad, c);
+    editPanel->addWidget(btn);
+
 
 
 }
+
+
+
