@@ -26,20 +26,20 @@ SOURCES += \
     sizes/medium.cpp \
     sizes/size.cpp \
     sizes/small.cpp \
-    view/BoardingFilterWidget.cpp \
-    view/BoardingPanel.cpp \
-    view/BreedingFilterWidget.cpp \
-    view/BreedingPanel.cpp \
-    view/ButtonsWidget.cpp \
-    view/DogList.cpp \
-    view/DogListWidget.cpp \
-    view/DogVisitorCard.cpp \
-    view/DogVisitorEditPanel.cpp \
-    view/DogVisitorInfoPanel.cpp \
-    view/FinalButtonWidget.cpp \
-    view/GeneralFilterWidget.cpp \
-    view/GeneralPanel.cpp \
-    view/MainWindow.cpp
+    view/MainWindow.cpp \
+    view/buttons/ButtonsWidget.cpp \
+    view/buttons/FinalButtonWidget.cpp \
+    view/filter/BoardingFilterWidget.cpp \
+    view/filter/BreedingFilterWidget.cpp \
+    view/filter/GeneralFilterWidget.cpp \
+    view/list/DogList.cpp \
+    view/list/DogListWidget.cpp \
+    view/panel/BoardingPanel.cpp \
+    view/panel/BreedingPanel.cpp \
+    view/panel/GeneralPanel.cpp \
+    view/visitor/DogVisitorCard.cpp \
+    view/visitor/DogVisitorEditPanel.cpp \
+    view/visitor/DogVisitorInfoPanel.cpp
 
 
 HEADERS += \
@@ -62,20 +62,20 @@ HEADERS += \
     sizes/medium.h \
     sizes/size.h \
     sizes/small.h \
-    view/BoardingFilterWidget.h \
-    view/BoardingPanel.h \
-    view/BreedingFilterWidget.h \
-    view/BreedingPanel.h \
-    view/ButtonsWidget.h \
-    view/DogList.h \
-    view/DogListWidget.h \
-    view/DogVisitorCard.h \
-    view/DogVisitorEditPanel.h \
-    view/DogVisitorInfoPanel.h \
-    view/FinalButtonWidget.h \
-    view/GeneralFilterWidget.h \
-    view/GeneralPanel.h \
-    view/MainWindow.h
+    view/MainWindow.h \
+    view/buttons/ButtonsWidget.h \
+    view/buttons/FinalButtonWidget.h \
+    view/filter/BoardingFilterWidget.h \
+    view/filter/BreedingFilterWidget.h \
+    view/filter/GeneralFilterWidget.h \
+    view/list/DogList.h \
+    view/list/DogListWidget.h \
+    view/panel/BoardingPanel.h \
+    view/panel/BreedingPanel.h \
+    view/panel/GeneralPanel.h \
+    view/visitor/DogVisitorCard.h \
+    view/visitor/DogVisitorEditPanel.h \
+    view/visitor/DogVisitorInfoPanel.h
 
 
 # Default rules for deployment.
@@ -87,6 +87,9 @@ RESOURCES += \
     resources.qrc
 
 FORMS +=
+
+DISTFILES += \
+    view/visitor/fj.txt
 
 
 
