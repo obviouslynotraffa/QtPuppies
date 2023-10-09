@@ -5,8 +5,8 @@
 
 #include "Dog/container.h"
 #include "ButtonsWidget.h"
-#include "DogVisitorInfoPanel.h"
-#include "DogVisitorEditPanel.h"
+#include "./view/visitor/DogVisitorInfoPanel.h"
+#include "./view/visitor/DogVisitorEditPanel.h"
 
 ButtonsWidget::ButtonsWidget(Dog* dog, Container& c, QWidget *parent)
     : QWidget{parent}, dog(dog), c(c)

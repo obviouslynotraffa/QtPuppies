@@ -8,7 +8,7 @@
 #include <QPushButton>
 
 #include "DogVisitorEditPanel.h"
-#include "FinalButtonWidget.h"
+#include "./view/buttons/FinalButtonWidget.h"
 
 #include "sizes/large.h"
 #include "sizes/medium.h"

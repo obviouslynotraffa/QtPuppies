@@ -7,7 +7,7 @@
 
 #include "Dog/container.h"
 #include "DogListWidget.h"
-#include "ButtonsWidget.h"
+#include "./view/buttons/ButtonsWidget.h"
 
 
 

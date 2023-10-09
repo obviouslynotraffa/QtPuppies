@@ -10,7 +10,7 @@
 #include "DogVisitorCard.h"
 #include "DogVisitorInfoPanel.h"
 #include "Dog/owner.h"
-#include "ButtonsWidget.h"
+#include "./view/buttons/ButtonsWidget.h"
 
 #include "breeds/breed.h"
 #include "breeds/amstaff.h"

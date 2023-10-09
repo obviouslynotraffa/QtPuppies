@@ -1,7 +1,6 @@
 #include <QLabel>
 #include <QGroupBox>
 
-
 #include "DogVisitorInfoPanel.h"
 
 

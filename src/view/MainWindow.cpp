@@ -21,7 +21,7 @@
 #include "sizes/small.h"
 
 #include "Dog/owner.h"
-#include "FinalButtonWidget.h"
+#include "./view/buttons/FinalButtonWidget.h"
 
 
 MainWindow::MainWindow(QWidget *parent): QMainWindow{parent}{

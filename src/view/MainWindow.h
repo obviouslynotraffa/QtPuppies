@@ -11,11 +11,11 @@
 #include <QMainWindow>
 #include <QPushButton>
 
-#include "GeneralPanel.h"
-#include "BoardingPanel.h"
-#include "BreedingPanel.h"
+#include "view/panel/GeneralPanel.h"
+#include "view/panel/BoardingPanel.h"
+#include "view/panel/BreedingPanel.h"
 #include "Dog/container.h"
-#include "ButtonsWidget.h"
+#include "view/buttons/ButtonsWidget.h"
 #include "../memory/repository/JsonRepo.h"
 
 class MainWindow : public QMainWindow

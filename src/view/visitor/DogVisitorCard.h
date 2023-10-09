@@ -9,7 +9,7 @@
 #include "Dog/dogvisitor.h"
 #include "Dog/boarding.h"
 #include "Dog/breeding.h"
-#include "ButtonsWidget.h"
+#include "./view/buttons/ButtonsWidget.h"
 
 class DogVisitorCard: public DogVisitor
 {

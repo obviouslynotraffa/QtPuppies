@@ -1,11 +1,10 @@
 #ifndef GENERALPANEL_H
 #define GENERALPANEL_H
 
-#include "GeneralFilterWidget.h"
+#include "./view/filter/GeneralFilterWidget.h"
 #include "Dog/container.h"
-#include "DogList.h"
-#include "ButtonsWidget.h"
-//#include "MainWindow.h"
+#include "./view/list/DogList.h"
+#include "./view/buttons/ButtonsWidget.h"
 
 
 class GeneralPanel: public QWidget

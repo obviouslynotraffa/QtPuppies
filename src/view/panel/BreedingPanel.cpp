@@ -4,7 +4,7 @@
 #include <QPushButton>
 #include <QPixmap>
 
-#include "DogList.h"
+#include "./view/list/DogList.h"
 #include "BreedingPanel.h"
 
 #include "breeds/amstaff.h"

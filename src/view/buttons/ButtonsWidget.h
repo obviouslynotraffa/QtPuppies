@@ -4,8 +4,6 @@
 #include <QWidget>
 #include <QPushButton>
 
-#include "FinalButtonWidget.h"
-
 #include "Dog/dog.h"
 #include "Dog/container.h"
 

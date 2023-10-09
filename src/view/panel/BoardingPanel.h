@@ -3,9 +3,9 @@
 
 #include <QRadioButton>
 
-#include "BoardingFilterWidget.h"
+#include "./view/filter/BoardingFilterWidget.h"
 #include "Dog/container.h"
-#include "DogList.h"
+#include "./view/list/DogList.h"
 
 class BoardingPanel : public QWidget
 {

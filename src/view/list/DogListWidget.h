@@ -3,10 +3,11 @@
 
 #include <QWidget>
 #include <QVBoxLayout>
+#include <QFrame>
 
 #include "Dog/container.h"
-#include "DogVisitorCard.h"
-#include "ButtonsWidget.h"
+#include "./view/visitor/DogVisitorCard.h"
+#include "./view/buttons/ButtonsWidget.h"
 
 class DogListWidget : public QWidget
 {

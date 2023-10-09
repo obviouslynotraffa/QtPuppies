@@ -1,5 +1,5 @@
 #include "DogListWidget.h"
-#include "ButtonsWidget.h"
+#include "./view/buttons/ButtonsWidget.h"
 
 DogListWidget::DogListWidget(Container& c, QWidget *parent)
     : QWidget{parent}, c(c)

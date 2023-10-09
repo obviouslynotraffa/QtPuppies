@@ -1,9 +1,9 @@
 #ifndef BREEDINGPANEL_H
 #define BREEDINGPANEL_H
 
-#include "BreedingFilterWidget.h"
+#include "./view/filter/BreedingFilterWidget.h"
 #include "Dog/container.h"
-#include "DogList.h"
+#include "./view/list/DogList.h"
 
 class BreedingPanel : public QWidget
 {

@@ -4,8 +4,7 @@
 #include <QDialog>
 
 #include "DogList.h"
-
-#include "DogVisitorCard.h"
+#include "./view/visitor/DogVisitorCard.h"
 
 
 DogList::DogList(QWidget *parent)

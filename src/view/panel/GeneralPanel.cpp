@@ -6,7 +6,7 @@
 #include <QScrollArea>
 
 #include "GeneralPanel.h"
-#include "DogList.h"
+#include "./view/list/DogList.h"
 
 
 GeneralPanel::GeneralPanel(Container c ,QWidget* parent)
