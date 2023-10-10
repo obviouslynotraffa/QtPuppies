@@ -12,11 +12,9 @@ jobs:
     runs-on: ubuntu-18.04
 
     steps:
-      - uses: actions/checkout@v2
-
       - name: Install Qt
-        run: |
-          sudo apt install qt5-default libqt5charts5-dev -y
+        uses: jurplel/install-qt-action@v3.3.0
+            
 
       - name: Build
         run: |
