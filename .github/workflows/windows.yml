@@ -17,8 +17,11 @@ jobs:
     - name: Install Qt
       uses: jurplel/install-qt-action@v3
 
-    - name: Build
-      run: |
-          cd src
-          qmake
-          make
+    - name: Set up Qt environment
+      uses: ilammy/qt-setup-windows@v2
+      with:
+        version: '5.15'
+        win_compiler: 'mingw73_64'
+
+    - name: Build project
+      run: qmake && mingw32-make
