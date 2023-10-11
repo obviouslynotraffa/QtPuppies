@@ -1,7 +1,8 @@
 <p align="center">
     <img src="src/assets/appIcon.png" style="width:auto;height:200px">
 </p>
-<h1 align="center">Qt Puppies</h1>
+
+ <h1 align="center"> QtPuppies </h1>
 
 
 Qt Puppies is a small project done for the Object Oriented Programming course. Basically is an application that allows breeding and daycare managers to have a better overview of the dogs, since, with a greater number of dogs, it is difficult to always have an up-to-date and orderly picture of the situation. Various functions are available, such as search by name, size, breed, etc...
@@ -9,7 +10,7 @@ Qt Puppies is a small project done for the Object Oriented Programming course. B
 <br></br>
 
 
-## How to run it
+## How to run it  &emsp;  [![Ubuntu](https://github.com/obviouslynotraffa/QtPuppies/actions/workflows/ubuntu.yml/badge.svg)](https://github.com/obviouslynotraffa/QtPuppies/actions/workflows/ubuntu.yml)
 To compile the project, clone or download this repository, then run `qmake` and `make`:
 ```
 git clone https://github.com/obviouslynotraffa/QtPuppies.git
